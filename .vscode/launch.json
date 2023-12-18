@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Users/minjeon2/cub3d_git",
+      "program": "/Users/minjeon2/cub3d_git/build/Debug/outDebug"
+    }
+  ]
+}
