@@ -26,10 +26,10 @@ void	init_texture(t_data *data)
 	int	j;
 
 	i = 0;
-	while (i < TEX_HEGIHT)
+	while (i < TEXTURE_HEGIHT)
 	{
 		j = 0;
-		while (j < TEX_WIDTH)
+		while (j < TEXTURE_WIDTH)
 			data -> texture[i][j++] = 0;
 		i++;
 	}
