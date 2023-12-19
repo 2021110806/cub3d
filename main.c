@@ -63,7 +63,7 @@ void	set_texture(t_data *data, char *direction, int index)
 	mlx_destroy_image(data -> mlx, img.image);
 }
 
-void	set_player(t_data *data, char **argv)
+void	set_player(t_data *data)
 {
 	data -> player_position_x = 22.0;
 	data -> player_position_y = 11.5;
@@ -167,7 +167,7 @@ int calculate_texture_spot(t_data *data, t_vectors *vectors, double wall_crash_s
 	int texture_print_spot;
 	
 	texture_print_spot = (int)(wall_crash_spot * (double)TEXTURE_WIDTH);
-	if (data -> last_hit_pos == X && vectors->ray_vector.x > 0 || data -> last_hit_pos == Y && vectors->ray_vector.y < 0)
+	if ((data -> last_hit_pos == X && vectors->ray_vector.x > 0) || (data -> last_hit_pos == Y && vectors->ray_vector.y < 0))
 		return (TEXTURE_WIDTH - texture_print_spot - 1);
 	return (texture_print_spot);
 	
@@ -262,9 +262,11 @@ int	main(int argc, char **argv)
 	int		i;
 
 	i = 0;
+	(void) argc;
+	(void) argv;
 	data.mlx = mlx_init();
 	printf("ttt1\n");
-	set_player(&data, argv);
+	set_player(&data);
 	printf("ttt2\n");
 	init_buf(&data);
 	printf("ttt3\n");
