@@ -129,11 +129,7 @@ void move_ray(t_vectors *vectors, t_int_coordinate *map, t_data *data, t_int_coo
 double calculate_vertical_distance_from_camera_to_wall(t_int_coordinate map, t_data *data, t_vectors vectors, t_int_coordinate step)
 {
 	if (data -> last_hit_pos == X)
-	{
-		printf("step_x %d ray_vector_x %f\n", step.x, vectors.ray_vector.x);
 		return (map.x - data -> player_position_x + (1 - step.x) / 2) / vectors.ray_vector.x;
-	}
-	printf("step_y %d ray_vector_y %f\n", step.y, vectors.ray_vector.y);
 	return (map.y - data -> player_position_y + (1 - step.y) / 2) / vectors.ray_vector.y;
 }
 
@@ -162,21 +158,22 @@ double calculate_wall_crash_spot(t_data *data, double vertical_distance, t_vecto
 	double wall_crash_spot;
 	
 	if (data -> last_hit_pos == X)
-		wall_crash_spot = (data -> player_position_y + vertical_distance * vectors->ray_vector.y);
+		wall_crash_spot = data->player_position_y + vertical_distance * vectors->ray_vector.y;
 	else 
-		wall_crash_spot = (data -> player_position_x + vertical_distance * vectors->ray_vector.x);
-	wall_crash_spot = floor(wall_crash_spot);
+		wall_crash_spot = data->player_position_x + vertical_distance * vectors->ray_vector.x;
+	wall_crash_spot -= floor(wall_crash_spot);
 	return (wall_crash_spot);
 }
 
 int calculate_texture_spot(t_data *data, t_vectors *vectors, double wall_crash_spot)
 {
-	int texture_print_spot;
+	int texture_x;
 	
-	texture_print_spot = (int)(wall_crash_spot * (double)TEXTURE_WIDTH);
-	if ((data -> last_hit_pos == X && vectors->ray_vector.x > 0) || (data -> last_hit_pos == Y && vectors->ray_vector.y < 0))
-		return (TEXTURE_WIDTH - texture_print_spot - 1);
-	return (texture_print_spot);
+	texture_x = (int)(wall_crash_spot * (double)TEXTURE_WIDTH);
+	if ((data -> last_hit_pos == X && vectors->ray_vector.x > 0) || \
+	(data -> last_hit_pos == Y && vectors->ray_vector.y < 0))
+		return (TEXTURE_WIDTH - texture_x - 1);
+	return (texture_x);
 	
 }
 
@@ -193,10 +190,8 @@ void draw_image(double vertical_distance, t_int_coordinate *map, t_data *data, t
 	double delta;
 
 	line_height = WIN_HEIGHT / vertical_distance;
-	// printf("line_height %d vertical_distance %f\n", line_height, vertical_distance);
 	draw_start = calculate_draw_start(line_height);
 	draw_end = calculate_draw_end(line_height);
-	// printf("draw_start %d draw_end %d\n", draw_start, draw_end);
 	texture_number = worldMap[map -> y][map -> x];
 	delta = (1.0 * TEXTURE_HEGIHT / line_height);
 	curr_drawing_spot = (draw_start - WIN_HEIGHT / 2 + line_height / 2) * delta;
@@ -209,13 +204,11 @@ void draw_image(double vertical_distance, t_int_coordinate *map, t_data *data, t
 		int texture_y = (int) curr_drawing_spot & (TEXTURE_HEGIHT - 1);
 		curr_drawing_spot += delta;
 		int color = data -> texture[texture_number][TEXTURE_HEGIHT * texture_y + texture_x];
-		// printf ("color %d texture_number %d texture y %d texture x %d drawend %d y %d drawstart %d\n", color, texture_number, texture_y, texture_x, draw_end, y, draw_start);
 		if (data->last_hit_pos == Y)
 			color = (color >> 1) & 8355711;
 		data -> buf[y][x] = color;
 		y++;
 	}
-	
 }
 
 int set_wall(t_data *data)
@@ -232,10 +225,6 @@ int set_wall(t_data *data)
 		double curr_ratio = 2 * x / (double) WIN_WIDTH - 1;
 		vectors.ray_vector.x = data -> player_view_direction_x + data -> camera_plane_x * curr_ratio;
 		vectors.ray_vector.y = data -> player_view_direction_y + data -> camera_plane_y * curr_ratio;
-		printf("curr_ratio %f ray_vector_X %f ray_vector_Y %f player_view_direcion %f camera_plane_y %f\n", curr_ratio, vectors.ray_vector.x, vectors.ray_vector.y, data->player_view_direction_y, data->camera_plane_y);
-		printf("cal ray_Vecotr Y1 %f\n", data->player_view_direction_y);
-		printf("cal ray_Vecotr Y2 %f\n", data->camera_plane_y * curr_ratio);
-		printf("cal ray_Vecotr Y3 %f\n", data->player_view_direction_y + data->camera_plane_y * curr_ratio);
 
 		vectors.delta_vector.x = fabs(1 / vectors.ray_vector.x);
 		vectors.delta_vector.y = fabs(1 / vectors.ray_vector.y);
@@ -257,10 +246,7 @@ void	draw(t_data *data)
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
 		for (int x = 0; x < WIN_WIDTH; x++)
-		{
-			// printf("draw value : %d y %d x %d\n", data->buf[y][x], y, x);
 			data->img.texture[y * WIN_WIDTH + x] = data->buf[y][x];
-		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.image, 0, 0);
 }
@@ -276,7 +262,6 @@ void buffer_initialize(t_data *data)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			// printf("y : %d x : %d\n", y, x);
 			data->buf[y][x] = 0;
 			x++;
 		}
@@ -340,21 +325,13 @@ int	key_press(int key, t_data *data)
 
 void set_textures(t_data *data)
 {
-	printf("texture0\n");
 	set_texture(data, "texture/eagle.xpm", 0);
-	printf("texture1\n");
-	set_texture(data, WEST_PATH, WEST);
-	printf("texture2\n");
 	set_texture(data, EAST_PATH, EAST);
-	printf("texture3\n");
-	set_texture(data, NORTH_PATH, NORTH);
-	printf("texture4\n");
+	set_texture(data, WEST_PATH, WEST);
 	set_texture(data, SOUTH_PATH, SOUTH);
-	printf("texture5\n");
+	set_texture(data, NORTH_PATH, NORTH);
 	set_texture(data, "texture/mossy.xpm", FLOOR);
-	printf("texture6\n");
 	set_texture(data, "texture/wood.xpm", CEILING);
-	printf("texture7\n");
 	set_texture(data, "texture/colorstone.xpm", 7);
 }
 
