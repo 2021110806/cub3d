@@ -19,7 +19,7 @@ int	init_buf(t_data *data)
 	return (1);
 }
 
-int	init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	data = malloc(sizeof (data));
 	if (!data)
