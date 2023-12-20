@@ -73,7 +73,7 @@ void	set_player(t_data *data)
 	data -> camera_plane_x = 0.0;
 	data -> camera_plane_y = 0.66;
 	data -> move_speed = 0.15;
-	data -> rotate_speed = 0.15;
+	data -> rotate_speed = 0.10;
 }
 
 void set_curr_measurement_vector(t_int_coordinate *map, t_data *data, t_int_coordinate *step, t_vectors *vectors)
@@ -112,11 +112,11 @@ void move_ray(t_vectors *vectors, t_int_coordinate *map, t_data *data, t_int_coo
 		{
 			vectors -> curr_measurement_vector.x += vectors -> delta_vector.x;
 			map -> x += step.x;
-			last_hit_pos = X;
+			last_hit_pos = X;  
 		}
 		else
 		{
-			vectors -> curr_measurement_vector.y = vectors -> delta_vector.y;
+			vectors -> curr_measurement_vector.y += vectors -> delta_vector.y;
 			map -> y += step.y;
 			last_hit_pos = Y;
 		}
@@ -149,7 +149,7 @@ int calculate_draw_end(int line_height)
 
 	draw_end = line_height  / 2 + WIN_HEIGHT / 2;
 	if (draw_end >= WIN_HEIGHT)
-		return (WIN_HEIGHT - 1);
+		return (WIN_HEIGHT);
 	return (draw_end);
 }
 
@@ -251,7 +251,7 @@ void	draw(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.image, 0, 0);
 }
 
-void buffer_initialize(t_data *data)
+void set_floor_ceiling(t_data *data)
 {
 	int y;
 	int x;
@@ -262,7 +262,10 @@ void buffer_initialize(t_data *data)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			data->buf[y][x] = 0;
+			if (y < WIN_HEIGHT / 2)
+				data->buf[y][x] = 163798;
+			else
+				data->buf[y][x] = 183145;
 			x++;
 		}
 		y++;
@@ -271,7 +274,7 @@ void buffer_initialize(t_data *data)
 
 int play(t_data *data)
 {
-	buffer_initialize(data);
+	set_floor_ceiling(data);
 	set_wall(data);
 	draw(data);
 	return (0);
