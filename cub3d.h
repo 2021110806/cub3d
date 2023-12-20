@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/18 19:56:25 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:48:36 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_data
 	int					last_hit_pos;
 	double				move_speed;
 	double				rotate_speed;
+	double				curr_ratio;
 }	t_data;
 
 typedef struct s_vectors
@@ -96,9 +97,58 @@ typedef struct s_vectors
 	t_crash_checker crash_checker;
 } t_vectors;
 
+typedef struct s_drawing_factors
+{
+	int draw_start;
+	int draw_end;
+	int	line_height;
+	int	texture_number;
+	double wall_crash_spot;
+	double curr_drawing_spot;
+} t_drawing_factors;
+
+static int	worldMap[24][24] =
+						{
+							{4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,7,7,7,7,7,7,7,7},
+							{4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+							{4,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+							{4,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7},
+							{4,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,7,0,0,0,0,0,0,7},
+							{4,0,4,0,0,0,0,5,5,5,5,5,5,5,5,5,7,7,0,7,7,7,7,7},
+							{4,0,5,0,0,0,0,5,0,5,0,5,0,5,0,5,7,0,0,0,7,7,7,1},
+							{4,0,6,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+							{4,0,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,7,7,7,1},
+							{4,0,8,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,0,0,0,8},
+							{4,0,0,0,0,0,0,5,0,0,0,0,0,0,0,5,7,0,0,0,7,7,7,1},
+							{4,0,0,0,0,0,0,5,5,5,5,0,5,5,5,5,7,7,7,7,7,7,7,1},
+							{6,6,6,6,6,6,6,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+							{8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4},
+							{6,6,6,6,6,6,0,6,6,6,6,0,6,6,6,6,6,6,6,6,6,6,6,6},
+							{4,4,4,4,4,4,0,4,4,4,6,0,6,2,2,2,2,2,2,2,3,3,3,3},
+							{4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+							{4,0,0,0,0,0,0,0,0,0,0,0,6,2,0,0,5,0,0,2,0,0,0,2},
+							{4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+							{4,0,6,0,6,0,0,0,0,4,6,0,0,0,0,0,5,0,0,0,0,0,0,2},
+							{4,0,0,5,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,2,0,2,2},
+							{4,0,6,0,6,0,0,0,0,4,6,0,6,2,0,0,5,0,0,2,0,0,0,2},
+							{4,0,0,0,0,0,0,0,0,4,6,0,6,2,0,0,0,0,0,2,0,0,0,2},
+							{4,4,4,4,4,4,4,4,4,4,1,1,1,2,2,2,2,2,2,3,3,3,3,3}
+						};
+						
 void	init_data(t_data *data);
 int	init_buf(t_data *data);
 int	*ft_int_malloc(int size);
 int **ft_int_pointer_malloc(int size);
 void	init_texture(t_data *data);
+void draw_image(double vertical_distance, t_int_coordinate *map, t_data *data, t_vectors *vectors, int x);
+double	calculate_distance_from_camera_to_wall\
+(t_int_coordinate map, t_data *data, t_vectors vectors, t_int_coordinate step);
+double	calculate_wall_crash_spot\
+(t_data *data, double vertical_distance, t_vectors *vectors);
+int	calculate_texture_spot\
+(t_data *data, t_vectors *vectors, double wall_crash_spot);
+void	draw(t_data *data);
+void	draw_floor_and_ceiling(t_data *data);
+int	calculate_draw_start(int line_height);
+int	calculate_draw_end(int line_height);
 #endif
