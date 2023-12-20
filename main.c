@@ -116,7 +116,7 @@ void move_ray(t_vectors *vectors, t_int_coordinate *map, t_data *data, t_int_coo
 		}
 		else
 		{
-			vectors -> curr_measurement_vector.y = vectors -> delta_vector.y;
+			vectors -> curr_measurement_vector.y += vectors -> delta_vector.y;
 			map -> y += step.y;
 			last_hit_pos = Y;
 		}
