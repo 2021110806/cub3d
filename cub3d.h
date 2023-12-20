@@ -17,10 +17,10 @@
 # define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 64
 # define TEXTURE_HEGIHT 64
-# define WEST_PATH "./texture/wood.xpm"
-# define EAST_PATH "./texture/wood.xpm"
-# define SOUTH_PATH "./texture/wood.xpm"
-# define NORTH_PATH "./texture/wood.xpm"
+# define WEST_PATH "./texture/redbrick.xpm"
+# define EAST_PATH "./texture/purplestone.xpm"
+# define SOUTH_PATH "./texture/greystone.xpm"
+# define NORTH_PATH "./texture/bluestone.xpm"
 # define GAME_NAME "cub3d"
 # define EAST 1
 # define WEST 2
@@ -30,6 +30,12 @@
 # define CEILING 6
 # define X 0
 # define Y 1
+# define KEY_PRESS_EVENT 2
+# define KEYCODE_UP 13
+# define KEYCODE_DOWN 1
+# define KEYCODE_LEFT 0
+# define KEYCODE_RIGHT 2
+# define KEYCODE_ESC 53
 
 # include "./mlx/mlx.h"
 # include <stdlib.h>
@@ -78,6 +84,8 @@ typedef struct s_data
 	int					buf[WIN_HEIGHT][WIN_WIDTH];
 	int					**texture;
 	int					last_hit_pos;
+	double				move_speed;
+	double				rotate_speed;
 }	t_data;
 
 typedef struct s_vectors

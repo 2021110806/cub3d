@@ -57,8 +57,9 @@
   "C_Cpp_Runner.useLinkTimeOptimization": false,
 
   "powermode.enabled": true,
-  "powermode.presets": "flames",
+  "powermode.presets": "particles",
   "powermode.shake.enabled": false,
+  "powermode.explosions.size": 10,
   "powermode.combo.counterSize": 6,
   "powermode.explosions.maxExplosions": 1,
   "files.associations": {

@@ -56,6 +56,7 @@ void	set_texture(t_data *data, char *direction, int index)
 		while (j < img.width)
 		{
 			data -> texture[index][img.width * i + j] = img.texture[img.width * i + j];
+			// printf("texture %d\n", data -> texture[index][img.width * i + j]);
 			j++;
 		}
 		i++;
@@ -63,14 +64,16 @@ void	set_texture(t_data *data, char *direction, int index)
 	mlx_destroy_image(data -> mlx, img.image);
 }
 
-void	set_player(t_data *data, char **argv)
+void	set_player(t_data *data)
 {
 	data -> player_position_x = 22.0;
 	data -> player_position_y = 11.5;
-	data -> player_view_direction_x = 0.0;
-	data -> player_view_direction_y = 0.66;
+	data -> player_view_direction_x = -1.0;
+	data -> player_view_direction_y = 0.0;
 	data -> camera_plane_x = 0.0;
-	data -> camera_plane_x = 0.66;
+	data -> camera_plane_y = 0.66;
+	data -> move_speed = 0.15;
+	data -> rotate_speed = 0.15;
 }
 
 void set_curr_measurement_vector(t_int_coordinate *map, t_data *data, t_int_coordinate *step, t_vectors *vectors)
@@ -155,21 +158,22 @@ double calculate_wall_crash_spot(t_data *data, double vertical_distance, t_vecto
 	double wall_crash_spot;
 	
 	if (data -> last_hit_pos == X)
-		wall_crash_spot = (data -> player_position_y + vertical_distance * vectors->ray_vector.y);
+		wall_crash_spot = data->player_position_y + vertical_distance * vectors->ray_vector.y;
 	else 
-		wall_crash_spot = (data -> player_position_x + vertical_distance * vectors->ray_vector.x);
-	wall_crash_spot = floor(wall_crash_spot);
+		wall_crash_spot = data->player_position_x + vertical_distance * vectors->ray_vector.x;
+	wall_crash_spot -= floor(wall_crash_spot);
 	return (wall_crash_spot);
 }
 
 int calculate_texture_spot(t_data *data, t_vectors *vectors, double wall_crash_spot)
 {
-	int texture_print_spot;
+	int texture_x;
 	
-	texture_print_spot = (int)(wall_crash_spot * (double)TEXTURE_WIDTH);
-	if (data -> last_hit_pos == X && vectors->ray_vector.x > 0 || data -> last_hit_pos == Y && vectors->ray_vector.y < 0)
-		return (TEXTURE_WIDTH - texture_print_spot - 1);
-	return (texture_print_spot);
+	texture_x = (int)(wall_crash_spot * (double)TEXTURE_WIDTH);
+	if ((data -> last_hit_pos == X && vectors->ray_vector.x > 0) || \
+	(data -> last_hit_pos == Y && vectors->ray_vector.y < 0))
+		return (TEXTURE_WIDTH - texture_x - 1);
+	return (texture_x);
 	
 }
 
@@ -193,17 +197,18 @@ void draw_image(double vertical_distance, t_int_coordinate *map, t_data *data, t
 	curr_drawing_spot = (draw_start - WIN_HEIGHT / 2 + line_height / 2) * delta;
 	wall_crash_spot = calculate_wall_crash_spot(data, vertical_distance, vectors);
 	texture_x = calculate_texture_spot(data, vectors, wall_crash_spot);
+
 	y = draw_start;
 	while (y < draw_end)
 	{
-		int texture_y = (int) texture_x & (TEXTURE_HEGIHT - 1);
+		int texture_y = (int) curr_drawing_spot & (TEXTURE_HEGIHT - 1);
 		curr_drawing_spot += delta;
 		int color = data -> texture[texture_number][TEXTURE_HEGIHT * texture_y + texture_x];
+		if (data->last_hit_pos == Y)
+			color = (color >> 1) & 8355711;
 		data -> buf[y][x] = color;
-		printf("y : %d drawend %d\n", y, draw_end);
 		y++;
 	}
-	
 }
 
 int set_wall(t_data *data)
@@ -220,7 +225,7 @@ int set_wall(t_data *data)
 		double curr_ratio = 2 * x / (double) WIN_WIDTH - 1;
 		vectors.ray_vector.x = data -> player_view_direction_x + data -> camera_plane_x * curr_ratio;
 		vectors.ray_vector.y = data -> player_view_direction_y + data -> camera_plane_y * curr_ratio;
-		
+
 		vectors.delta_vector.x = fabs(1 / vectors.ray_vector.x);
 		vectors.delta_vector.y = fabs(1 / vectors.ray_vector.y);
 		
@@ -232,7 +237,6 @@ int set_wall(t_data *data)
 		vertical_distance = calculate_vertical_distance_from_camera_to_wall(map, data, vectors, step);
 		draw_image(vertical_distance, &map, data, &vectors, x);
 		x++;
-		printf("xxxxxxxxx %d\n", x);
 	}
 	return (0);
 }
@@ -242,57 +246,115 @@ void	draw(t_data *data)
 	for (int y = 0; y < WIN_HEIGHT; y++)
 	{
 		for (int x = 0; x < WIN_WIDTH; x++)
-		{
 			data->img.texture[y * WIN_WIDTH + x] = data->buf[y][x];
-			printf("!!!!!!!\n");
-		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.image, 0, 0);
 }
 
+void buffer_initialize(t_data *data)
+{
+	int y;
+	int x;
+
+	y = 0;
+	while (y < WIN_HEIGHT)
+	{
+		x = 0;
+		while (x < WIN_WIDTH)
+		{
+			data->buf[y][x] = 0;
+			x++;
+		}
+		y++;
+	}
+}
+
 int play(t_data *data)
 {
+	buffer_initialize(data);
 	set_wall(data);
 	draw(data);
 	return (0);
 }
+
+int	key_press(int key, t_data *data)
+{
+	if (key == KEYCODE_UP)
+	{
+		if (!worldMap[(int)(data->player_position_x + data->player_view_direction_x * data->move_speed)][(int)(data->player_position_y)])
+			data->player_position_x += data->player_view_direction_x * data->move_speed;
+		if (!worldMap[(int)(data->player_position_x)][(int)(data->player_position_y + data->player_view_direction_y * data->move_speed)])
+			data->player_position_y += data->player_view_direction_y * data->move_speed;
+	}
+	//move backwards if no wall behind you
+	if (key == KEYCODE_DOWN)
+	{
+		if (!worldMap[(int)(data->player_position_x - data->player_view_direction_x * data->move_speed)][(int)(data->player_position_y)])
+			data->player_position_x -= data->player_view_direction_x * data->move_speed;
+		if (!worldMap[(int)(data->player_position_x)][(int)(data->player_position_y - data->player_view_direction_y * data->move_speed)])
+			data->player_position_y -= data->player_view_direction_y * data->move_speed;
+	}
+	//rotate to the right
+	if (key == KEYCODE_RIGHT)
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = data->player_view_direction_x;
+		data->player_view_direction_x = data->player_view_direction_x * cos(-data->rotate_speed) - data->player_view_direction_y * sin(-data->rotate_speed);
+		data->player_view_direction_y = oldDirX * sin(-data->rotate_speed) + data->player_view_direction_y * cos(-data->rotate_speed);
+		double oldPlaneX = data->camera_plane_x;
+		data->camera_plane_x = data->camera_plane_x * cos(-data->rotate_speed) - data->camera_plane_y * sin(-data->rotate_speed);
+		data->camera_plane_y = oldPlaneX * sin(-data->rotate_speed) + data->camera_plane_y * cos(-data->rotate_speed);
+	}
+	//rotate to the left
+	if (key == KEYCODE_LEFT)
+	{
+		//both camera direction and camera plane must be rotated
+		double oldDirX = data->player_view_direction_x;
+		data->player_view_direction_x = data->player_view_direction_x * cos(data->rotate_speed) - data->player_view_direction_y * sin(data->rotate_speed);
+		data->player_view_direction_y = oldDirX * sin(data->rotate_speed) + data->player_view_direction_y * cos(data->rotate_speed);
+		double oldPlaneX = data->camera_plane_x;
+		data->camera_plane_x = data->camera_plane_x * cos(data->rotate_speed) - data->camera_plane_y * sin(data->rotate_speed);
+		data->camera_plane_y = oldPlaneX * sin(data->rotate_speed) + data->camera_plane_y * cos(data->rotate_speed);
+	}
+	if (key == KEYCODE_ESC)
+		exit(0);
+	mlx_clear_window(data->mlx, data->win);
+	play(data);
+	return (0);
+}
+
+void set_textures(t_data *data)
+{
+	set_texture(data, "texture/eagle.xpm", 0);
+	set_texture(data, EAST_PATH, EAST);
+	set_texture(data, WEST_PATH, WEST);
+	set_texture(data, SOUTH_PATH, SOUTH);
+	set_texture(data, NORTH_PATH, NORTH);
+	set_texture(data, "texture/mossy.xpm", FLOOR);
+	set_texture(data, "texture/wood.xpm", CEILING);
+	set_texture(data, "texture/colorstone.xpm", 7);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	int		i;
 
 	i = 0;
+	(void) argc;
+	(void) argv;
 	data.mlx = mlx_init();
-	printf("ttt1\n");
-	set_player(&data, argv);
-	printf("ttt2\n");
+	set_player(&data);
 	init_buf(&data);
-	printf("ttt3\n");
 	data.texture = ft_int_pointer_malloc(8);
-	printf("ttt4\n");
 	while (i < 8)
 		data .texture[i++] = ft_int_malloc(TEXTURE_HEGIHT * TEXTURE_WIDTH);
-	printf("ttt5\n");
-	set_texture(&data, WEST_PATH, WEST);
-	printf("ttt6\n");
-	set_texture(&data, EAST_PATH, EAST);
-	printf("ttt7\n");
-	set_texture(&data, NORTH_PATH, NORTH);
-	printf("ttt8\n");
-	set_texture(&data, SOUTH_PATH, SOUTH);
-	set_texture(&data, SOUTH_PATH, 5);
-	set_texture(&data, SOUTH_PATH, 6);
-	set_texture(&data, SOUTH_PATH, 7);
-
-	printf("ttt9\n");
-	
+	set_textures(&data);
 	data.win = mlx_new_window(data.mlx, WIN_WIDTH, WIN_HEIGHT, GAME_NAME);
-	printf("ttt10\n");
 	data.img.image = mlx_new_image(data.mlx, WIN_WIDTH, WIN_HEIGHT);
-	printf("ttt11\n");
 	data.img.texture = (int *) mlx_get_data_addr(data.img.image, &data.img.bit_per_pixel, &data.img.size, &data.img.endian);
-	printf("ttt12\n");
 	mlx_loop_hook(data.mlx, play, &data);
+	mlx_hook(data.win, KEY_PRESS_EVENT, 0, &key_press, &data);
 	mlx_loop(data.mlx);
 }
 
