@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/20 19:48:36 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:34:56 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 # define CUB3D_H
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
-# define TEXTURE_WIDTH 64
-# define TEXTURE_HEGIHT 64
-# define WEST_PATH "./texture/purplestone.xpm"
-# define EAST_PATH "./texture/redbrick.xpm"
-# define SOUTH_PATH "./texture/greystone.xpm"
-# define NORTH_PATH "./texture/bluestone.xpm"
+# define TEXTURE_WIDTH 128
+# define TEXTURE_HEGIHT 128
+# define WEST_PATH "./texture/bird1_128.xpm"
+# define EAST_PATH "./texture/bird2_128.xpm"
+# define SOUTH_PATH "./texture/bird3_128.xpm"
+# define NORTH_PATH "./texture/bird4_128.xpm"
 # define GAME_NAME "cub3d"
 # define EAST 1
 # define WEST 2
@@ -151,4 +151,7 @@ void	draw(t_data *data);
 void	draw_floor_and_ceiling(t_data *data);
 int	calculate_draw_start(int line_height);
 int	calculate_draw_end(int line_height);
+int	key_press(int key, t_data *data);
+
+int play(t_data *data);
 #endif

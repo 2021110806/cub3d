@@ -1,3 +1,5 @@
+#include "cub3d.h"
+
 int	key_press(int key, t_data *data)
 {
 	if (key == KEYCODE_UP)

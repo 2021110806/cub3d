@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:25:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/20 20:00:46 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:21:16 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,14 +147,14 @@ int play(t_data *data)
 
 void set_textures(t_data *data)
 {
-	set_texture(data, "texture/eagle.xpm", 0);
+	set_texture(data, EAST_PATH, 0);
 	set_texture(data, EAST_PATH, EAST);
 	set_texture(data, WEST_PATH, WEST);
 	set_texture(data, SOUTH_PATH, SOUTH);
 	set_texture(data, NORTH_PATH, NORTH);
-	set_texture(data, "texture/mossy.xpm", FLOOR);
-	set_texture(data, "texture/wood.xpm", CEILING);
-	set_texture(data, "texture/colorstone.xpm", 7);
+	set_texture(data, WEST_PATH, FLOOR);
+	set_texture(data, SOUTH_PATH, CEILING);
+	set_texture(data, NORTH_PATH, 7);
 }
 
 int	main(int argc, char **argv)
