@@ -6,24 +6,26 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:24:14 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 19:13:53 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/21 20:40:47 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	calculate_distance_from_camera_to_wall\
-(t_int_coordinate map, t_data *data, t_vectors vectors, t_int_coordinate step)
+void	set_textures(t_data *data)
 {
-	if (data -> last_hit_pos == X)
-		return ((map.x - data -> player_position_x + (1 - step.x) / 2) \
-				/ vectors.ray_vector.x);
-	return ((map.y - data -> player_position_y + (1 - step.y) / 2) \
-			/ vectors.ray_vector.y);
+	set_texture(data, EAST_PATH, 0);
+	set_texture(data, EAST_PATH, EAST);
+	set_texture(data, WEST_PATH, WEST);
+	set_texture(data, SOUTH_PATH, SOUTH);
+	set_texture(data, NORTH_PATH, NORTH);
+	set_texture(data, WEST_PATH, FLOOR);
+	set_texture(data, SOUTH_PATH, CEILING);
+	set_texture(data, NORTH_PATH, 7);
 }
 
-double	calculate_wall_crash_spot\
-(t_data *data, double vertical_distance, t_vectors *vectors)
+double	calculate_wall_crash_spot(t_data *data, \
+double vertical_distance, t_vectors *vectors)
 {
 	double	wall_crash_spot;
 
@@ -37,8 +39,8 @@ double	calculate_wall_crash_spot\
 	return (wall_crash_spot);
 }
 
-int	calculate_texture_spot\
-(t_data *data, t_vectors *vectors, double wall_crash_spot)
+int	calculate_texture_spot(t_data *data, \
+t_vectors *vectors, double wall_crash_spot)
 {
 	int	texture_x;
 

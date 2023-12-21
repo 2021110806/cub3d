@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2023/12/21 19:40:21 by minjeon2         ###   ########.fr        #
+#    Updated: 2023/12/21 20:41:41 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX_DIR = mlx
 FRAMEWORK = -framework Appkit -framework OpenGL
 NAME = cub3d
-SRCS = main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c
+SRCS = main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)

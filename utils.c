@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: minjeon2 <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/21 20:03:22 by minjeon2          #+#    #+#             */
+/*   Updated: 2023/12/21 20:03:24 by minjeon2         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 int	*ft_int_malloc(int size)
@@ -10,7 +22,7 @@ int	*ft_int_malloc(int size)
 	return (return_value);
 }
 
-int **ft_int_pointer_malloc(int size)
+int	**ft_int_pointer_malloc(int size)
 {
 	int	**return_value;
 

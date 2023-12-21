@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 19:12:36 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/21 20:39:50 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,15 @@ typedef struct s_vectors
 
 typedef struct s_drawing_factors
 {
-	int draw_start;
-	int draw_end;
-	int	line_height;
-	int	texture_number;
-	double wall_crash_spot;
-	double curr_drawing_spot;
+	int		draw_start;
+	int		draw_end;
+	int		line_height;
+	int		texture_number;
+	double	wall_crash_spot;
+	double	curr_drawing_spot;
+	double	vertical_distance;
+	double	delta;
+	int		x;
 } t_drawing_factors;
 
 static int	worldMap[24][24] =
@@ -136,22 +139,37 @@ static int	worldMap[24][24] =
 						};
 						
 void	init_data(t_data *data);
-int	init_buf(t_data *data);
-int	*ft_int_malloc(int size);
-int **ft_int_pointer_malloc(int size);
+int		init_buf(t_data *data);
+int		*ft_int_malloc(int size);
+int		**ft_int_pointer_malloc(int size);
 void	init_texture(t_data *data);
-void draw_image(double vertical_distance, t_int_coordinate *map, t_data *data, t_vectors *vectors, int x);
-double	calculate_distance_from_camera_to_wall\
+void	draw_image(t_drawing_factors *drawing_factors, \
+t_int_coordinate *map, t_data *data, t_vectors *vectors);
+double	calculate_distance_from_camera_to_wall \
 (t_int_coordinate map, t_data *data, t_vectors vectors, t_int_coordinate step);
-double	calculate_wall_crash_spot\
-(t_data *data, double vertical_distance, t_vectors *vectors);
-int	calculate_texture_spot\
+double	calculate_wall_crash_spot (t_data *data, \
+double vertical_distance, t_vectors *vectors);
+int		calculate_texture_spot\
 (t_data *data, t_vectors *vectors, double wall_crash_spot);
-void	draw(t_data *data);
+void	draw_buf(t_data *data);
 void	draw_floor_and_ceiling(t_data *data);
-int	calculate_draw_start(int line_height);
-int	calculate_draw_end(int line_height);
-int	key_press(int key, t_data *data);
-
-int play(t_data *data);
+int		calculate_draw_start(int line_height);
+int		calculate_draw_end(int line_height);
+int		key_press(int key, t_data *data);
+int		play(t_data *data);
+double	calculate_distance_from_camera_to_wall(t_int_coordinate map, \
+t_data *data, t_vectors vectors, t_int_coordinate step);
+void	move_ray(t_vectors *vectors, \
+t_int_coordinate *map, t_data *data, t_int_coordinate step);
+void	set_x_vector(t_int_coordinate *map, t_data \
+*data, t_int_coordinate *step, t_vectors *vectors);
+void	set_y_vector(t_int_coordinate *map, t_data \
+*data, t_int_coordinate *step, t_vectors *vectors);
+void	set_curr_measurement_vector(t_int_coordinate *map, t_data \
+*data, t_int_coordinate *step, t_vectors *vectors);
+void	set_vector(t_data *data, t_vectors *vectors, t_int_coordinate *map);
+void	set_texture(t_data *data, char *direction, int index);
+void	set_player(t_data *data);
+void	set_textures(t_data *data);
+int		draw_wall(t_data *data);
 #endif
