@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:24:14 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/20 19:51:10 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:13:53 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	calculate_texture_spot\
 {
 	int	texture_x;
 
-	texture_x = (int)(wall_crash_spot * (double)TEXTURE_WIDTH);
+	texture_x = (long)(wall_crash_spot * (double)TEXTURE_WIDTH);
 	if ((data -> last_hit_pos == X && vectors->ray_vector.x > 0) || \
 	(data -> last_hit_pos == Y && vectors->ray_vector.y < 0))
 		return (TEXTURE_WIDTH - texture_x - 1);

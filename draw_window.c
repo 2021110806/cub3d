@@ -12,9 +12,9 @@ void	draw_floor_and_ceiling(t_data *data)
 		while (x < WIN_WIDTH)
 		{
 			if (y < WIN_HEIGHT / 2)
-				data->buf[y][x] = 163798;
+				data->buf[y][x] = 123123 & 8355711;
 			else
-				data->buf[y][x] = 183145;
+				data->buf[y][x] = 10000001;
 			x++;
 		}
 		y++;
@@ -42,6 +42,7 @@ void draw_image(double vertical_distance, t_int_coordinate *map, t_data *data, t
 	{
 		int texture_y = (int) drawing_factors.curr_drawing_spot & (TEXTURE_HEGIHT - 1);
 		drawing_factors.curr_drawing_spot += delta;
+		//printf("texture_number %d y %lld x %d answer %lld\n", drawing_factors.texture_number, texture_y, texture_x, TEXTURE_HEGIHT * texture_y + texture_x);
 		int color = data -> texture[drawing_factors.texture_number][TEXTURE_HEGIHT * texture_y + texture_x];
 		if (data->last_hit_pos == Y)
 			color = (color >> 1) & 8355711;
