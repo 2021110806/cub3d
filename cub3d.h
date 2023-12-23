@@ -29,6 +29,7 @@
 # define X 0
 # define Y 1
 # define KEY_PRESS_EVENT 2
+# define RED_BUTTON 17
 # define KEYCODE_UP 13
 # define KEYCODE_DOWN 1
 # define KEYCODE_LEFT 0
@@ -54,19 +55,19 @@ typedef struct s_double_vector
 {
 	double	x;
 	double	y;
-} t_double_vector;
+}	t_double_vector;
 
 typedef struct s_int_coordinate
 {
 	int	x;
 	int	y;
-} t_int_coordinate;
+}	t_int_coordinate;
 
 typedef struct s_crash_checker
 {
-	int x;
-	int y;
-} t_crash_checker;
+	int	x;
+	int	y;
+}	t_crash_checker;
 
 typedef struct s_data
 {
@@ -74,7 +75,7 @@ typedef struct s_data
 	double				player_position_y;
 	double				player_view_direction_x;
 	double				player_view_direction_y;
-	double 				camera_plane_x;
+	double				camera_plane_x;
 	double				camera_plane_y;
 	void				*mlx;
 	void				*win;
@@ -90,10 +91,10 @@ typedef struct s_data
 typedef struct s_vectors
 {
 	t_double_vector	ray_vector;
-	t_double_vector curr_measurement_vector;
-	t_double_vector delta_vector;
-	t_crash_checker crash_checker;
-} t_vectors;
+	t_double_vector	curr_measurement_vector;
+	t_double_vector	delta_vector;
+	t_crash_checker	crash_checker;
+}	t_vectors;
 
 typedef struct s_drawing_factors
 {
@@ -106,7 +107,7 @@ typedef struct s_drawing_factors
 	double	vertical_distance;
 	double	delta;
 	int		x;
-} t_drawing_factors;
+}	t_drawing_factors;
 
 static int	worldMap[24][24] =
 						{
@@ -142,13 +143,13 @@ int		*ft_int_malloc(int size);
 int		**ft_int_pointer_malloc(int size);
 void	init_texture(t_data *data);
 void	draw_image(t_drawing_factors *drawing_factors, \
-t_data *data, t_vectors *vectors);
-double	calculate_distance_from_camera_to_wall \
-(t_int_coordinate map, t_data *data, t_vectors vectors, t_int_coordinate step);
-double	calculate_wall_crash_spot (t_data *data, \
+t_data	*data, t_vectors *vectors);
+double	calculate_distance_from_camera_to_wall(t_int_coordinate map, \
+t_data *data, t_vectors vectors, t_int_coordinate step);
+double	calculate_wall_crash_spot(t_data *data, \
 double vertical_distance, t_vectors *vectors);
-int		calculate_texture_spot\
-(t_data *data, t_vectors *vectors, double wall_crash_spot);
+int		calculate_texture_spot(t_data *data, \
+t_vectors *vectors, double wall_crash_spot);
 void	draw_buf(t_data *data);
 void	draw_floor_and_ceiling(t_data *data);
 int		calculate_draw_start(int line_height);
@@ -174,4 +175,5 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_left(t_data *data);
 void	move_right(t_data *data);
+int		progrem_end(void);
 #endif

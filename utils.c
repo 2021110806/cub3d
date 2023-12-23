@@ -46,3 +46,8 @@ void	init_texture(t_data *data)
 		i++;
 	}
 }
+
+int	progrem_end(void)
+{
+	exit (1);
+}
