@@ -41,5 +41,6 @@ int	main(int argc, char **argv)
 	(data.img.image, &data.img.bit_per_pixel, &data.img.size, &data.img.endian);
 	mlx_loop_hook(data.mlx, play, &data);
 	mlx_hook(data.win, KEY_PRESS_EVENT, 0, &key_press, &data);
+	mlx_hook(data.win, RED_BUTTON, 0, &progrem_end, 0);
 	mlx_loop(data.mlx);
 }
