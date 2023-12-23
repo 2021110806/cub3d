@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 20:39:50 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:08:33 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@
 # define KEYCODE_LEFT 0
 # define KEYCODE_RIGHT 2
 # define KEYCODE_ESC 53
-
+# define FALSE 0
+# define TRUE 1
 # include "./mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
-
+# include "get_next_line.h"
+# include "./libft/libft.h"
 typedef struct s_image_info
 {
 	void	*image;
@@ -109,6 +111,23 @@ typedef struct s_drawing_factors
 	double	delta;
 	int		x;
 } t_drawing_factors;
+
+typedef struct s_map
+{
+	char	**map;
+	int		size;
+} t_map;
+
+typedef struct s_args
+{
+	char	*north_path;
+	char	*south_path;
+	char 	*west_path;
+	char	*east_path;
+	int		floor_color;
+	int		ceiling_color;
+	t_map	map;
+} t_args;
 
 static int	worldMap[24][24] =
 						{
