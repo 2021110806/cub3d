@@ -14,14 +14,10 @@
 
 void	set_textures(t_data *data)
 {
-	set_texture(data, EAST_PATH, 0);
 	set_texture(data, EAST_PATH, EAST);
 	set_texture(data, WEST_PATH, WEST);
 	set_texture(data, SOUTH_PATH, SOUTH);
 	set_texture(data, NORTH_PATH, NORTH);
-	set_texture(data, WEST_PATH, FLOOR);
-	set_texture(data, SOUTH_PATH, CEILING);
-	set_texture(data, NORTH_PATH, 7);
 }
 
 double	calculate_wall_crash_spot(t_data *data, \
