@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+void	calculate_draw_texture_number(t_drawing_factors *drawing_factors, \
+t_data *data, t_int_coordinate step)
+{
+	if (data -> last_hit_pos == X && step.x == 1)
+		drawing_factors -> texture_number = WEST;
+	else if (data -> last_hit_pos == X && step.x == -1)
+		drawing_factors -> texture_number = EAST;
+	else if (data -> last_hit_pos == Y && step.y == 1)
+		drawing_factors -> texture_number = SOUTH;
+	else if (data -> last_hit_pos == Y && step.y == -1)
+		drawing_factors -> texture_number = NORTH;
+}
+
 int	draw_wall(t_data *data)
 {
 	int					x;
@@ -30,7 +43,8 @@ int	draw_wall(t_data *data)
 		drawing_factors.vertical_distance = \
 		calculate_distance_from_camera_to_wall(map, data, vectors, step);
 		drawing_factors.x = x;
-		draw_image(&drawing_factors, &map, data, &vectors);
+		calculate_draw_texture_number(&drawing_factors, data, step);
+		draw_image(&drawing_factors, data, &vectors);
 		x++;
 	}
 	return (0);
@@ -58,7 +72,7 @@ void	draw_floor_and_ceiling(t_data *data)
 }
 
 void	set_drawing_factors(t_drawing_factors *drawing_factors, \
-t_int_coordinate *map, t_data *data, t_vectors *vectors)
+t_data *data, t_vectors *vectors)
 {
 	drawing_factors -> line_height = \
 	WIN_HEIGHT / drawing_factors -> vertical_distance;
@@ -66,7 +80,6 @@ t_int_coordinate *map, t_data *data, t_vectors *vectors)
 	calculate_draw_start(drawing_factors -> line_height);
 	drawing_factors -> draw_end = \
 	calculate_draw_end(drawing_factors -> line_height);
-	drawing_factors -> texture_number = worldMap[map -> y][map -> x];
 	drawing_factors -> delta = \
 	(1.0 * TEXTURE_HEGIHT / drawing_factors -> line_height);
 	drawing_factors -> curr_drawing_spot = (drawing_factors -> \
@@ -78,14 +91,14 @@ t_int_coordinate *map, t_data *data, t_vectors *vectors)
 }
 
 void	draw_image(t_drawing_factors *drawing_factors, \
-t_int_coordinate *map, t_data *data, t_vectors *vectors)
+t_data *data, t_vectors *vectors)
 {
 	int	texture_x;
 	int	texture_y;
 	int	color;
 	int	y;
 
-	set_drawing_factors(drawing_factors, map, data, vectors);
+	set_drawing_factors(drawing_factors, data, vectors);
 	texture_x = \
 	calculate_texture_spot(data, vectors, drawing_factors -> wall_crash_spot);
 	y = drawing_factors -> draw_start;
