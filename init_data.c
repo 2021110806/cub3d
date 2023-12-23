@@ -56,21 +56,11 @@ int	init_buf(t_data *data)
 	return (1);
 }
 
-void	init_data(t_data *data)
-{
-	data = malloc(sizeof (data));
-	if (!data)
-		exit(-1);
-}
-
 void	set_player(t_data *data)
 {
-	data -> player_position_x = 22.0;
-	data -> player_position_y = 11.5;
-	data -> player_view_direction_x = -1.0;
-	data -> player_view_direction_y = 0.0;
-	data -> camera_plane_x = 0.0;
-	data -> camera_plane_y = 0.66;
+	data -> player_position_x = 1.8;
+	data -> player_position_y = 1.8;
 	data -> move_speed = 0.15;
 	data -> rotate_speed = 0.10;
+	set_player_direction(data, 'N');
 }
