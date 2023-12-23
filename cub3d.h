@@ -170,4 +170,8 @@ void	set_texture(t_data *data, char *direction, int index);
 void	set_player(t_data *data);
 void	set_textures(t_data *data);
 int		draw_wall(t_data *data);
+void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_left(t_data *data);
+void	move_right(t_data *data);
 #endif
