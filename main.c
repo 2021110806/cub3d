@@ -16,6 +16,7 @@ int	play(t_data *data)
 {
 	draw_floor_and_ceiling(data);
 	draw_wall(data);
+	draw_minimap(data);
 	draw_buf(data);
 	return (0);
 }

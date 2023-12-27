@@ -35,6 +35,11 @@
 # define KEYCODE_LEFT 0
 # define KEYCODE_RIGHT 2
 # define KEYCODE_ESC 53
+# define MAP_ONE_SPACE_SIZE 10
+# define MINIMAP_WALL 1
+# define MINIMAP_NULL 32
+# define MINIMAP_EMPTY 0
+# define MINIMAP_PLAYER 2
 
 # include "./mlx/mlx.h"
 # include <stdlib.h>
@@ -68,6 +73,13 @@ typedef struct s_crash_checker
 	int	x;
 	int	y;
 }	t_crash_checker;
+
+typedef struct s_rgb_color
+{
+	int r;
+	int g;
+	int b;
+}	t_rgb_color;
 
 typedef struct s_data
 {
@@ -112,11 +124,11 @@ typedef struct s_drawing_factors
 static int	worldMap[7][7] =
 						{
 							{1,1,1,1,1,1,1},
-							{1,0,1,0,0,0,1},
-							{1,0,1,0,0,0,1},
-							{1,0,1,0,0,0,1},
-							{1,0,1,0,0,0,1},
 							{1,0,0,0,0,0,1},
+							{1,0,0,0,1,0,1},
+							{1,0,0,0,1,0,1},
+							{1,0,0,0,1,0,1},
+							{1,0,0,0,1,0,1},
 							{1,1,1,1,1,1,1},
 						};
 						
@@ -160,4 +172,8 @@ void	move_left(t_data *data);
 void	move_right(t_data *data);
 int		progrem_end(void);
 void	set_player_direction(t_data *data, char direction);
+void	draw_minimap(t_data *data);
+int 	rgb_convert_int(t_rgb_color color);
+void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
+int		check_minimap_current_location (int y, int x, t_data *data);
 #endif

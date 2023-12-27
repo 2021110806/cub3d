@@ -62,5 +62,5 @@ void	set_player(t_data *data)
 	data -> player_position_y = 1.8;
 	data -> move_speed = 0.15;
 	data -> rotate_speed = 0.10;
-	set_player_direction(data, 'N');
+	set_player_direction(data, 'E');
 }

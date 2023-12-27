@@ -15,7 +15,7 @@ CFLAGS = -Wall -Wextra -Werror
 MLX_DIR = mlx
 FRAMEWORK = -framework Appkit -framework OpenGL
 NAME = cub3d
-SRCS = main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c draw_window_setting.c set_direction.c
+SRCS = main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c draw_window_setting.c set_direction.c color.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS)

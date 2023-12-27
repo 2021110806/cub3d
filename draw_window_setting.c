@@ -16,9 +16,9 @@ void	calculate_draw_texture_number(t_drawing_factors *drawing_factors, \
 t_data *data, t_int_coordinate step)
 {
 	if (data -> last_hit_pos == X && step.x == 1)
-		drawing_factors -> texture_number = WEST;
-	else if (data -> last_hit_pos == X && step.x == -1)
 		drawing_factors -> texture_number = EAST;
+	else if (data -> last_hit_pos == X && step.x == -1)
+		drawing_factors -> texture_number = WEST;
 	else if (data -> last_hit_pos == Y && step.y == 1)
 		drawing_factors -> texture_number = SOUTH;
 	else if (data -> last_hit_pos == Y && step.y == -1)
@@ -93,4 +93,28 @@ t_data *data, t_vectors *vectors)
 		data -> buf[y][drawing_factors -> x] = color;
 		y++;
 	}
+}
+
+#include <stdio.h>
+
+int	check_minimap_current_location (int y, int x, t_data *data)
+{
+	int minimap_y;
+	int minimap_x;
+	int y_max = 6;
+	int x_max = 6;
+
+	if (y <= 5)
+		minimap_y = data->player_position_y - (5 - y);
+	else
+		minimap_y = data->player_position_y - (5 - y);
+	if (x <= 5)
+		minimap_x = data->player_position_x - (5 - x);
+	else
+		minimap_x = data->player_position_x - (5 - x);
+	if (minimap_y < 0 || minimap_x < 0 || minimap_y > y_max || minimap_x > x_max)
+		return (MINIMAP_NULL);
+	if (minimap_y == floor(data->player_position_y) && minimap_x == floor(data->player_position_x))
+		return (MINIMAP_PLAYER);
+	return (worldMap[minimap_y][minimap_x]);
 }
