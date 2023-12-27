@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 20:39:50 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/23 20:08:33 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define KEYCODE_LEFT 0
 # define KEYCODE_RIGHT 2
 # define KEYCODE_ESC 53
+# define FALSE 0
+# define TRUE 1
 # define MAP_ONE_SPACE_SIZE 10
 # define MINIMAP_WALL 1
 # define MINIMAP_NULL 32
@@ -44,7 +46,8 @@
 # include "./mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
-
+# include "get_next_line.h"
+# include "./libft/libft.h"
 typedef struct s_image_info
 {
 	void	*image;
@@ -121,7 +124,7 @@ typedef struct s_drawing_factors
 	int		x;
 }	t_drawing_factors;
 
-static int	worldMap[7][7] =
+static int	worldMap[24][24] =
 						{
 							{1,1,1,1,1,1,1},
 							{1,0,0,0,0,0,1},
