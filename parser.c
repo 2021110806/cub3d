@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/23 21:10:43 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/27 17:33:01 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	set_direction(char *line, t_args *args)
 		while (is_whitespace(*line))
 			line++;
 		args->east_path = malloc (ft_strlen(line) + 1);
-		while (*line)
+		while (*line && *line != '\n')
 		{
 			args -> east_path[i] = *line;
 			i++;
@@ -116,7 +116,7 @@ void	set_direction(char *line, t_args *args)
 		while (is_whitespace(*line))
 			line++;
 		args->west_path = malloc (ft_strlen(line) + 1);
-		while (*line)
+		while (*line && *line != '\n')
 		{
 			args -> west_path[i] = *line;
 			i++;
@@ -132,7 +132,7 @@ void	set_direction(char *line, t_args *args)
 		while (is_whitespace(*line))
 			line++;
 		args->south_path = malloc (ft_strlen(line) + 1);
-		while (*line)
+		while (*line && *line != '\n')
 		{
 			args -> south_path[i] = *line;
 			i++;
@@ -148,45 +148,58 @@ void	set_direction(char *line, t_args *args)
 		while (is_whitespace(*line))
 			line++;
 		args->north_path = malloc (ft_strlen(line) + 1);
-		while (*line)
+		while (*line && *line != '\n')
 		{
 			args -> north_path[i] = *line;
 			i++;
 			line++;
 		}
-		printf("!!!!!!! %s\n", args -> north_path);
 		return ;
 	}
-
 	if (CEILING == check_direction(line))
 	{
 		line++;
 		while (is_whitespace(*line))
 			line++;
-		while ((*line) && *line != ',')
+		while (*line && *line != '\n')
 		{
-			if (ft_isdigit(*line))
-				red += (int) *line << 16;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while ((*line) && *line != ',')
-		{
-			if (ft_isdigit(*line))
-				green += (int) *line << 8;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while ((*line) && *line != ',' )
-		{
+			if (*line == ',')
+				break;
 			if (ft_isdigit(*line))
 				red += (int) *line;
 			else
+			{
+				printf("1\n");
 				exit(1);
+			}
+			line++;
+		}
+		line ++;
+		while (*line && *line != '\n')
+		{
+			if (*line == ',')
+				break;
+			if (ft_isdigit(*line))
+				green += (int) *line;
+			else
+			{
+				printf("2\n");
+				exit(1);
+			}
+			line++;
+		}
+		line ++;
+		while (*line && *line != '\n')
+		{
+			if (*line == ',')
+				break;
+			if (ft_isdigit(*line))
+				red += (int) *line;
+			else
+			{
+				printf("3\n");
+				exit(1);
+			}
 			line++;
 		}
 		args -> ceiling_color = red + green + blue;
@@ -197,30 +210,45 @@ void	set_direction(char *line, t_args *args)
 		line++;
 		while (is_whitespace(*line))
 			line++;
-		while ((*line) && *line != ',')
+		while (*line && *line != '\n')
 		{
-			if (ft_isdigit(*line))
-				red += (int) *line << 16;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while ((*line) && *line != ',')
-		{
-			if (ft_isdigit(*line))
-				green += (int) *line << 8;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while ((*line) && *line != ',')
-		{
+			if (*line == ',')
+				break;
 			if (ft_isdigit(*line))
 				red += (int) *line;
 			else
+			{
+				printf("4\n");
 				exit(1);
+			}
+			line++;
+		}
+		line ++;
+		while (*line && *line != '\n')
+		{
+			if (*line == ',')
+				break;
+			if (ft_isdigit(*line))
+				green += (int) *line;
+			else
+			{
+				printf("5\n");
+				exit(1);
+			}
+			line++;
+		}
+		line ++;
+		while (*line && *line != '\n')
+		{
+			if (*line == ',')
+				break;
+			if (ft_isdigit(*line))
+				red += (int) *line;
+			else
+			{
+				printf("6\n");
+				exit(1);
+			}
 			line++;
 		}
 		args -> floor_color = red + green + blue;
@@ -251,17 +279,18 @@ void	set_map(int fd, t_args *args)
 	int	max_len;
 
 	i = 0;
-	max_len = 0;
 	char *line = get_next_line(fd);
-	while (line)
-	{
-		if (max_len < ft_strlen(line))
-			max_len = ft_strlen(line);
-		args -> map.map[i] = line;
-		line = get_next_line(fd);
-		if (args -> map.size >= i)
-			ft_realloc(args);
-	}
+		while (line)
+		{
+			if (max_len < ft_strlen(line))
+				args -> x_max = ft_strlen(line);
+			args -> map.map[i] = line;
+			if (args -> map.size >= i)
+				ft_realloc(args);
+			i++;
+			line = get_next_line(fd);
+		}
+		args -> y_max = i;
 }
 
 void	parse_argv(t_args *args, int argc, char **argv)
@@ -274,49 +303,36 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		exit(1);
 	else
 	{
-		printf("1\n");
 		fd = open(argv[1], O_RDONLY);
 		line = get_next_line(fd);
 		if (fd == -1)
 			exit(1);
-		printf("2\n");
 		while (line && *line && only_whitespace(line))
 			line = get_next_line(fd);
-		printf("3 %s\n", line);
-		set_direction(line, args);
-		printf("%s!!\n", args -> north_path);
-		printf("line : %s\n", line);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		printf("4 %s\n", line);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		printf("5 %s\n", line);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		printf("6 %s\n", line);
 		set_direction(line, args);
 		line = get_next_line(fd);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
 		line = get_next_line(fd);
-		while (line  && only_whitespace(line))
+		while (only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
 		line = get_next_line(fd);
-		while (line && only_whitespace(line))
+		while (only_whitespace(line))
+			line = get_next_line(fd);
+		set_direction(line, args);
+		line = get_next_line(fd);
+		while (only_whitespace(line))
+			line = get_next_line(fd);
+		set_direction(line, args);
+		line = get_next_line(fd);
+		while (only_whitespace(line))
+			line = get_next_line(fd);
+		set_direction(line, args);
+		while (only_whitespace(line))
 			line = get_next_line(fd);
 	}
-	printf("fin - nor %s\n",args -> north_path);
-	printf("fin - sou %s\n",args -> south_path);
-	printf("fin - west %s\n",args -> west_path);
-	printf("fin - east %s\n",args -> east_path);
 	args -> map.map= ft_char_two_pointer_malloc(20);
 	args -> map.size = 20;
 	set_map(fd, args);
@@ -328,7 +344,13 @@ int main(int argc, char **argv)
 
 	parse_argv(&args, argc, argv);
 	int i = 0;
-	while (i < args.map.size)
+	printf("fin - nor %s\n",args.north_path);
+	printf("fin - sou %s\n",args.south_path);
+	printf("fin - west %s\n",args.west_path);
+	printf("fin - east %s\n",args. east_path);
+	printf("7 floor %d\n", args.floor_color);
+	printf("8 ceiling %d\n", args.ceiling_color);
+	while (i < args.y_max)
 	{
 		printf("%s\n", args.map.map[i]);
 		i++;
