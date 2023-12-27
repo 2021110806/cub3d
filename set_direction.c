@@ -28,7 +28,7 @@ void set_player_direction_south(t_data *data)
     data -> camera_plane_y = 0;
 }
 
-void set_player_direction_east(t_data *data)
+void set_player_direction_west(t_data *data)
 {
     data -> player_view_direction_x = -1.0;
     data -> player_view_direction_y = 0.0;
@@ -36,7 +36,7 @@ void set_player_direction_east(t_data *data)
     data -> camera_plane_y = 0.66;
 }
 
-void set_player_direction_west(t_data *data)
+void set_player_direction_east(t_data *data)
 {
     data -> player_view_direction_x = 1.0;
     data -> player_view_direction_y = 0.0;
