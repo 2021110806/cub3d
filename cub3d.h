@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/23 20:08:33 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/27 15:48:29 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define WEST 1
 # define SOUTH 2
 # define NORTH 3
+# define CEILING 5
+# define FLOOR 6
 # define X 0
 # define Y 1
 # define KEY_PRESS_EVENT 2
@@ -119,6 +121,8 @@ typedef struct s_map
 
 typedef struct s_args
 {
+	int		y_max;
+	int		x_max;
 	char	*north_path;
 	char	*south_path;
 	char 	*west_path;
