@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:24:14 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 20:40:47 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:11:31 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	set_textures(t_data *data)
 {
-	set_texture(data, EAST_PATH, EAST);
-	set_texture(data, WEST_PATH, WEST);
-	set_texture(data, SOUTH_PATH, SOUTH);
-	set_texture(data, NORTH_PATH, NORTH);
+	set_texture(data, data -> args.east_path, EAST);
+	set_texture(data, data -> args.west_path, WEST);
+	set_texture(data,data -> args.south_path, SOUTH);
+	set_texture(data, data -> args.north_path, NORTH);
 }
 
 double	calculate_wall_crash_spot(t_data *data, \

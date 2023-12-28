@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/27 15:48:29 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:13:00 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 # define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEGIHT 128
-# define WEST_PATH "./texture/bird1_128.xpm" // 주황색
-# define EAST_PATH "./texture/bird2_128.xpm" // 점박이
-# define SOUTH_PATH "./texture/bird3_128.xpm" // 하늘색
-# define NORTH_PATH "./texture/bird4_128.xpm" // 코쿠투칸
+// # define WEST_PATH "./texture/bird1_128.xpm" // 주황색
+// # define EAST_PATH "./texture/bird2_128.xpm" // 점박이
+// # define SOUTH_PATH "./texture/bird3_128.xpm" // 하늘색
+// # define NORTH_PATH "./texture/bird4_128.xpm" // 코쿠투칸
 # define GAME_NAME "cub3d"
 # define EAST 0
 # define WEST 1
@@ -86,25 +86,6 @@ typedef struct s_rgb_color
 	int b;
 }	t_rgb_color;
 
-typedef struct s_data
-{
-	double				player_position_x;
-	double				player_position_y;
-	double				player_view_direction_x;
-	double				player_view_direction_y;
-	double				camera_plane_x;
-	double				camera_plane_y;
-	void				*mlx;
-	void				*win;
-	t_image_info		img;
-	int					buf[WIN_HEIGHT][WIN_WIDTH];
-	int					**texture;
-	int					last_hit_pos;
-	double				move_speed;
-	double				rotate_speed;
-	double				curr_ratio;
-}	t_data;
-
 typedef struct s_vectors
 {
 	t_double_vector	ray_vector;
@@ -144,6 +125,26 @@ typedef struct s_args
 	int		ceiling_color;
 	t_map	map;
 } t_args;
+
+typedef struct s_data
+{
+	double				player_position_x;
+	double				player_position_y;
+	double				player_view_direction_x;
+	double				player_view_direction_y;
+	double				camera_plane_x;
+	double				camera_plane_y;
+	void				*mlx;
+	void				*win;
+	t_image_info		img;
+	int					buf[WIN_HEIGHT][WIN_WIDTH];
+	int					**texture;
+	int					last_hit_pos;
+	double				move_speed;
+	double				rotate_speed;
+	double				curr_ratio;
+	t_args				args;
+}	t_data;
 
 static int	worldMap[7][7] =
 						{
@@ -200,4 +201,5 @@ void	draw_minimap(t_data *data);
 int 	rgb_convert_int(t_rgb_color color);
 void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
 int		check_minimap_current_location (int y, int x, t_data *data);
+void	parse_argv(t_args *args, int argc, char **argv);
 #endif

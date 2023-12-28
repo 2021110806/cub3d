@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2023/12/27 15:34:43 by minjeon2         ###   ########.fr        #
+#    Updated: 2023/12/28 17:13:08 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ MLX_DIR = mlx
 FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
-NAME = 밈정바보
-SRCS = main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c
+NAME = cub3d
+SRCS = parser.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS) $(LIBFT)

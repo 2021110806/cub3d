@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/27 17:33:01 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:14:22 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	set_direction(char *line, t_args *args)
 			i++;
 			line++;
 		}
+		args -> east_path[i] = '\0';
 		return ;
 	}
 	if (WEST == check_direction(line))
@@ -122,6 +123,7 @@ void	set_direction(char *line, t_args *args)
 			i++;
 			line++;
 		}
+		args -> west_path[i] = '\0';
 		return ;
 	}
 	if (SOUTH == check_direction(line))
@@ -138,6 +140,7 @@ void	set_direction(char *line, t_args *args)
 			i++;
 			line++;
 		}
+		args -> south_path[i] = '\0';
 		return ;
 	}
 	if (NORTH == check_direction(line))
@@ -154,6 +157,7 @@ void	set_direction(char *line, t_args *args)
 			i++;
 			line++;
 		}
+		args -> north_path[i] = '\0';
 		return ;
 	}
 	if (CEILING == check_direction(line))
@@ -276,13 +280,13 @@ char **ft_realloc(t_args *args)
 void	set_map(int fd, t_args *args)
 {
 	int	i;
-	int	max_len;
+	int	max_len = 0;
 
 	i = 0;
 	char *line = get_next_line(fd);
 		while (line)
 		{
-			if (max_len < ft_strlen(line))
+			if (max_len < (int) ft_strlen(line))
 				args -> x_max = ft_strlen(line);
 			args -> map.map[i] = line;
 			if (args -> map.size >= i)
@@ -297,7 +301,6 @@ void	parse_argv(t_args *args, int argc, char **argv)
 {
 	char 	*line;
 	int		fd;
-	int		i;
 
 	if (argc > 2)
 		exit(1);
@@ -338,22 +341,22 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	set_map(fd, args);
 }
 
-int main(int argc, char **argv)
-{
-	t_args args;
+// int main(int argc, char **argv)
+// {
+// 	t_args args;
 
-	parse_argv(&args, argc, argv);
-	int i = 0;
-	printf("fin - nor %s\n",args.north_path);
-	printf("fin - sou %s\n",args.south_path);
-	printf("fin - west %s\n",args.west_path);
-	printf("fin - east %s\n",args. east_path);
-	printf("7 floor %d\n", args.floor_color);
-	printf("8 ceiling %d\n", args.ceiling_color);
-	while (i < args.y_max)
-	{
-		printf("%s\n", args.map.map[i]);
-		i++;
-	}
-	return 0;
-}
+// 	parse_argv(&args, argc, argv);
+// 	int i = 0;
+// 	printf("fin - nor %s\n",args.north_path);
+// 	printf("fin - sou %s\n",args.south_path);
+// 	printf("fin - west %s\n",args.west_path);
+// 	printf("fin - east %s\n",args. east_path);
+// 	printf("7 floor %d\n", args.floor_color);
+// 	printf("8 ceiling %d\n", args.ceiling_color);
+// 	while (i < args.y_max)
+// 	{
+// 		printf("%s\n", args.map.map[i]);
+// 		i++;
+// 	}
+// 	return 0;
+// }
