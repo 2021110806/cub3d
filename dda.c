@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:30:18 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 20:40:06 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:26:27 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_int_coordinate *map, t_data *data, t_int_coordinate step)
 			map -> y += step.y;
 			last_hit_pos = Y;
 		}
-		if (worldMap[map -> x][map -> y] > 0)
+		if (data -> args.map.map[map -> x][map -> y] != '0')
 			hit = 1;
 		data -> last_hit_pos = last_hit_pos;
 	}

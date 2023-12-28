@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_window_setting.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:27:17 by minkyole          #+#    #+#             */
-/*   Updated: 2023/12/23 15:27:19 by minkyole         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:26:59 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_data *data, t_vectors *vectors)
 
 #include <stdio.h>
 
-int	check_minimap_current_location (int y, int x, t_data *data)
+char	check_minimap_current_location (int y, int x, t_data *data)
 {
 	int minimap_y;
 	int minimap_x;
@@ -116,5 +116,5 @@ int	check_minimap_current_location (int y, int x, t_data *data)
 		return (MINIMAP_NULL);
 	if (minimap_y == floor(data->player_position_y) && minimap_x == floor(data->player_position_x))
 		return (MINIMAP_PLAYER);
-	return (worldMap[minimap_y][minimap_x]);
+	return (data -> args.map.map[minimap_y][minimap_x]);
 }

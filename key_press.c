@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   key_press.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:24:56 by minkyole          #+#    #+#             */
-/*   Updated: 2023/12/23 15:24:57 by minkyole         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:46:09 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
+#include <stdio.h>
 int	key_press(int key, t_data *data)
 {
 	if (key == KEYCODE_UP)
@@ -31,28 +31,28 @@ int	key_press(int key, t_data *data)
 
 void	move_up(t_data *data)
 {
-	if (!worldMap[(int)(data->player_position_x + \
+	if (data->args.map.map[(int)(data->player_position_x + \
 	data->player_view_direction_x * data->move_speed)] \
-	[(int)(data->player_position_y)])
+	[(int)(data->player_position_y)] != '1')
 			data->player_position_x += \
 			data->player_view_direction_x * data->move_speed;
-	if (!worldMap[(int)(data->player_position_x)] \
+	if (data->args.map.map[(int)(data->player_position_x)] \
 	[(int)(data->player_position_y + data->player_view_direction_y * \
-	data->move_speed)])
+	data->move_speed)] != '1')
 			data->player_position_y += data->player_view_direction_y * \
 			data->move_speed;
 }
 
 void	move_down(t_data *data)
 {
-	if (!worldMap[(int)(data->player_position_x - \
+	if (data->args.map.map[(int)(data->player_position_x - \
 	data->player_view_direction_x * data->move_speed)] \
-	[(int)(data->player_position_y)])
+	[(int)(data->player_position_y)] != '1')
 			data->player_position_x -= \
 			data->player_view_direction_x * data->move_speed;
-	if (!worldMap[(int)(data->player_position_x)] \
+	if (data->args.map.map[(int)(data->player_position_x)] \
 	[(int)(data->player_position_y - data->player_view_direction_y * \
-	data->move_speed)])
+	data->move_speed)] != '1')
 			data->player_position_y -= \
 			data->player_view_direction_y * data->move_speed;
 }

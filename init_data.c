@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:05:13 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:18:34 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:51:10 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ int	init_buf(t_data *data)
 
 void	set_player(t_data *data)
 {
-	data -> player_position_x = 1.8;
-	data -> player_position_y = 1.8;
+	data -> player_position_x = 4.3;
+	data -> player_position_y = 4.3;
 	data -> move_speed = 0.15;
 	data -> rotate_speed = 0.10;
 	set_player_direction(data, 'N');

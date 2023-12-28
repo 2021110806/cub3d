@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:25:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:11:56 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:39:00 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	play(t_data *data)
 {
 	draw_floor_and_ceiling(data);
 	draw_wall(data);
-	draw_minimap(data);
+	//draw_minimap(data);
 	draw_buf(data);
 	return (0);
 }

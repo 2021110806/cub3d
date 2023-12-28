@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:13:00 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 17:26:02 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,16 +146,16 @@ typedef struct s_data
 	t_args				args;
 }	t_data;
 
-static int	worldMap[7][7] =
-						{
-							{1,1,1,1,1,1,1},
-							{1,0,0,0,0,0,1},
-							{1,0,0,0,1,0,1},
-							{1,0,0,0,1,0,1},
-							{1,0,0,0,1,0,1},
-							{1,0,0,0,1,0,1},
-							{1,1,1,1,1,1,1},
-						};
+// static char	worldMap[7][7] =
+// 						{
+// 							{'1','1','1','1','1','1','1'},
+// 							{'1','0','0','0','0','1'},
+// 							{'1','0','0','0','1','0','1'},
+// 							{'1','0','0','0','1','0','1'},
+// 							{'1','0','0','0','1','0','1'},
+// 							{'1','0','1','0','1'},
+// 							{'1','1','1','1','1','1','1'},
+// 						};
 						
 void	init_data(t_data *data);
 int		init_buf(t_data *data);
@@ -200,6 +200,6 @@ void	set_player_direction(t_data *data, char direction);
 void	draw_minimap(t_data *data);
 int 	rgb_convert_int(t_rgb_color color);
 void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
-int		check_minimap_current_location (int y, int x, t_data *data);
+char	check_minimap_current_location (int y, int x, t_data *data);
 void	parse_argv(t_args *args, int argc, char **argv);
 #endif
