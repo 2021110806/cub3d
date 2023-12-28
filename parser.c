@@ -6,58 +6,11 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:14:22 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:32:50 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "cub3d.h"
-
-int	is_whitespace(char charactor)
-{
-	if (charactor == ' ' || charactor == '\t' || charactor == '\n' || \
-	charactor == 'v' || charactor == '\r')
-		return (TRUE);
-	return (FALSE);
-}
-
-int	only_whitespace(char *line)
-{
-	while (*line)
-	{
-		if (is_whitespace(*line))
-			line++;
-		else
-			return (FALSE);
-	}
-	return (TRUE);
-}
-
-int	count_line(int fd, char *file_name)
-{
-	int		count;
-	char	*line;
-
-	count = 0;
-	fd = open(file_name, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		line = get_next_line(fd);
-		count++;
-	}
-	return (count + 1);
-}
-
-char	**ft_char_two_pointer_malloc(int size)
-{
-	char	**return_value;
-
-	return_value = malloc (sizeof (char *) * size);
-	if (!return_value)	
-		exit(1);
-	return (return_value);
-}
 
 int	check_direction(char *path)
 {	
@@ -82,9 +35,44 @@ int	check_direction(char *path)
 	return (-1);
 }
 
+void	pass_white_space(char **line)
+{
+	(*line)++;
+	(*line)++;
+	while (is_whitespace(**line))
+		(*line)++;
+}
+
+void	copy_path(int direction, char *line, t_args *args, int i)
+{
+	if (direction == EAST)
+	{
+		while (*line && *line != '\n')
+			args -> east_path[i++] = *line++;
+		args -> east_path[i] = '\0';
+	}
+	if (direction == WEST)
+	{
+		while (*line && *line != '\n')
+			args -> west_path[i++] = *line++;
+		args -> west_path[i] = '\0';
+	}
+	if (direction == SOUTH)
+	{
+		while (*line && *line != '\n')
+			args -> south_path[i++] = *line++;
+		args -> south_path[i] = '\0';
+	}
+	if (direction == NORTH)
+	{
+		while (*line && *line != '\n')
+			args -> north_path[i++] = *line++;
+		args -> north_path[i] = '\0';
+	}
+}
+
 void	set_direction(char *line, t_args *args)
 {
-	int		i;
 	int		red;
 	int		green;
 	int		blue;
@@ -94,70 +82,30 @@ void	set_direction(char *line, t_args *args)
 	green = 0;
 	if (EAST == check_direction(line))
 	{
-		i = 0;
-		line++;
-		line++;
-		while (is_whitespace(*line))
-			line++;
+		pass_white_space(&line);
 		args->east_path = malloc (ft_strlen(line) + 1);
-		while (*line && *line != '\n')
-		{
-			args -> east_path[i] = *line;
-			i++;
-			line++;
-		}
-		args -> east_path[i] = '\0';
+		copy_path(EAST, line, args, 0);
 		return ;
 	}
 	if (WEST == check_direction(line))
 	{
-		i = 0;
-		line++;
-		line++;
-		while (is_whitespace(*line))
-			line++;
+		pass_white_space(&line);
 		args->west_path = malloc (ft_strlen(line) + 1);
-		while (*line && *line != '\n')
-		{
-			args -> west_path[i] = *line;
-			i++;
-			line++;
-		}
-		args -> west_path[i] = '\0';
+		copy_path(WEST, line, args, 0);
 		return ;
 	}
 	if (SOUTH == check_direction(line))
 	{
-		i = 0;
-		line++;
-		line++;
-		while (is_whitespace(*line))
-			line++;
+		pass_white_space(&line);
 		args->south_path = malloc (ft_strlen(line) + 1);
-		while (*line && *line != '\n')
-		{
-			args -> south_path[i] = *line;
-			i++;
-			line++;
-		}
-		args -> south_path[i] = '\0';
+		copy_path(SOUTH, line, args, 0);
 		return ;
 	}
 	if (NORTH == check_direction(line))
 	{
-		i = 0;
-		line++;
-		line++;
-		while (is_whitespace(*line))
-			line++;
+		pass_white_space(&line);
 		args->north_path = malloc (ft_strlen(line) + 1);
-		while (*line && *line != '\n')
-		{
-			args -> north_path[i] = *line;
-			i++;
-			line++;
-		}
-		args -> north_path[i] = '\0';
+		copy_path(NORTH, line, args, 0);
 		return ;
 	}
 	if (CEILING == check_direction(line))
@@ -172,38 +120,29 @@ void	set_direction(char *line, t_args *args)
 			if (ft_isdigit(*line))
 				red += (int) *line;
 			else
-			{
-				printf("1\n");
 				exit(1);
-			}
 			line++;
 		}
 		line ++;
 		while (*line && *line != '\n')
 		{
 			if (*line == ',')
-				break;
+				break ;
 			if (ft_isdigit(*line))
 				green += (int) *line;
 			else
-			{
-				printf("2\n");
 				exit(1);
-			}
 			line++;
 		}
 		line ++;
 		while (*line && *line != '\n')
 		{
 			if (*line == ',')
-				break;
+				break ;
 			if (ft_isdigit(*line))
 				red += (int) *line;
 			else
-			{
-				printf("3\n");
 				exit(1);
-			}
 			line++;
 		}
 		args -> ceiling_color = red + green + blue;
@@ -217,64 +156,38 @@ void	set_direction(char *line, t_args *args)
 		while (*line && *line != '\n')
 		{
 			if (*line == ',')
-				break;
+				break ;
 			if (ft_isdigit(*line))
 				red += (int) *line;
 			else
-			{
-				printf("4\n");
 				exit(1);
-			}
 			line++;
 		}
 		line ++;
 		while (*line && *line != '\n')
 		{
 			if (*line == ',')
-				break;
+				break ;
 			if (ft_isdigit(*line))
 				green += (int) *line;
 			else
-			{
-				printf("5\n");
 				exit(1);
-			}
 			line++;
 		}
 		line ++;
 		while (*line && *line != '\n')
 		{
 			if (*line == ',')
-				break;
+				break ;
 			if (ft_isdigit(*line))
 				red += (int) *line;
 			else
-			{
-				printf("6\n");
 				exit(1);
-			}
 			line++;
 		}
 		args -> floor_color = red + green + blue;
 		return ;
 	}
-}
-
-char **ft_realloc(t_args *args)
-{
-	int		i;
-	char	**return_value;
-
-	i = 0;
-	return_value = ft_char_two_pointer_malloc(args -> map.size * 2);
-	while (i < args -> map.size)
-	{
-		return_value[i] = args -> map.map[i];
-		i++;
-	}
-	args -> map.map = return_value;
-	args -> map.size *= 2;
-	return (return_value);
 }
 
 void	set_map(int fd, t_args *args)

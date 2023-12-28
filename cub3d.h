@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 18:37:31 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:33:31 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,4 +204,9 @@ void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
 char	check_minimap_current_location (int y, int x, t_data *data);
 void	parse_argv(t_args *args, int argc, char **argv);
 int	is_correct_map_line(char *line);
+char **ft_realloc(t_args *args);
+char	**ft_char_two_pointer_malloc(int size);
+int	count_line(int fd, char *file_name);
+int	only_whitespace(char *line);
+int	is_whitespace(char charactor);
 #endif
