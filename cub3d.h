@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:26:02 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:37:31 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@
 # include "./mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
+# include <stdio.h>
 # include "get_next_line.h"
 # include "./libft/libft.h"
 typedef struct s_image_info
@@ -202,4 +203,5 @@ int 	rgb_convert_int(t_rgb_color color);
 void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
 char	check_minimap_current_location (int y, int x, t_data *data);
 void	parse_argv(t_args *args, int argc, char **argv);
+int	is_correct_map_line(char *line);
 #endif
