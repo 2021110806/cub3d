@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 19:32:50 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:43:27 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,49 @@ void	copy_path(int direction, char *line, t_args *args, int i)
 	}
 }
 
+int	make_color(char *line)
+{
+	int	color;
+
+	color = 0;
+	while (*line && *line != '\n')
+	{
+		if (*line == ',')
+		{
+			line++;
+			continue ;
+		}
+		if (ft_isdigit(*line))
+			color += (int) *line;
+		else
+			exit(1);
+		line++;
+	}
+	return (color);
+}
+
+void	set_floor_and_ceiling_color(char *line, t_args *args)
+{
+	if (CEILING == check_direction(line))
+	{
+		line++;
+		while (is_whitespace(*line))
+			line++;
+		args -> ceiling_color = make_color(line);
+		return ;
+	}
+	if (FLOOR == check_direction(line))
+	{
+		line++;
+		while (is_whitespace(*line))
+			line++;
+		args -> floor_color = make_color(line);
+		return ;
+	}
+}
+
 void	set_direction(char *line, t_args *args)
 {
-	int		red;
-	int		green;
-	int		blue;
-
-	red = 0;
-	blue = 0;
-	green = 0;
 	if (EAST == check_direction(line))
 	{
 		pass_white_space(&line);
@@ -106,86 +140,6 @@ void	set_direction(char *line, t_args *args)
 		pass_white_space(&line);
 		args->north_path = malloc (ft_strlen(line) + 1);
 		copy_path(NORTH, line, args, 0);
-		return ;
-	}
-	if (CEILING == check_direction(line))
-	{
-		line++;
-		while (is_whitespace(*line))
-			line++;
-		while (*line && *line != '\n')
-		{
-			if (*line == ',')
-				break;
-			if (ft_isdigit(*line))
-				red += (int) *line;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while (*line && *line != '\n')
-		{
-			if (*line == ',')
-				break ;
-			if (ft_isdigit(*line))
-				green += (int) *line;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while (*line && *line != '\n')
-		{
-			if (*line == ',')
-				break ;
-			if (ft_isdigit(*line))
-				red += (int) *line;
-			else
-				exit(1);
-			line++;
-		}
-		args -> ceiling_color = red + green + blue;
-		return ;
-	}
-	if (FLOOR == check_direction(line))
-	{
-		line++;
-		while (is_whitespace(*line))
-			line++;
-		while (*line && *line != '\n')
-		{
-			if (*line == ',')
-				break ;
-			if (ft_isdigit(*line))
-				red += (int) *line;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while (*line && *line != '\n')
-		{
-			if (*line == ',')
-				break ;
-			if (ft_isdigit(*line))
-				green += (int) *line;
-			else
-				exit(1);
-			line++;
-		}
-		line ++;
-		while (*line && *line != '\n')
-		{
-			if (*line == ',')
-				break ;
-			if (ft_isdigit(*line))
-				red += (int) *line;
-			else
-				exit(1);
-			line++;
-		}
-		args -> floor_color = red + green + blue;
 		return ;
 	}
 }
@@ -226,6 +180,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		while (line && *line && only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
+		set_floor_and_ceiling_color(line, args);
 		line = get_next_line(fd);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
