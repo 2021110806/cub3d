@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 19:43:27 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:21:50 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,49 @@ void	set_direction(char *line, t_args *args)
 	}
 }
 
+char	*ft_char_malloc(size)
+{
+	char	*return_value;
+
+	return_value = malloc (sizeof(char) * size);
+	if (!return_value)
+		exit(1);
+	return (return_value);
+}
+
+void	make_map_rectangular(t_args *args)
+{
+	int		i;
+	int		j;
+	char	*new_map_line;
+	
+	i = 0;
+	while (i < args -> y_max)
+	{
+		printf("x_max %d, i %d, strlen %d\n", args -> x_max, i, (int) ft_strlen(args -> map.map[i]));
+		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max)
+		{
+			j = 0;
+			new_map_line = ft_char_malloc(args -> x_max);
+			while (j < (int) ft_strlen(args -> map.map[i]))
+			{
+				new_map_line[j] = args -> map.map[i][j];
+				j++;
+			}
+			while (j < args -> x_max)
+			{
+				new_map_line[j] = ' ';
+				j++;
+			}
+			char *tmp = args -> map.map[i];
+			args -> map.map[i] = new_map_line;
+			free(tmp);
+		}
+		i++;
+	}	
+}
+
+
 void	set_map(int fd, t_args *args)
 {
 	int	i;
@@ -154,7 +197,7 @@ void	set_map(int fd, t_args *args)
 		while (line)
 		{
 			if (max_len < (int) ft_strlen(line))
-				args -> x_max = ft_strlen(line);
+				args -> x_max = (int) ft_strlen(line);
 			args -> map.map[i] = line;
 			if (args -> map.size >= i)
 				ft_realloc(args);
@@ -208,4 +251,20 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	args -> map.map= ft_char_two_pointer_malloc(20);
 	args -> map.size = 20;
 	set_map(fd, args);
+	printf("x_max %d\n", args -> x_max);
+	make_map_rectangular(args);
+	//printf("y max %d, x max %d\n", args -> y_max, args -> x_max);
+	for (int i = 0; args -> map.map[i]; i++)
+	{
+		for (int j = 0; args -> map.map[i][j]; j++)
+		{
+			if (args -> map.map[i][j] == ' ')
+			{
+				printf("2 ");
+			}
+			else
+				printf("%c ", args -> map.map[i][j]);
+		}
+		printf("\n");
+	}
 }
