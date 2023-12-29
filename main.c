@@ -33,6 +33,7 @@ int	main(int argc, char **argv)
 	parse_argv(&(data.args), argc, argv);
 	set_player(&data);
 	init_buf(&data);
+
 	data.texture = ft_int_pointer_malloc(4);
 	while (i < 4)
 		data .texture[i++] = ft_int_malloc(TEXTURE_HEGIHT * TEXTURE_WIDTH);

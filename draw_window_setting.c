@@ -16,9 +16,9 @@ void	calculate_draw_texture_number(t_drawing_factors *drawing_factors, \
 t_data *data, t_int_coordinate step)
 {
 	if (data -> last_hit_pos == X && step.x == 1)
-		drawing_factors -> texture_number = WEST;
-	else if (data -> last_hit_pos == X && step.x == -1)
 		drawing_factors -> texture_number = EAST;
+	else if (data -> last_hit_pos == X && step.x == -1)
+		drawing_factors -> texture_number = WEST;
 	else if (data -> last_hit_pos == Y && step.y == 1)
 		drawing_factors -> texture_number = SOUTH;
 	else if (data -> last_hit_pos == Y && step.y == -1)
@@ -36,7 +36,7 @@ int	draw_wall(t_data *data)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		data -> curr_ratio = 2 * x / (double) WIN_WIDTH - 1;
+		data -> curr_ratio = -(2 * x / (double) WIN_WIDTH - 1);
 		set_vector(data, &vectors, &map);
 		set_curr_measurement_vector(&map, data, &step, &vectors);
 		move_ray(&vectors, &map, data, step);

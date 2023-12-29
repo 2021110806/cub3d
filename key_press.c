@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:24:56 by minkyole          #+#    #+#             */
-/*   Updated: 2023/12/29 18:37:30 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 20:31:00 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,17 @@ void	move_left(t_data *data)
 	old_dir_x = data->player_view_direction_x;
 	old_plane_x = data->camera_plane_x;
 	data->player_view_direction_x = data->player_view_direction_x \
-	* cos(data->rotate_speed) - data->player_view_direction_y \
-	* sin(data->rotate_speed);
+	* cos(-data->rotate_speed) - data->player_view_direction_y \
+	* sin(-data->rotate_speed);
 	data->player_view_direction_y = old_dir_x \
-	* sin(data->rotate_speed) + data->player_view_direction_y \
-	* cos(data->rotate_speed);
+	* sin(-data->rotate_speed) + data->player_view_direction_y \
+	* cos(-data->rotate_speed);
 	data->camera_plane_x = data->camera_plane_x \
-	* cos(data->rotate_speed) - data->camera_plane_y \
-	* sin(data->rotate_speed);
+	* cos(-data->rotate_speed) - data->camera_plane_y \
+	* sin(-data->rotate_speed);
 	data->camera_plane_y = old_plane_x \
-	* sin(data->rotate_speed) + data->camera_plane_y \
-	* cos(data->rotate_speed);
+	* sin(-data->rotate_speed) + data->camera_plane_y \
+	* cos(-data->rotate_speed);
 }
 
 void	move_right(t_data *data)
@@ -87,14 +87,14 @@ void	move_right(t_data *data)
 	old_plane_x = data->camera_plane_x;
 	data->player_view_direction_x = data->player_view_direction_x \
 	* cos(data->rotate_speed) - data->player_view_direction_y \
-	* sin(-data->rotate_speed);
+	* sin(data->rotate_speed);
 	data->player_view_direction_y = old_dir_x \
-	* sin(-data->rotate_speed) + data->player_view_direction_y \
+	* sin(data->rotate_speed) + data->player_view_direction_y \
 	* cos(data->rotate_speed);
 	data->camera_plane_x = data->camera_plane_x \
 	* cos(data->rotate_speed) - data->camera_plane_y \
-	* sin(-data->rotate_speed);
+	* sin(data->rotate_speed);
 	data->camera_plane_y = old_plane_x \
-	* sin(-data->rotate_speed) + data->camera_plane_y \
+	* sin(data->rotate_speed) + data->camera_plane_y \
 	* cos(data->rotate_speed);
 }

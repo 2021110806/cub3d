@@ -1,7 +1,7 @@
-NO ./texture/bird4_128.xpm
-SO ./texture/bird3_128.xpm
-WE ./texture/bird1_128.xpm
-EA ./texture/bird2_128.xpm
+NO ./texture/green_bird.xpm
+SO ./texture/skyblue_bird.xpm
+WE ./texture/dot_bird.xpm
+EA ./texture/orange_bird.xpm
 
 F 220,100,0
 C 225,30,0
