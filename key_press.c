@@ -65,27 +65,6 @@ void	move_left(t_data *data)
 	old_dir_x = data->player_view_direction_x;
 	old_plane_x = data->camera_plane_x;
 	data->player_view_direction_x = data->player_view_direction_x \
-	* cos(data->rotate_speed) - data->player_view_direction_y \
-	* sin(data->rotate_speed);
-	data->player_view_direction_y = old_dir_x \
-	* sin(data->rotate_speed) + data->player_view_direction_y \
-	* cos(data->rotate_speed);
-	data->camera_plane_x = data->camera_plane_x \
-	* cos(data->rotate_speed) - data->camera_plane_y \
-	* sin(data->rotate_speed);
-	data->camera_plane_y = old_plane_x \
-	* sin(data->rotate_speed) + data->camera_plane_y \
-	* cos(data->rotate_speed);
-}
-
-void	move_right(t_data *data)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = data->player_view_direction_x;
-	old_plane_x = data->camera_plane_x;
-	data->player_view_direction_x = data->player_view_direction_x \
 	* cos(-data->rotate_speed) - data->player_view_direction_y \
 	* sin(-data->rotate_speed);
 	data->player_view_direction_y = old_dir_x \
@@ -97,4 +76,25 @@ void	move_right(t_data *data)
 	data->camera_plane_y = old_plane_x \
 	* sin(-data->rotate_speed) + data->camera_plane_y \
 	* cos(-data->rotate_speed);
+}
+
+void	move_right(t_data *data)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = data->player_view_direction_x;
+	old_plane_x = data->camera_plane_x;
+	data->player_view_direction_x = data->player_view_direction_x \
+	* cos(data->rotate_speed) - data->player_view_direction_y \
+	* sin(data->rotate_speed);
+	data->player_view_direction_y = old_dir_x \
+	* sin(data->rotate_speed) + data->player_view_direction_y \
+	* cos(data->rotate_speed);
+	data->camera_plane_x = data->camera_plane_x \
+	* cos(data->rotate_speed) - data->camera_plane_y \
+	* sin(data->rotate_speed);
+	data->camera_plane_y = old_plane_x \
+	* sin(data->rotate_speed) + data->camera_plane_y \
+	* cos(data->rotate_speed);
 }
