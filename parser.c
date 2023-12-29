@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 22:10:04 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:59:23 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,68 @@ int	make_color(char **line)
 	return ((int) (color * pow(10, i - 1)));
 }
 
-void	set_floor_and_ceiling_color(char *line, t_args *args)
+// void	set_floor_and_ceiling_color(char *line, t_args *args)
+// {
+// 	if (CEILING == check_direction(line))
+// 	{
+// 		line++;
+// 		while (is_whitespace(*line))
+// 			line++;
+// 		set_rgb_color(&(args ->ceiling_color) , make_color(&line), make_color(&line), make_color(&line));
+// 		return ;
+// 	}
+// 	if (FLOOR == check_direction(line))
+// 	{
+// 		line++;
+// 		while (is_whitespace(*line))
+// 			line++;
+// 		set_rgb_color(&(args ->floor_color), make_color(&line), make_color(&line), make_color(&line));
+// 		return ;
+// 	}
+// }
+
+void	set_direction(char *line, t_args *args)
 {
+	if (EAST == check_direction(line))
+	{
+		if (args -> east_path != NULL)
+			exit(1);
+		pass_white_space(&line);
+		args->east_path = malloc (ft_strlen(line) + 1);
+		copy_path(EAST, line, args, 0);
+		return ;
+	}
+	if (WEST == check_direction(line))
+	{
+		if (args -> west_path != NULL)
+			exit(1);
+		pass_white_space(&line);
+		args->west_path = malloc (ft_strlen(line) + 1);
+		copy_path(WEST, line, args, 0);
+		return ;
+	}
+	if (SOUTH == check_direction(line))
+	{
+		if (args -> west_path != NULL)
+			exit(1);
+		pass_white_space(&line);
+		args->south_path = malloc (ft_strlen(line) + 1);
+		copy_path(SOUTH, line, args, 0);
+		return ;
+	}
+	if (NORTH == check_direction(line))
+	{
+		if (args -> west_path != NULL)
+			exit(1);
+		pass_white_space(&line);
+		args->north_path = malloc (ft_strlen(line) + 1);
+		copy_path(NORTH, line, args, 0);
+		return ;
+	}
 	if (CEILING == check_direction(line))
 	{
+		if (!(args -> ceiling_color.r == -1 && args -> ceiling_color.g == -1 && args -> ceiling_color.b == -1))
+			exit(1);
 		line++;
 		while (is_whitespace(*line))
 			line++;
@@ -109,42 +167,12 @@ void	set_floor_and_ceiling_color(char *line, t_args *args)
 	}
 	if (FLOOR == check_direction(line))
 	{
+		if (!(args -> floor_color.r == -1 && args -> floor_color.g == -1 && args -> floor_color.b == -1))
+			exit(1);
 		line++;
 		while (is_whitespace(*line))
 			line++;
 		set_rgb_color(&(args ->floor_color), make_color(&line), make_color(&line), make_color(&line));
-		return ;
-	}
-}
-
-void	set_direction(char *line, t_args *args)
-{
-	if (EAST == check_direction(line))
-	{
-		pass_white_space(&line);
-		args->east_path = malloc (ft_strlen(line) + 1);
-		copy_path(EAST, line, args, 0);
-		return ;
-	}
-	if (WEST == check_direction(line))
-	{
-		pass_white_space(&line);
-		args->west_path = malloc (ft_strlen(line) + 1);
-		copy_path(WEST, line, args, 0);
-		return ;
-	}
-	if (SOUTH == check_direction(line))
-	{
-		pass_white_space(&line);
-		args->south_path = malloc (ft_strlen(line) + 1);
-		copy_path(SOUTH, line, args, 0);
-		return ;
-	}
-	if (NORTH == check_direction(line))
-	{
-		pass_white_space(&line);
-		args->north_path = malloc (ft_strlen(line) + 1);
-		copy_path(NORTH, line, args, 0);
 		return ;
 	}
 }
@@ -218,6 +246,21 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	char 	*line;
 	int		fd;
 
+	if (ft_strlen(argv) < 4)
+		exit(1);
+	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && argv[1][ft_strlen(argv[1]) - 2] == 'u' \
+	&& argv[1][ft_strlen(argv[1]) - 3] == 'c' && argv[1][ft_strlen(argv[1]) - 4] == '.'))
+		exit(1);
+	args -> east_path = NULL;
+	args -> west_path = NULL;
+	args -> north_path = NULL;
+	args -> south_path = NULL;
+	args -> ceiling_color.r = -1;
+	args -> ceiling_color.g = -1;
+	args -> ceiling_color.b = -1;
+	args -> floor_color.r = -1;
+	args -> floor_color.g = -1;
+	args -> floor_color.b = -1;
 	if (argc > 2)
 		exit(1);
 	else
@@ -244,7 +287,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		line = get_next_line(fd);
 		while (only_whitespace(line))
 		 	line = get_next_line(fd);
-		set_floor_and_ceiling_color(line, args);
+		set_direction(line, args);
 		// set_direction(line, args);
 		// line = get_next_line(fd);
 		// while (only_whitespace(line))
@@ -253,7 +296,8 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		line = get_next_line(fd);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
-		set_floor_and_ceiling_color(line, args);
+		set_direction(line, args);
+		//set_floor_and_ceiling_color(line, args);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
 	}
