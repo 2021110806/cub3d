@@ -166,7 +166,7 @@ void	make_map_rectangular(t_args *args)
 		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max - 1)
 		{
 			j = 0;
-			new_map_line = ft_char_malloc(args -> x_max);
+			new_map_line = ft_char_malloc(args -> x_max + 2);
 			while (j < (int) ft_strlen(args -> map.map[i]) - 1)
 			{
 				new_map_line[j] = args -> map.map[i][j];
@@ -177,7 +177,8 @@ void	make_map_rectangular(t_args *args)
 				new_map_line[j] = ' ';
 				j++;
 			}
-			new_map_line[j] = '\0';
+			new_map_line[j] = '\n';
+			new_map_line[j + 1] = '\0';
 			char *tmp = args -> map.map[i];
 			args -> map.map[i] = new_map_line;
 			free(tmp);
@@ -198,7 +199,7 @@ void	set_map(int fd, t_args *args, char *line)
 			if (args -> x_max < (int) ft_strlen(line))
 				args -> x_max = (int) ft_strlen(line);
 			args -> map.map[i] = line;
-			printf("%d %s\n",i,line);
+			// printf("%d %s\n",i,line);
 			if (args -> map.size >= i)
 				ft_realloc(args);
 			i++;
