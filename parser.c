@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 20:56:25 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:10:04 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,30 @@ void	copy_path(int direction, char *line, t_args *args, int i)
 	}
 }
 
-int	make_color(char *line)
+int	make_color(char **line)
 {
-	int	color;
+	double	color;
+	int		i;
 
+	i = 1;
 	color = 0;
-	while (*line && *line != '\n')
+	while (**line && **line != '\n')
 	{
-		if (*line == ',')
+		if (**line == ',')
 		{
-			line++;
-			continue ;
+			(*line)++;
+			break ;
 		}
-		if (ft_isdigit(*line))
-			color += (int) *line;
+		if (ft_isdigit(**line))
+		{
+			color += ((double) **line - 48) * pow(0.1, i);
+			i++;
+		}
 		else
 			exit(1);
-		line++;
+		(*line)++;
 	}
-	return (color);
+	return ((int) (color * pow(10, i - 1)));
 }
 
 void	set_floor_and_ceiling_color(char *line, t_args *args)
@@ -99,7 +104,7 @@ void	set_floor_and_ceiling_color(char *line, t_args *args)
 		line++;
 		while (is_whitespace(*line))
 			line++;
-		args -> ceiling_color = make_color(line);
+		set_rgb_color(&(args ->ceiling_color) , make_color(&line), make_color(&line), make_color(&line));
 		return ;
 	}
 	if (FLOOR == check_direction(line))
@@ -107,7 +112,7 @@ void	set_floor_and_ceiling_color(char *line, t_args *args)
 		line++;
 		while (is_whitespace(*line))
 			line++;
-		args -> floor_color = make_color(line);
+		set_rgb_color(&(args ->floor_color), make_color(&line), make_color(&line), make_color(&line));
 		return ;
 	}
 }
@@ -163,10 +168,10 @@ void	make_map_rectangular(t_args *args)
 	i = 0;
 	while (i < args -> y_max)
 	{
-		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max - 1)
+		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max)
 		{
 			j = 0;
-			new_map_line = ft_char_malloc(args -> x_max + 2);
+			new_map_line = ft_char_malloc(args -> x_max + 1);
 			while (j < (int) ft_strlen(args -> map.map[i]) - 1)
 			{
 				new_map_line[j] = args -> map.map[i][j];
@@ -199,7 +204,6 @@ void	set_map(int fd, t_args *args, char *line)
 			if (args -> x_max < (int) ft_strlen(line))
 				args -> x_max = (int) ft_strlen(line);
 			args -> map.map[i] = line;
-			// printf("%d %s\n",i,line);
 			if (args -> map.size >= i)
 				ft_realloc(args);
 			i++;
@@ -225,27 +229,31 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		while (line && *line && only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
+		line = get_next_line(fd);
+		while (only_whitespace(line))
+			line = get_next_line(fd);
+		set_direction(line, args);
+		line = get_next_line(fd);
+		while (only_whitespace(line))
+			line = get_next_line(fd);
+		set_direction(line, args);
+		line = get_next_line(fd);
+		while (only_whitespace(line))
+			line = get_next_line(fd);
+		set_direction(line, args);
+		line = get_next_line(fd);
+		while (only_whitespace(line))
+		 	line = get_next_line(fd);
 		set_floor_and_ceiling_color(line, args);
+		// set_direction(line, args);
+		// line = get_next_line(fd);
+		// while (only_whitespace(line))
+		// 	line = get_next_line(fd);
+		// set_direction(line, args);
 		line = get_next_line(fd);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
+		set_floor_and_ceiling_color(line, args);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
 	}
@@ -256,7 +264,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 			line = get_next_line(fd);
 	set_map(fd, args, line); 
 	make_map_rectangular(args);
-
+	//printf("floor %d %d %d, ceiling %d %d %d\n", args->floor_color.r,  args->floor_color.g,  args->floor_color.b,  args->ceiling_color.r, args->ceiling_color.g, args->ceiling_color.b);
 	// for (int i = 0; args -> map.map[i]; i++)
 	// {
 	// 	printf("%d ", i%10);
@@ -270,5 +278,5 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	// 			printf("%c", args -> map.map[i][j]);
 	// 	}
 	// 	printf("\n");
-	// }
+	// }	int x,y;
 }

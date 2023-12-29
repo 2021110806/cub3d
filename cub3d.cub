@@ -3,8 +3,8 @@ SO ./texture/skyblue_bird.xpm
 WE ./texture/dot_bird.xpm
 EA ./texture/orange_bird.xpm
 
-F 220,100,0
-C 225,30,0
+F 212,244,250
+C 183,240,177
 
         1111111111111111111111111
         1000S00000110000000000001

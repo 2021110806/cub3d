@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:05:34 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/21 20:40:35 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 21:28:28 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,21 @@ void	draw_floor_and_ceiling(t_data *data)
 	int	x;
 
 	y = 0;
+	// printf("%d\n", rgb_convert_int(data -> args.ceiling_color));
+	// printf("%d\n", rgb_convert_int(data -> args.floor_color));
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
 			if (y < WIN_HEIGHT / 2)
-				data->buf[y][x] = 123123 & 8355711;
+			{
+				data->buf[y][x] = rgb_convert_int(data -> args.ceiling_color);
+			}
 			else
-				data->buf[y][x] = 10000001;
+			{
+				data->buf[y][x] = rgb_convert_int(data -> args.floor_color);
+			}
 			x++;
 		}
 		y++;

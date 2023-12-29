@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:25:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:39:00 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:10:19 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	main(int argc, char **argv)
 	set_player(&data);
 	init_buf(&data);
 	mlx_mouse_hide();
-
 	data.texture = ft_int_pointer_malloc(4);
 	while (i < 4)
 		data .texture[i++] = ft_int_malloc(TEXTURE_HEGIHT * TEXTURE_WIDTH);
