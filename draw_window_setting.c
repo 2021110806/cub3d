@@ -102,9 +102,9 @@ char	check_minimap_current_location (int y, int x, t_data *data)
 	int minimap_y;
 	int minimap_x;
 
-	minimap_y = data->player_position_y - (5 - y);
-	minimap_x = data->player_position_x + (5 - x);
-	if (minimap_y < 0 || minimap_x < 0 || minimap_y >= data->args.y_max || minimap_x >= data->args.x_max)
+	minimap_y = floor(data->player_position_y) - (5 - y);
+	minimap_x = floor(data->player_position_x) + (5 - x);
+	if (minimap_y < 0 || minimap_x < 0 || minimap_y >= data->args.y_max || minimap_x >= data->args.x_max - 1)
 		return (MINIMAP_NULL);
 	if (minimap_y == floor(data->player_position_y) && minimap_x == floor(data->player_position_x))
 		return (MINIMAP_PLAYER);

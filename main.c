@@ -14,6 +14,7 @@
 
 int	play(t_data *data)
 {
+	check_mouse_rotate(data);
 	draw_floor_and_ceiling(data);
 	draw_wall(data);
 	draw_minimap(data);
@@ -27,25 +28,11 @@ int	main(int argc, char **argv)
 	int		i;
 
 	i = 0;
-	(void) argc;
-	(void) argv;
 	data.mlx = mlx_init();
 	parse_argv(&(data.args), argc, argv);
 	set_player(&data);
 	init_buf(&data);
-	// int x,y;
-	// x = 0;
-	// y = 0;
-	// while (data.args.map.map[y])
-	// {
-	// 	x = 0;
-	// 	while(data.args.map.map[y][x])
-	// 	{
-	// 		printf("%c", data.args.map.map[y][x]);
-	// 		x++;
-	// 	}
-	// 	y++;
-	// }
+	mlx_mouse_hide();
 	data.texture = ft_int_pointer_malloc(4);
 	while (i < 4)
 		data .texture[i++] = ft_int_malloc(TEXTURE_HEGIHT * TEXTURE_WIDTH);
