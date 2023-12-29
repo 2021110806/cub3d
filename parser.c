@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 21:49:24 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 22:10:04 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,11 +168,11 @@ void	make_map_rectangular(t_args *args)
 	i = 0;
 	while (i < args -> y_max)
 	{
-		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max - 1)
+		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max)
 		{
 			j = 0;
-			new_map_line = ft_char_malloc(args -> x_max);
-			while (j < (int) ft_strlen(args -> map.map[i]) - 1)
+			new_map_line = ft_char_malloc(args -> x_max + 1);
+			while (args -> map.map[i][j] != '\0' && args -> map.map[i][j] != '\n')
 			{
 				new_map_line[j] = args -> map.map[i][j];
 				j++;
@@ -182,7 +182,8 @@ void	make_map_rectangular(t_args *args)
 				new_map_line[j] = ' ';
 				j++;
 			}
-			new_map_line[j] = '\0';
+			new_map_line[j] = '\n';
+			new_map_line[j + 1] = '\0';
 			char *tmp = args -> map.map[i];
 			args -> map.map[i] = new_map_line;
 			free(tmp);
@@ -277,5 +278,5 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	// 			printf("%c", args -> map.map[i][j]);
 	// 	}
 	// 	printf("\n");
-	// }
+	// }	int x,y;
 }
