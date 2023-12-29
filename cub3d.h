@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 19:33:31 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/29 21:03:14 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,16 +112,16 @@ typedef struct s_map
 
 typedef struct s_args
 {
-	int		y_max;
-	int		x_max;
-	char	*north_path;
-	char	*south_path;
-	char 	*west_path;
-	char	*east_path;
-	int		floor_color;
-	int		ceiling_color;
-	t_map	map;
-} t_args;
+	int				y_max;
+	int				x_max;
+	char			*north_path;
+	char			*south_path;
+	char 			*west_path;
+	char			*east_path;
+	t_rgb_color		floor_color;
+	t_rgb_color				ceiling_color;
+	t_map			map;
+}	t_args;
 
 typedef struct s_data
 {
@@ -142,7 +142,7 @@ typedef struct s_data
 	double				curr_ratio;
 	t_args				args;
 }	t_data;
-						
+
 void	init_data(t_data *data);
 int		init_buf(t_data *data);
 int		*ft_int_malloc(int size);
