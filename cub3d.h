@@ -17,10 +17,6 @@
 # define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEGIHT 128
-// # define WEST_PATH "./texture/bird1_128.xpm" // 주황색
-// # define EAST_PATH "./texture/bird2_128.xpm" // 점박이
-// # define SOUTH_PATH "./texture/bird3_128.xpm" // 하늘색
-// # define NORTH_PATH "./texture/bird4_128.xpm" // 코쿠투칸
 # define GAME_NAME "cub3d"
 # define EAST 0
 # define WEST 1
@@ -40,9 +36,9 @@
 # define FALSE 0
 # define TRUE 1
 # define MAP_ONE_SPACE_SIZE 10
-# define MINIMAP_WALL 1
+# define MINIMAP_WALL 49
 # define MINIMAP_NULL 32
-# define MINIMAP_EMPTY 0
+# define MINIMAP_EMPTY 48
 # define MINIMAP_PLAYER 2
 
 # include "./mlx/mlx.h"
@@ -146,17 +142,6 @@ typedef struct s_data
 	double				curr_ratio;
 	t_args				args;
 }	t_data;
-
-// static char	worldMap[7][7] =
-// 						{
-// 							{'1','1','1','1','1','1','1'},
-// 							{'1','0','0','0','0','1'},
-// 							{'1','0','0','0','1','0','1'},
-// 							{'1','0','0','0','1','0','1'},
-// 							{'1','0','0','0','1','0','1'},
-// 							{'1','0','1','0','1'},
-// 							{'1','1','1','1','1','1','1'},
-// 						};
 						
 void	init_data(t_data *data);
 int		init_buf(t_data *data);
@@ -203,10 +188,10 @@ int 	rgb_convert_int(t_rgb_color color);
 void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
 char	check_minimap_current_location (int y, int x, t_data *data);
 void	parse_argv(t_args *args, int argc, char **argv);
-int	is_correct_map_line(char *line);
-char **ft_realloc(t_args *args);
+int		is_correct_map_line(char *line);
+char	**ft_realloc(t_args *args);
 char	**ft_char_two_pointer_malloc(int size);
-int	count_line(int fd, char *file_name);
-int	only_whitespace(char *line);
-int	is_whitespace(char charactor);
+int		count_line(int fd, char *file_name);
+int		only_whitespace(char *line);
+int		is_whitespace(char charactor);
 #endif
