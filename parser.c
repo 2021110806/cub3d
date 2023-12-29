@@ -161,6 +161,7 @@ void	set_map(int fd, t_args *args)
 			i++;
 			line = get_next_line(fd);
 		}
+		args->map.map[i] = NULL;
 		args -> y_max = i;
 }
 
@@ -208,23 +209,3 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	args -> map.size = 20;
 	set_map(fd, args);
 }
-
-// int main(int argc, char **argv)
-// {
-// 	t_args args;
-
-// 	parse_argv(&args, argc, argv);
-// 	int i = 0;
-// 	printf("fin - nor %s\n",args.north_path);
-// 	printf("fin - sou %s\n",args.south_path);
-// 	printf("fin - west %s\n",args.west_path);
-// 	printf("fin - east %s\n",args. east_path);
-// 	printf("7 floor %d\n", args.floor_color);
-// 	printf("8 ceiling %d\n", args.ceiling_color);
-// 	while (i < args.y_max)
-// 	{
-// 		printf("%s\n", args.map.map[i]);
-// 		i++;
-// 	}
-// 	return 0;
-// }

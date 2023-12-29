@@ -56,11 +56,42 @@ int	init_buf(t_data *data)
 	return (1);
 }
 
+void	is_player_direction(t_data *data, int y, int x)
+{
+	if (data->args.map.map[y][x] == 'N' || data->args.map.map[y][x] == 'S' || 
+	data->args.map.map[y][x] == 'E' || data->args.map.map[y][x] == 'W')
+	{
+		set_player_direction(data, data->args.map.map[y][x]);
+		data->player_position_y = y + 0.5;
+		data->player_position_x = x + 0.5;
+		data->args.map.map[y][x] = '0';
+	}
+}
+
+void	check_player_direction(t_data *data)
+{
+	int	current_y;
+	int	current_x;
+
+	current_y = 0;
+	while (data->args.map.map[current_y])
+	{
+		current_x = 0;
+		while (data->args.map.map[current_y][current_x])
+		{
+			is_player_direction(data, current_y, current_x);
+			current_x++;
+		}
+		current_y++;
+	}
+}
+
 void	set_player(t_data *data)
 {
-	data -> player_position_x = 4.3;
-	data -> player_position_y = 4.3;
+	check_player_direction(data);
+	// data -> player_position_x = 4.3;
+	// data -> player_position_y = 4.3;
 	data -> move_speed = 0.15;
 	data -> rotate_speed = 0.10;
-	set_player_direction(data, 'N');
+	// set_player_direction(data, 'N');
 }
