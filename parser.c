@@ -172,7 +172,7 @@ void	make_map_rectangular(t_args *args)
 		{
 			j = 0;
 			new_map_line = ft_char_malloc(args -> x_max + 1);
-			while (args -> map.map[i][j] != '\0' && args -> map.map[i][j] != '\n')
+			while (j < (int) ft_strlen(args -> map.map[i]) - 1)
 			{
 				new_map_line[j] = args -> map.map[i][j];
 				j++;

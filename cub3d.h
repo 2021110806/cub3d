@@ -179,8 +179,8 @@ void	set_textures(t_data *data);
 int		draw_wall(t_data *data);
 void	move_up(t_data *data);
 void	move_down(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
+void	move_left(t_data *data, double rotate_speed);
+void	move_right(t_data *data, double rotate_speed);
 int		progrem_end(void);
 void	set_player_direction(t_data *data, char direction);
 void	draw_minimap(t_data *data);
@@ -194,4 +194,5 @@ char	**ft_char_two_pointer_malloc(int size);
 int		count_line(int fd, char *file_name);
 int		only_whitespace(char *line);
 int		is_whitespace(char charactor);
+void	check_mouse_rotate(t_data *data);
 #endif

@@ -19,9 +19,9 @@ int	key_press(int key, t_data *data)
 	if (key == KEYCODE_DOWN)
 		move_down(data);
 	if (key == KEYCODE_RIGHT)
-		move_right(data);
+		move_right(data, data->rotate_speed);
 	if (key == KEYCODE_LEFT)
-		move_left(data);
+		move_left(data, data->rotate_speed);
 	if (key == KEYCODE_ESC)
 		exit(0);
 	mlx_clear_window(data->mlx, data->win);
@@ -57,7 +57,7 @@ void	move_down(t_data *data)
 			data->player_view_direction_x * data->move_speed;
 }
 
-void	move_left(t_data *data)
+void	move_left(t_data *data, double rotate_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -65,20 +65,20 @@ void	move_left(t_data *data)
 	old_dir_x = data->player_view_direction_x;
 	old_plane_x = data->camera_plane_x;
 	data->player_view_direction_x = data->player_view_direction_x \
-	* cos(-data->rotate_speed) - data->player_view_direction_y \
-	* sin(-data->rotate_speed);
+	* cos(-rotate_speed) - data->player_view_direction_y \
+	* sin(-rotate_speed);
 	data->player_view_direction_y = old_dir_x \
-	* sin(-data->rotate_speed) + data->player_view_direction_y \
-	* cos(-data->rotate_speed);
+	* sin(-rotate_speed) + data->player_view_direction_y \
+	* cos(-rotate_speed);
 	data->camera_plane_x = data->camera_plane_x \
-	* cos(-data->rotate_speed) - data->camera_plane_y \
-	* sin(-data->rotate_speed);
+	* cos(-rotate_speed) - data->camera_plane_y \
+	* sin(-rotate_speed);
 	data->camera_plane_y = old_plane_x \
-	* sin(-data->rotate_speed) + data->camera_plane_y \
-	* cos(-data->rotate_speed);
+	* sin(-rotate_speed) + data->camera_plane_y \
+	* cos(-rotate_speed);
 }
 
-void	move_right(t_data *data)
+void	move_right(t_data *data, double rotate_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -86,15 +86,15 @@ void	move_right(t_data *data)
 	old_dir_x = data->player_view_direction_x;
 	old_plane_x = data->camera_plane_x;
 	data->player_view_direction_x = data->player_view_direction_x \
-	* cos(data->rotate_speed) - data->player_view_direction_y \
-	* sin(data->rotate_speed);
+	* cos(rotate_speed) - data->player_view_direction_y \
+	* sin(rotate_speed);
 	data->player_view_direction_y = old_dir_x \
-	* sin(data->rotate_speed) + data->player_view_direction_y \
-	* cos(data->rotate_speed);
+	* sin(rotate_speed) + data->player_view_direction_y \
+	* cos(rotate_speed);
 	data->camera_plane_x = data->camera_plane_x \
-	* cos(data->rotate_speed) - data->camera_plane_y \
-	* sin(data->rotate_speed);
+	* cos(rotate_speed) - data->camera_plane_y \
+	* sin(rotate_speed);
 	data->camera_plane_y = old_plane_x \
-	* sin(data->rotate_speed) + data->camera_plane_y \
-	* cos(data->rotate_speed);
+	* sin(rotate_speed) + data->camera_plane_y \
+	* cos(rotate_speed);
 }
