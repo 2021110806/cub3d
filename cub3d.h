@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 21:03:14 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:02:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,4 +195,7 @@ int		count_line(int fd, char *file_name);
 int		only_whitespace(char *line);
 int		is_whitespace(char charactor);
 void	check_mouse_rotate(t_data *data);
+int		is_not_set_ceiling_or_floor_color(t_args *args);
+int		is_no_texture(t_args *args);
+int		is_wrapped_by_wall(t_args *args);
 #endif

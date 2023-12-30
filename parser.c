@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 22:59:23 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:05:51 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	check_direction(char *path)
 			return (FLOOR);
 		if (path[0] == 'C' && is_whitespace(path[1]))
 			return (CEILING);
-		exit(1);
 	}
 	return (-1);
 }
@@ -187,12 +186,31 @@ char	*ft_char_malloc(size)
 	return (return_value);
 }
 
+void make_space_to_integer(t_args *args)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < args -> y_max)
+	{
+		j = 0;
+		while (j < args -> x_max)
+		{
+			if (args -> map.map[i][j] == ' ')
+				args -> map.map[i][j] = '5';
+			j++;
+		}
+		i++;
+	}
+}
+
 void	make_map_rectangular(t_args *args)
 {
 	int		i;
 	int		j;
 	char	*new_map_line;
-	
+
 	i = 0;
 	while (i < args -> y_max)
 	{
@@ -207,7 +225,7 @@ void	make_map_rectangular(t_args *args)
 			}
 			while (j < args -> x_max - 1)
 			{
-				new_map_line[j] = ' ';
+				new_map_line[j] = '5';
 				j++;
 			}
 			new_map_line[j] = '\n';
@@ -246,7 +264,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	char 	*line;
 	int		fd;
 
-	if (ft_strlen(argv) < 4)
+	if (ft_strlen(argv[1]) < 4)
 		exit(1);
 	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && argv[1][ft_strlen(argv[1]) - 2] == 'u' \
 	&& argv[1][ft_strlen(argv[1]) - 3] == 'c' && argv[1][ft_strlen(argv[1]) - 4] == '.'))
@@ -297,30 +315,35 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		while (only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
+		line = get_next_line(fd);
 		//set_floor_and_ceiling_color(line, args);
+		// printf("%s\n", line);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
+		set_direction(line, args);
+		// printf("%s\n", line);
 	}
+	if (is_no_texture(args))
+		exit(1);
+	if (is_not_set_ceiling_or_floor_color(args))
+		exit(1);
 	args -> map.map= ft_char_two_pointer_malloc(20);
 	args -> map.size = 20;
-	line = get_next_line(fd);
 	while (only_whitespace(line))
 			line = get_next_line(fd);
 	set_map(fd, args, line); 
 	make_map_rectangular(args);
+	make_space_to_integer(args);
 	//printf("floor %d %d %d, ceiling %d %d %d\n", args->floor_color.r,  args->floor_color.g,  args->floor_color.b,  args->ceiling_color.r, args->ceiling_color.g, args->ceiling_color.b);
 	// for (int i = 0; args -> map.map[i]; i++)
 	// {
 	// 	printf("%d ", i%10);
 	// 	for (int j = 0; args -> map.map[i][j] || args -> map.map[i][j] == '\n'; j++)
 	// 	{
-	// 		if (args -> map.map[i][j] == ' ')
-	// 		{
-	// 			printf("2");
-	// 		}
-	// 		else
 	// 			printf("%c", args -> map.map[i][j]);
 	// 	}
 	// 	printf("\n");
-	// }	int x,y;
+	// }
+	if (!is_wrapped_by_wall(args))
+		exit(1);
 }
