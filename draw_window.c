@@ -63,6 +63,8 @@ void	draw_minimap(t_data *data)
 	t_rgb_color player_color;
 	t_rgb_color wall_color;
 	t_rgb_color null_color;
+	t_rgb_color	door_close_color;
+	t_rgb_color	door_open_color;
 	int y;
 	int x;
 	int current_location;
@@ -71,7 +73,9 @@ void	draw_minimap(t_data *data)
 	set_rgb_color(&null_color, 189, 189, 189);
 	set_rgb_color(&player_color, 255, 0, 221);
 	set_rgb_color(&empty_color, 183, 240, 177);
-	set_rgb_color(&wall_color, 153, 112, 0);
+	set_rgb_color(&wall_color, 242, 150, 97);
+	set_rgb_color(&door_close_color, 153, 112, 0);
+	set_rgb_color(&door_open_color, 250, 237, 125);
 
 	while (y < 11)
 	{
@@ -87,6 +91,10 @@ void	draw_minimap(t_data *data)
 				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, empty_color);
 			else if (current_location == MINIMAP_PLAYER)
 				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, player_color);
+			else if (current_location == MINIMAP_CLOSE_DOOR)
+				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, door_close_color);
+			else if (current_location == MINIMAP_OPEN_DOOR)
+				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, door_open_color);
 			x++;
 		}
 		y++;

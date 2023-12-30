@@ -16,8 +16,10 @@ void	set_textures(t_data *data)
 {
 	set_texture(data, data -> args.east_path, EAST);
 	set_texture(data, data -> args.west_path, WEST);
-	set_texture(data,data -> args.south_path, SOUTH);
+	set_texture(data, data -> args.south_path, SOUTH);
 	set_texture(data, data -> args.north_path, NORTH);
+	set_texture(data, CLOSE_DOOR_IMAGE_PATH, CLOSE_DOOR);
+	set_texture(data, OPENED_DOOR_IMAGE_PATH, OPENED_DOOR);
 }
 
 double	calculate_wall_crash_spot(t_data *data, \

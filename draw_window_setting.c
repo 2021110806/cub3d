@@ -13,9 +13,13 @@
 #include "cub3d.h"
 
 void	calculate_draw_texture_number(t_drawing_factors *drawing_factors, \
-t_data *data, t_int_coordinate step)
+t_data *data, t_int_coordinate step, t_int_coordinate map)
 {
-	if (data -> last_hit_pos == X && step.x == 1)
+	if (data -> args.map.map[map.y][map.x] == MINIMAP_CLOSE_DOOR)
+		drawing_factors -> texture_number = CLOSE_DOOR;
+	else if (data -> args.map.map[map.y][map.x] == MINIMAP_OPEN_DOOR)
+		drawing_factors -> texture_number = OPENED_DOOR;
+	else if (data -> last_hit_pos == X && step.x == 1)
 		drawing_factors -> texture_number = EAST;
 	else if (data -> last_hit_pos == X && step.x == -1)
 		drawing_factors -> texture_number = WEST;
@@ -43,7 +47,7 @@ int	draw_wall(t_data *data)
 		drawing_factors.vertical_distance = \
 		calculate_distance_from_camera_to_wall(map, data, vectors, step);
 		drawing_factors.x = x;
-		calculate_draw_texture_number(&drawing_factors, data, step);
+		calculate_draw_texture_number(&drawing_factors, data, step, map);
 		draw_image(&drawing_factors, data, &vectors);
 		x++;
 	}
