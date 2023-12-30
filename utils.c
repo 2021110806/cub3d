@@ -52,7 +52,7 @@ int	progrem_end(void)
 	exit (1);
 }
 
-int double_range_check(double value, double center, double range)
+int	double_range_check(double value, double center, double range)
 {
-    return (value >= (center - range)) && (value <= (center + range));
+	return ((value >= (center - range)) && (value <= (center + range)));
 }
