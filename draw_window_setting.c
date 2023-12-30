@@ -99,8 +99,6 @@ t_data *data, t_vectors *vectors)
 	}
 }
 
-#include <stdio.h>
-
 char	check_minimap_current_location (int y, int x, t_data *data)
 {
 	int minimap_y;

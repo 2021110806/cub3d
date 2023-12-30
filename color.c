@@ -12,14 +12,14 @@
 
 #include "cub3d.h"
 
-int rgb_convert_int(t_rgb_color color)
+int	rgb_convert_int(t_rgb_color color)
 {
-    int convert_rgb;
+	int	convert_rgb;
 
-    convert_rgb = 0;
-    convert_rgb += color.r << 16;
-    convert_rgb += color.g << 8;
-    convert_rgb += color.b;
+	convert_rgb = 0;
+	convert_rgb += color.r << 16;
+	convert_rgb += color.g << 8;
+	convert_rgb += color.b;
 	return (convert_rgb);
 }
 
