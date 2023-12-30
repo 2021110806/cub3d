@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2023/12/30 21:11:15 by minjeon2         ###   ########.fr        #
+#    Updated: 2023/12/30 22:53:43 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
 NAME = cub3d
-SRCS = exception.c parser.c parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c mouse.c
+SRCS = set_texture_path.c exception.c parser.c parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c mouse.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS) $(LIBFT)
