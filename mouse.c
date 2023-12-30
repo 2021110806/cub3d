@@ -76,7 +76,7 @@ void    mouse_active_mode_change(t_data *data)
     else
     {
         mlx_mouse_hide();
-        data -> is_mouse_move_active = 1;
+        data -> is_mouse_move_active = 0;
     }
 }
 

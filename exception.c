@@ -65,26 +65,26 @@ int	is_space_in_contact_with_wall(t_args *args)
 		j = 0;
 		while (j < args -> x_max)
 		{
-			if (args -> map.map[i][j] == '5')
+			if (args -> map.map[i][j] == MINIMAP_NULL)
 			{
 				if (i - 1 > -1)
 				{
-					if (args -> map.map[i - 1][j] == '0')
+					if (args -> map.map[i - 1][j] != MINIMAP_WALL)
 						return (FALSE);
 				}
 				if (i + 1 < args -> y_max)
 				{
-					if (args -> map.map[i + 1][j] == '0')
+					if (args -> map.map[i + 1][j] != MINIMAP_WALL)
 						return (FALSE);
 				}
 				if (j - 1 > -1)
 				{
-					if (args -> map.map[i][j - 1] == '0')
+					if (args -> map.map[i][j - 1] != MINIMAP_WALL)
 						return (FALSE);
 				}
 				if (j + 1 < args -> x_max)
 				{
-					if (args -> map.map[i][j + 1] == '0')
+					if (args -> map.map[i][j + 1] != MINIMAP_WALL)
 						return (FALSE);
 				}
 			}
