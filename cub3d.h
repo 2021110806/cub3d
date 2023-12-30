@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 19:33:31 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:02:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,16 @@ typedef struct s_map
 
 typedef struct s_args
 {
-	int		y_max;
-	int		x_max;
-	char	*north_path;
-	char	*south_path;
-	char 	*west_path;
-	char	*east_path;
-	int		floor_color;
-	int		ceiling_color;
-	t_map	map;
-} t_args;
+	int				y_max;
+	int				x_max;
+	char			*north_path;
+	char			*south_path;
+	char 			*west_path;
+	char			*east_path;
+	t_rgb_color		floor_color;
+	t_rgb_color				ceiling_color;
+	t_map			map;
+}	t_args;
 
 typedef struct s_data
 {
@@ -151,7 +151,7 @@ typedef struct s_data
 	int					is_mouse_move_active;
 	t_args				args;
 }	t_data;
-						
+
 void	init_data(t_data *data);
 int		init_buf(t_data *data);
 int		*ft_int_malloc(int size);
@@ -204,6 +204,9 @@ int		count_line(int fd, char *file_name);
 int		only_whitespace(char *line);
 int		is_whitespace(char charactor);
 void	check_mouse_rotate(t_data *data);
+int		is_not_set_ceiling_or_floor_color(t_args *args);
+int		is_no_texture(t_args *args);
+int		is_wrapped_by_wall(t_args *args);
 int		mouse_press(int buttom, int x, int y, t_data *data);
 int		double_range_check(double value, double center, double range);
 #endif
