@@ -22,8 +22,10 @@
 # define WEST 1
 # define SOUTH 2
 # define NORTH 3
-# define CEILING 5
-# define FLOOR 6
+# define CLOSE_DOOR 4
+# define OPENED_DOOR 5
+# define CEILING 6
+# define FLOOR 7
 # define X 0
 # define Y 1
 # define KEY_PRESS_EVENT 2
@@ -40,6 +42,12 @@
 # define MINIMAP_NULL 32
 # define MINIMAP_EMPTY 48
 # define MINIMAP_PLAYER 2
+# define MINIMAP_CLOSE_DOOR 50
+# define MINIMAP_OPEN_DOOR 51
+# define MOUSE_LEFT_CLICK 1
+# define MOUSE_RIGHT_CLICK 2
+# define CLOSE_DOOR_IMAGE_PATH "./texture/close_door.xpm"
+# define OPENED_DOOR_IMAGE_PATH "./texture/opened_door.xpm"
 
 # include "./mlx/mlx.h"
 # include <stdlib.h>
@@ -140,6 +148,7 @@ typedef struct s_data
 	double				move_speed;
 	double				rotate_speed;
 	double				curr_ratio;
+	int					is_mouse_move_active;
 	t_args				args;
 }	t_data;
 
@@ -198,6 +207,8 @@ void	check_mouse_rotate(t_data *data);
 int		is_not_set_ceiling_or_floor_color(t_args *args);
 int		is_no_texture(t_args *args);
 int		is_wrapped_by_wall(t_args *args);
+int		mouse_press(int buttom, int x, int y, t_data *data);
+int		double_range_check(double value, double center, double range);
 int		is_correct_user_position(t_args *args);
 int		is_next_line_is_map(char *line);
 int		check_direction(char *path);

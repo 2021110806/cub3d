@@ -89,9 +89,8 @@ void	check_player_direction(t_data *data)
 void	set_player(t_data *data)
 {
 	check_player_direction(data);
-	// data -> player_position_x = 4.3;
-	// data -> player_position_y = 4.3;
+	data -> is_mouse_move_active = 1;
+	mlx_mouse_hide();
 	data -> move_speed = 0.15;
 	data -> rotate_speed = 0.10;
-	// set_player_direction(data, 'N');
 }
