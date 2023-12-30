@@ -18,8 +18,6 @@ void	draw_floor_and_ceiling(t_data *data)
 	int	x;
 
 	y = 0;
-	// printf("%d\n", rgb_convert_int(data -> args.ceiling_color));
-	// printf("%d\n", rgb_convert_int(data -> args.floor_color));
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
@@ -39,14 +37,13 @@ void	draw_floor_and_ceiling(t_data *data)
 	}
 }
 
-#include <stdio.h>
-
-void	draw_map_one_space(int draw_start_y, int draw_start_x, t_data *data, t_rgb_color color)
+void	draw_map_one_space(int draw_start_y, int draw_start_x, \
+t_data *data, t_rgb_color color)
 {
 	int	draw_end_y;
 	int	draw_end_x;
 	int	draw_current_x;
-	int draw_current_y;
+	int	draw_current_y;
 
 	draw_current_y = draw_start_y;
 	draw_end_y = draw_start_y + MAP_ONE_SPACE_SIZE;
@@ -65,15 +62,15 @@ void	draw_map_one_space(int draw_start_y, int draw_start_x, t_data *data, t_rgb_
 
 void	draw_minimap(t_data *data)
 {
-	t_rgb_color empty_color;
-	t_rgb_color player_color;
-	t_rgb_color wall_color;
-	t_rgb_color null_color;
+	t_rgb_color	empty_color;
+	t_rgb_color	player_color;
+	t_rgb_color	wall_color;
+	t_rgb_color	null_color;
 	t_rgb_color	door_close_color;
 	t_rgb_color	door_open_color;
-	int y;
-	int x;
-	int current_location;
+	int			y;
+	int			x;
+	int			current_location;
 
 	y = 0;
 	set_rgb_color(&null_color, 189, 189, 189);
@@ -82,7 +79,6 @@ void	draw_minimap(t_data *data)
 	set_rgb_color(&wall_color, 242, 150, 97);
 	set_rgb_color(&door_close_color, 153, 112, 0);
 	set_rgb_color(&door_open_color, 250, 237, 125);
-
 	while (y < 11)
 	{
 		x = 0;

@@ -52,13 +52,13 @@ char	**ft_char_two_pointer_malloc(int size)
 {
 	char	**return_value;
 
-	return_value = malloc (sizeof (char *) * size);
-	if (!return_value)	
+	return_value = malloc(sizeof (char *) * size);
+	if (!return_value)
 		exit(1);
 	return (return_value);
 }
 
-char **ft_realloc(t_args *args)
+char	**ft_realloc(t_args *args)
 {
 	int		i;
 	char	**return_value;
