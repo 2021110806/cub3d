@@ -225,7 +225,7 @@ void	make_map_rectangular(t_args *args)
 			}
 			while (j < args -> x_max - 1)
 			{
-				new_map_line[j] = '5';
+				new_map_line[j] = MINIMAP_NULL;
 				j++;
 			}
 			new_map_line[j] = '\n';
