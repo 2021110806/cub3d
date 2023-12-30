@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:55:58 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 22:15:32 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:42:28 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	is_space_in_contact_with_wall(t_args *args)
 
 	i = 0;
 	j = 0;
-	while (i < args -> y_max)
+	while (i < args -> y_max + 1)
 	{
 		j = 0;
-		while (j < args -> x_max)
+		while (j < args -> x_max + 1)
 		{
 			if (args -> map.map[i][j] == MINIMAP_NULL)
 			{

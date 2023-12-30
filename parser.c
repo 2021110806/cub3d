@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 22:18:41 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:42:14 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,6 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	// 	}
 	// 	printf("\n");
 	// }
-	// if (!is_wrapped_by_wall(args))
-	// 	exit(1);
+	if (!is_wrapped_by_wall(args))
+		exit(1);
 }
