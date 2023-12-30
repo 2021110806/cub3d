@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 19:02:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:07:15 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,4 +198,7 @@ void	check_mouse_rotate(t_data *data);
 int		is_not_set_ceiling_or_floor_color(t_args *args);
 int		is_no_texture(t_args *args);
 int		is_wrapped_by_wall(t_args *args);
+int		is_correct_user_position(t_args *args);
+int		is_next_line_is_map(char *line);
+int		check_direction(char *path);
 #endif

@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 21:05:51 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:18:41 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,8 @@ void	set_map(int fd, t_args *args, char *line)
 				ft_realloc(args);
 			i++;
 			line = get_next_line(fd);
+			// if (!is_correct_map_line(line))
+			// 	exit(1);
 		}
 		args->map.map[i] = NULL;
 		args -> y_max = i;
@@ -306,22 +308,15 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		while (only_whitespace(line))
 		 	line = get_next_line(fd);
 		set_direction(line, args);
-		// set_direction(line, args);
-		// line = get_next_line(fd);
-		// while (only_whitespace(line))
-		// 	line = get_next_line(fd);
-		// set_direction(line, args);
 		line = get_next_line(fd);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
 		line = get_next_line(fd);
-		//set_floor_and_ceiling_color(line, args);
-		// printf("%s\n", line);
 		while (only_whitespace(line))
 			line = get_next_line(fd);
-		set_direction(line, args);
-		// printf("%s\n", line);
+		if (!is_next_line_is_map(line))
+			exit(1);
 	}
 	if (is_no_texture(args))
 		exit(1);
@@ -333,6 +328,8 @@ void	parse_argv(t_args *args, int argc, char **argv)
 			line = get_next_line(fd);
 	set_map(fd, args, line); 
 	make_map_rectangular(args);
+	if (!is_correct_user_position(args))
+		exit(1);
 	make_space_to_integer(args);
 	//printf("floor %d %d %d, ceiling %d %d %d\n", args->floor_color.r,  args->floor_color.g,  args->floor_color.b,  args->ceiling_color.r, args->ceiling_color.g, args->ceiling_color.b);
 	// for (int i = 0; args -> map.map[i]; i++)
@@ -344,6 +341,6 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	// 	}
 	// 	printf("\n");
 	// }
-	if (!is_wrapped_by_wall(args))
-		exit(1);
+	// if (!is_wrapped_by_wall(args))
+	// 	exit(1);
 }
