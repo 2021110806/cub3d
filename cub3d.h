@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 19:02:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:07:15 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,4 +209,7 @@ int		is_no_texture(t_args *args);
 int		is_wrapped_by_wall(t_args *args);
 int		mouse_press(int buttom, int x, int y, t_data *data);
 int		double_range_check(double value, double center, double range);
+int		is_correct_user_position(t_args *args);
+int		is_next_line_is_map(char *line);
+int		check_direction(char *path);
 #endif

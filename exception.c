@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:55:58 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 21:14:14 by minjeon2         ###   ########.fr       */
+/*   Updated: 2023/12/30 22:15:32 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_correct_map_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] && line[i] != '\n')
+	while (line && line[i] && line[i] != '\n')
 	{
 		if (!is_correct_map_component(line[i]))
 			return (FALSE);
@@ -135,10 +135,10 @@ int	is_correct_user_position(t_args *args)
 	int	user_position;
 
 	i = 0;
-	j = 0;
 	user_position = FALSE;
 	while (i < args -> y_max)
 	{
+		j = 0;
 		while (j < args -> x_max)
 		{
 			if (args -> map.map[i][j] == 'N' || args -> map.map[i][j] == 'S' ||\
@@ -148,7 +148,9 @@ int	is_correct_user_position(t_args *args)
 					return (FALSE);
 				user_position = TRUE;
 			}
+			j++;
 		}
+		i++;
 	}
 	if (!user_position)
 		return (FALSE);
@@ -202,5 +204,16 @@ int	is_correct_rgb_color(char *line)
 			return (FALSE);
 		i++;
 	}
+	return (TRUE);
+}
+
+int is_next_line_is_map(char *line)
+{
+	int	curr_direction;
+
+	curr_direction = check_direction(line);
+	if (curr_direction == CEILING || curr_direction == FLOOR || curr_direction == NORTH || \
+		curr_direction == SOUTH || curr_direction == WEST || curr_direction == EAST)
+		return (FALSE);
 	return (TRUE);
 }
