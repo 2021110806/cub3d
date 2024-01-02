@@ -17,7 +17,7 @@ FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
 NAME = cub3d
-SRCS = set_texture_path.c exception.c parser.c parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c mouse.c
+SRCS = set_texture_path.c exception.c parser.c parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c mouse.c minimap_utils.c
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS) $(LIBFT)

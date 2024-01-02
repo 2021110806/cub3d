@@ -186,6 +186,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	char 	*line;
 	int		fd;
 
+	printf("parse start\n");
 	if (ft_strlen(argv[1]) < 4)
 		exit(1);
 	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && argv[1][ft_strlen(argv[1]) - 2] == 'u' \
@@ -251,6 +252,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	if (!is_correct_user_position(args))
 		exit(1);
 	make_space_to_integer(args);
-	if (!is_wrapped_by_wall(args))
-		exit(1);
+	// if (!is_wrapped_by_wall(args))
+	// 	exit(1);
+	printf("parse end\n");
 }
