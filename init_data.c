@@ -58,7 +58,7 @@ int	init_buf(t_data *data)
 
 void	is_player_direction(t_data *data, int y, int x)
 {
-	if (data->args.map.map[y][x] == 'N' || data->args.map.map[y][x] == 'S' || 
+	if (data->args.map.map[y][x] == 'N' || data->args.map.map[y][x] == 'S' || \
 	data->args.map.map[y][x] == 'E' || data->args.map.map[y][x] == 'W')
 	{
 		set_player_direction(data, data->args.map.map[y][x]);
