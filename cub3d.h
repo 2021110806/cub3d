@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 17:43:26 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:07:08 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@
 # include <stdio.h>
 # include "get_next_line.h"
 # include "./libft/libft.h"
+
 typedef struct s_image_info
 {
 	void	*image;
@@ -93,10 +94,20 @@ typedef struct s_crash_checker
 
 typedef struct s_rgb_color
 {
-	int r;
-	int g;
-	int b;
+	int	r;
+	int	g;
+	int	b;
 }	t_rgb_color;
+
+typedef struct s_minimap_color
+{
+	t_rgb_color	empty_color;
+	t_rgb_color	player_color;
+	t_rgb_color	wall_color;
+	t_rgb_color	null_color;
+	t_rgb_color	door_close_color;
+	t_rgb_color	door_open_color;
+}	t_minimap_color;
 
 typedef struct s_vectors
 {
@@ -123,7 +134,7 @@ typedef struct s_map
 {
 	char	**map;
 	int		size;
-} t_map;
+}	t_map;
 
 typedef struct s_args
 {
@@ -131,10 +142,10 @@ typedef struct s_args
 	int				x_max;
 	char			*north_path;
 	char			*south_path;
-	char 			*west_path;
+	char			*west_path;
 	char			*east_path;
 	t_rgb_color		floor_color;
-	t_rgb_color				ceiling_color;
+	t_rgb_color		ceiling_color;
 	t_map			map;
 }	t_args;
 
@@ -200,9 +211,9 @@ void	move_right(t_data *data, double rotate_speed);
 int		progrem_end(void);
 void	set_player_direction(t_data *data, char direction);
 void	draw_minimap(t_data *data);
-int 	rgb_convert_int(t_rgb_color color);
+int		rgb_convert_int(t_rgb_color color);
 void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
-char	check_minimap_current_location (int y, int x, t_data *data);
+char	check_minimap_current_location(int y, int x, t_data *data);
 void	parse_argv(t_args *args, int argc, char **argv);
 int		is_correct_map_line(char *line);
 char	**ft_realloc(t_args *args);
@@ -223,4 +234,14 @@ int		make_color(char **line);
 void	pass_white_space(char **line);
 void	copy_path(int direction, char *line, t_args *args, int i);
 void	set_direction(char *line, t_args *args);
+void	pass_white_space(char **line);
+void	copy_path(int direction, char *line, t_args *args, int i);
+int		make_color(char **line);
+void	set_direction(char *line, t_args *args);
+void	init_minimap_color(t_minimap_color *minimap_color);
+void	draw_minimapa_space(int current_location, \
+t_int_coordinate minimap_coordinate, t_data *data, \
+t_minimap_color minimap_color);
+void	draw_map_one_space(int draw_start_y, int draw_start_x, \
+t_data *data, t_rgb_color color);
 #endif

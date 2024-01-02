@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:05:50 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:07:42 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	char 	*line;
 	int		fd;
 
+	printf("parse start\n");
 	if (ft_strlen(argv[1]) < 4)
 	{
 		printf("%s", FILE_ERROR);

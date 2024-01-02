@@ -62,44 +62,24 @@ t_data *data, t_rgb_color color)
 
 void	draw_minimap(t_data *data)
 {
-	t_rgb_color	empty_color;
-	t_rgb_color	player_color;
-	t_rgb_color	wall_color;
-	t_rgb_color	null_color;
-	t_rgb_color	door_close_color;
-	t_rgb_color	door_open_color;
-	int			y;
-	int			x;
-	int			current_location;
+	t_minimap_color		minimap_color;
+	t_int_coordinate	minimap_coordinate;
+	int					current_location;
 
-	y = 0;
-	set_rgb_color(&null_color, 189, 189, 189);
-	set_rgb_color(&player_color, 255, 0, 221);
-	set_rgb_color(&empty_color, 183, 240, 177);
-	set_rgb_color(&wall_color, 242, 150, 97);
-	set_rgb_color(&door_close_color, 153, 112, 0);
-	set_rgb_color(&door_open_color, 250, 237, 125);
-	while (y < 11)
+	minimap_coordinate.y = 0;
+	init_minimap_color(&minimap_color);
+	while (minimap_coordinate.y < 11)
 	{
-		x = 0;
-		while (x < 11)
+		minimap_coordinate.x = 0;
+		while (minimap_coordinate.x < 11)
 		{
-			current_location = check_minimap_current_location(y, x, data);
-			if (current_location == MINIMAP_NULL)
-				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, null_color);
-			else if (current_location == MINIMAP_WALL)
-				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, wall_color);
-			else if (current_location == MINIMAP_EMPTY)
-				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, empty_color);
-			else if (current_location == MINIMAP_PLAYER)
-				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, player_color);
-			else if (current_location == MINIMAP_CLOSE_DOOR)
-				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, door_close_color);
-			else if (current_location == MINIMAP_OPEN_DOOR)
-				draw_map_one_space(y * MAP_ONE_SPACE_SIZE, WIN_WIDTH - x * MAP_ONE_SPACE_SIZE, data, door_open_color);
-			x++;
+			current_location = check_minimap_current_location(\
+			minimap_coordinate.y, minimap_coordinate.x, data);
+			draw_minimapa_space(current_location, \
+			minimap_coordinate, data, minimap_color);
+			minimap_coordinate.x++;
 		}
-		y++;
+		minimap_coordinate.y++;
 	}
 }
 
