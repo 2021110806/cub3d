@@ -67,3 +67,31 @@ int	is_space_in_contact_with_wall(t_args *args)
 	}
 	return (TRUE);
 }
+
+int	is_map_edge_check(t_args *args)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	x = 0;
+	while (x + 2 < args -> x_max)
+	{
+		if (!((args->map.map[0][x] == MINIMAP_NULL || \
+		args->map.map[0][x] == MINIMAP_WALL) && \
+		(args->map.map[args->y_max - 1][x] == MINIMAP_NULL || \
+		args->map.map[args->y_max - 1][x] == MINIMAP_WALL)))
+			return (TRUE);
+		x++;
+	}
+	while (y + 1 < args -> y_max)
+	{
+		if (!((args->map.map[y][0] == MINIMAP_NULL || \
+		args->map.map[y][0] == MINIMAP_WALL) && \
+		(args->map.map[y][args->x_max - 2] == MINIMAP_NULL || \
+		args->map.map[y][args->x_max - 2] == MINIMAP_WALL)))
+			return (TRUE);
+		y++;
+	}
+	return (FALSE);
+}

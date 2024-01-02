@@ -35,6 +35,8 @@ void	is_wrapped_by_wall(t_args *args)
 {
 	if (!is_space_in_contact_with_wall(args))
 		progrem_error_end(MAP_ERROR);
+	if (is_map_edge_check(args))
+		progrem_error_end(MAP_ERROR);
 }
 
 void	is_no_texture(t_args *args)

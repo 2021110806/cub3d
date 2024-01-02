@@ -44,6 +44,7 @@
 # define MINIMAP_PLAYER 2
 # define MINIMAP_CLOSE_DOOR 50
 # define MINIMAP_OPEN_DOOR 51
+# define MINIMAP_CHICKADEE 52
 # define MOUSE_LEFT_CLICK 1
 # define MOUSE_RIGHT_CLICK 2
 # define CLOSE_DOOR_IMAGE_PATH "./texture/close_door.xpm"
@@ -261,4 +262,5 @@ int		check_direction(char *path);
 char	*ft_char_malloc(int size);
 void	make_map_rectangular(t_args *args);
 void	make_space_to_integer(t_args *args);
+int		is_map_edge_check(t_args *args);
 #endif
