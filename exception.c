@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:55:58 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:05:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:24:10 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,71 +29,6 @@ int	is_start_with_correct_charactor(char *line)
 	if (line[1] == 'C' && line[1] == ' ')
 		return (TRUE);
 	return (FALSE);
-}
-
-int	is_correct_map_component(char comp)
-{
-	if (comp == '1' || comp == '0' || comp == 'N' || \
-		comp == 'W' || comp == 'E' || comp == 'S' || comp == ' ' || \
-		comp == '2' || comp == '3' || comp == '4' || comp == '5')
-		return (TRUE);
-	return (FALSE);
-}
-
-int	is_correct_map_line(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line && line[i] && line[i] != '\n')
-	{
-		if (!is_correct_map_component(line[i]))
-			return (FALSE);
-		i++;
-	}
-	return (TRUE);
-}
-
-int	is_space_in_contact_with_wall(t_args *args)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (i < args -> y_max)
-	{
-		j = 0;
-		while (j < args -> x_max)
-		{
-			if (args -> map.map[i][j] == MINIMAP_NULL)
-			{
-				if (i - 1 > -1)
-				{
-					if (!(args -> map.map[i - 1][j] == MINIMAP_WALL || args -> map.map[i - 1][j] == MINIMAP_NULL ))
-						return (FALSE);
-				}
-				if (i + 1 < args -> y_max)
-				{
-					if (!(args -> map.map[i + 1][j] == MINIMAP_WALL || args -> map.map[i + 1][j] == MINIMAP_NULL))
-						return (FALSE);
-				}
-				if (j - 1 > -1)
-				{
-					if (!(args -> map.map[i][j - 1] == MINIMAP_WALL || args -> map.map[i][j - 1] == MINIMAP_NULL))
-						return (FALSE);
-				}
-				if (j + 1 < args -> x_max)
-				{
-					if (!(args -> map.map[i][j + 1] == MINIMAP_WALL || args -> map.map[i][j + 1] == MINIMAP_NULL || args -> map.map[i][j + 1] == 10))
-						return (FALSE);
-				}
-			}
-			j++;
-		}
-		i++;
-	}
-	return (TRUE);
 }
 
 int	is_wrapped_by_wall(t_args *args)
@@ -127,35 +62,6 @@ int	is_not_set_ceiling_or_floor_color(t_args *args)
 	args -> floor_color.b == -1)
 		return (TRUE);
 	return (FALSE);
-}
-
-int	is_correct_user_position(t_args *args)
-{
-	int	i;
-	int	j;
-	int	user_position;
-
-	i = 0;
-	user_position = FALSE;
-	while (i < args -> y_max)
-	{
-		j = 0;
-		while (j < args -> x_max)
-		{
-			if (args -> map.map[i][j] == 'N' || args -> map.map[i][j] == 'S' ||\
-				args -> map.map[i][j] == 'W' || args -> map.map[i][j] == 'E')
-			{
-				if (user_position)
-					return (FALSE);
-				user_position = TRUE;
-			}
-			j++;
-		}
-		i++;
-	}
-	if (!user_position)
-		return (FALSE);
-	return (TRUE);
 }
 
 int	arr_size_len(char **arr)
