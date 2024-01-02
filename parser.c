@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:07:42 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:11:05 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,8 +180,11 @@ void	set_map(int fd, t_args *args, char *line)
 				ft_realloc(args);
 			i++;
 			line = get_next_line(fd);
-			// if (!is_correct_map_line(line))
-			// 	exit(1);
+			if (!is_correct_map_line(line))
+			{
+				printf("%s", MAP_ERROR);
+				exit(1);
+			}
 		}
 		args->map.map[i] = NULL;
 		args -> y_max = i;
@@ -192,7 +195,6 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	char 	*line;
 	int		fd;
 
-	printf("parse start\n");
 	if (ft_strlen(argv[1]) < 4)
 	{
 		printf("%s", FILE_ERROR);
