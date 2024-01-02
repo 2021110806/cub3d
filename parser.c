@@ -12,31 +12,6 @@
 
 #include "cub3d.h"
 
-int	check_direction(char *path)
-{	
-	if (ft_strlen(path) < 2)
-	{
-		printf("%s", SETTING_FORMAT_ERROR);
-		exit (1);
-	}
-	else
-	{
-		if (path[0] == 'E' && path[1] == 'A' && is_whitespace(path[2]))
-			return (EAST);
-		if (path[0] == 'W' && path[1] == 'E' && is_whitespace(path[2]))
-			return (WEST);
-		if (path[0] == 'N' && path[1] == 'O' && is_whitespace(path[2]))
-			return (NORTH);
-		if (path[0] == 'S' && path[1] == 'O' && is_whitespace(path[2]))
-			return (SOUTH);
-		if (path[0] == 'F' && is_whitespace(path[1]))
-			return (FLOOR);
-		if (path[0] == 'C' && is_whitespace(path[1]))
-			return (CEILING);
-	}
-	return (-1);
-}
-
 void	pass_white_space(char **line)
 {
 	(*line)++;
@@ -102,110 +77,8 @@ int	make_color(char **line)
 	return ((int)(color * pow(10, i - 1)));
 }
 
-char	*ft_char_malloc(size)
+void	init_path_and_color(t_args *args)
 {
-	char	*return_value;
-
-	return_value = malloc (sizeof(char) * size);
-	if (!return_value)
-		exit(1);
-	return (return_value);
-}
-
-void make_space_to_integer(t_args *args)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < args -> y_max)
-	{
-		j = 0;
-		while (j < args -> x_max)
-		{
-			if (args -> map.map[i][j] == ' ')
-				args -> map.map[i][j] = '5';
-			j++;
-		}
-		i++;
-	}
-}
-
-void	make_map_rectangular(t_args *args)
-{
-	int		i;
-	int		j;
-	char	*new_map_line;
-
-	i = 0;
-	while (i < args -> y_max)
-	{
-		if ((int) ft_strlen(args -> map.map[i]) < args -> x_max)
-		{
-			j = 0;
-			new_map_line = ft_char_malloc(args -> x_max + 1);
-			while (j < (int) ft_strlen(args -> map.map[i]) - 1)
-			{
-				new_map_line[j] = args -> map.map[i][j];
-				j++;
-			}
-			while (j < args -> x_max - 1)
-			{
-				new_map_line[j] = MINIMAP_NULL;
-				j++;
-			}
-			new_map_line[j] = '\n';
-			new_map_line[j + 1] = '\0';
-			char *tmp = args -> map.map[i];
-			args -> map.map[i] = new_map_line;
-			free(tmp);
-		}
-		i++;
-	}	
-}
-
-
-void	set_map(int fd, t_args *args, char *line)
-{
-	int	i;
-
-	i = 0;
-	args -> x_max = 0;
-		while (line)
-		{
-			if (args -> x_max < (int) ft_strlen(line))
-				args -> x_max = (int) ft_strlen(line);
-			args -> map.map[i] = line;
-			if (args -> map.size >= i)
-				ft_realloc(args);
-			i++;
-			line = get_next_line(fd);
-			if (!is_correct_map_line(line))
-			{
-				printf("%s", MAP_ERROR);
-				exit(1);
-			}
-		}
-		args->map.map[i] = NULL;
-		args -> y_max = i;
-}
-
-void	parse_argv(t_args *args, int argc, char **argv)
-{
-	char 	*line;
-	int		fd;
-
-	if (ft_strlen(argv[1]) < 4)
-	{
-		printf("%s", FILE_ERROR);
-		exit(1);
-	}
-	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && argv[1][ft_strlen(argv[1]) - 2] == 'u' \
-	&& argv[1][ft_strlen(argv[1]) - 3] == 'c' && argv[1][ft_strlen(argv[1]) - 4] == '.'))
-	{
-		printf("%s", FILE_ERROR);
-		exit(1);
-	}
 	args -> east_path = NULL;
 	args -> west_path = NULL;
 	args -> north_path = NULL;
@@ -216,76 +89,33 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	args -> floor_color.r = -1;
 	args -> floor_color.g = -1;
 	args -> floor_color.b = -1;
-	if (argc > 2)
-	{
-		printf("%s", ARGUMENT_ERROR);
-		exit(1);
-	}
-	else
-	{
-		fd = open(argv[1], O_RDONLY);
+}
+
+void	parse_argv(t_args *args, int argc, char **argv)
+{
+	char	*line;
+	int		fd;
+
+	check_cub_file(argv);
+	init_path_and_color(args);
+	check_parameter(argc);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		progrem_error_end(FILE_ERROR);
+	set_all_direction(fd, args);
+	line = get_next_line(fd);
+	while (only_whitespace(line))
 		line = get_next_line(fd);
-		if (fd == -1)
-		{
-			printf("%s", FILE_ERROR);
-			exit(1);
-		}
-		while (line && *line && only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-		 	line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		set_direction(line, args);
-		line = get_next_line(fd);
-		while (only_whitespace(line))
-			line = get_next_line(fd);
-		if (!is_next_line_is_map(line))
-		{
-			printf("%s", SETTING_FORMAT_ERROR);
-			exit(1);
-		}
-	}
-	if (is_no_texture(args))
-	{	printf("%s", TEXTURE_ERROR);
-		exit(1);
-	}
-	if (is_not_set_ceiling_or_floor_color(args))
-	{
-		printf("%s", COLOR_ERROR);
-		exit(1);
-	}
-	args -> map.map= ft_char_two_pointer_malloc(20);
+	is_next_line_is_map(line);
+	is_no_texture(args);
+	is_not_set_ceiling_or_floor_color(args);
+	args -> map.map = ft_char_two_pointer_malloc(20);
 	args -> map.size = 20;
 	while (only_whitespace(line))
-			line = get_next_line(fd);
-	set_map(fd, args, line); 
+		line = get_next_line(fd);
+	set_map(fd, args, line);
 	make_map_rectangular(args);
-	if (!is_correct_user_position(args))
-	{
-		printf("%s", USER_POSITION_ERROR);
-		exit(1);
-	}
+	is_correct_user_position(args);
 	make_space_to_integer(args);
-	if (!is_wrapped_by_wall(args))
-	{
-		printf("%s", MAP_ERROR);
-		exit(1);
-	}
+	is_wrapped_by_wall(args);
 }

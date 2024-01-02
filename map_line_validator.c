@@ -35,7 +35,7 @@ int	is_correct_map_line(char *line)
 	return (TRUE);
 }
 
-int	is_correct_user_position(t_args *args)
+void	is_correct_user_position(t_args *args)
 {
 	int	i;
 	int	j;
@@ -48,11 +48,11 @@ int	is_correct_user_position(t_args *args)
 		j = 0;
 		while (j < args -> x_max)
 		{
-			if (args -> map.map[i][j] == 'N' || args -> map.map[i][j] == 'S' ||\
-				args -> map.map[i][j] == 'W' || args -> map.map[i][j] == 'E')
+			if (args -> map.map[i][j] == 'N' || args -> map.map[i][j] == 'S' || \
+			args -> map.map[i][j] == 'W' || args -> map.map[i][j] == 'E')
 			{
 				if (user_position)
-					return (FALSE);
+					progrem_error_end(USER_POSITION_ERROR);
 				user_position = TRUE;
 			}
 			j++;
@@ -60,6 +60,5 @@ int	is_correct_user_position(t_args *args)
 		i++;
 	}
 	if (!user_position)
-		return (FALSE);
-	return (TRUE);
+		progrem_error_end(USER_POSITION_ERROR);
 }

@@ -12,10 +12,10 @@
 
 #include "cub3d.h"
 
-int	is_side_wall_or_null(t_args *args, int x, int y)
+int	is_side_wall_or_null(t_args *args, int y, int x)
 {
-	if ((args -> map.map[y - 1][x] == MINIMAP_WALL || \
-		args -> map.map[y - 1][x] == MINIMAP_NULL))
+	if ((args -> map.map[y][x] == MINIMAP_WALL || \
+		args -> map.map[y][x] == MINIMAP_NULL))
 		return (TRUE);
 	return (FALSE);
 }
@@ -39,7 +39,7 @@ int	is_four_side_wall_or_null(t_args *args, int x, int y)
 			if (!is_side_wall_or_null(args, y, x - 1))
 				return (FALSE);
 		}
-		if (x + 1 < args -> x_max)
+		if (x + 2 < args -> x_max)
 		{
 			if (!is_side_wall_or_null(args, y, x + 1))
 				return (FALSE);
@@ -59,7 +59,8 @@ int	is_space_in_contact_with_wall(t_args *args)
 		j = 0;
 		while (j < args -> x_max)
 		{
-			is_four_side_wall_or_null(args, j, i);
+			if (!is_four_side_wall_or_null(args, j, i))
+				return (FALSE);
 			j++;
 		}
 		i++;
