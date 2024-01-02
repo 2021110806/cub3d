@@ -70,6 +70,7 @@ char	**ft_realloc(t_args *args)
 		return_value[i] = args -> map.map[i];
 		i++;
 	}
+	free (args -> map.map);
 	args -> map.map = return_value;
 	args -> map.size *= 2;
 	return (return_value);

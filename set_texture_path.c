@@ -16,10 +16,7 @@ void	set_direction_ceiling_path(char *line, t_args *args)
 {
 	if (!(args -> ceiling_color.r == -1 && args -> ceiling_color.g \
 	== -1 && args -> ceiling_color.b == -1))
-	{
-		printf("%s", SETTING_FORMAT_ERROR);
-		exit(1);
-	}
+		progrem_error_end(SETTING_FORMAT_ERROR);
 	line++;
 	while (is_whitespace(*line))
 		line++;
@@ -31,10 +28,7 @@ void	set_direction_floor_path(char *line, t_args *args)
 {
 	if (!(args -> floor_color.r == -1 && args -> floor_color.g \
 	== -1 && args -> floor_color.b == -1))
-	{
-		printf("%s", SETTING_FORMAT_ERROR);
-		exit(1);
-	}
+		progrem_error_end(SETTING_FORMAT_ERROR);
 	line++;
 	while (is_whitespace(*line))
 		line++;
@@ -58,7 +52,7 @@ void	set_direction(char *line, t_args *args)
 		set_direction_floor_path(line, args);
 }
 
-void	set_all_direction(int fd, t_args *args)
+char	*set_all_direction(int fd, t_args *args)
 {
 	int		repeat_num;
 	char	*line;
@@ -70,8 +64,13 @@ void	set_all_direction(int fd, t_args *args)
 		if (!line || !(*line))
 			progrem_error_end(FILE_ERROR);
 		while (only_whitespace(line))
+		{
+			free(line);
 			line = get_next_line(fd);
+		}
 		set_direction(line, args);
+		free(line);
 		repeat_num--;
 	}
+	return (line);
 }

@@ -63,11 +63,17 @@ void	is_not_set_ceiling_or_floor_color(t_args *args)
 		progrem_error_end(COLOR_ERROR);
 }
 
-void	is_next_line_is_map(char *line)
+void	is_next_line_is_map(int fd, char **line)
 {
-	int	curr_direction;
+	int		curr_direction;
 
-	curr_direction = check_direction(line);
+	*line = get_next_line(fd);
+	while (only_whitespace(*line))
+	{
+		free(*line);
+		*line = get_next_line(fd);
+	}
+	curr_direction = check_direction(*line);
 	if (curr_direction == CEILING || curr_direction == FLOOR || \
 	curr_direction == NORTH || curr_direction == SOUTH || \
 	curr_direction == WEST || curr_direction == EAST)

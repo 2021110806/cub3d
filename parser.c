@@ -68,10 +68,7 @@ int	make_color(char **line)
 			i++;
 		}
 		else
-		{
-			printf("%s", COLOR_FORMAT_ERROR);
-			exit(1);
-		}
+			progrem_error_end(COLOR_FORMAT_ERROR);
 		(*line)++;
 	}
 	return ((int)(color * pow(10, i - 1)));
@@ -93,8 +90,8 @@ void	init_path_and_color(t_args *args)
 
 void	parse_argv(t_args *args, int argc, char **argv)
 {
-	char	*line;
 	int		fd;
+	char	*line;
 
 	check_cub_file(argv);
 	init_path_and_color(args);
@@ -102,17 +99,12 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		progrem_error_end(FILE_ERROR);
-	set_all_direction(fd, args);
-	line = get_next_line(fd);
-	while (only_whitespace(line))
-		line = get_next_line(fd);
-	is_next_line_is_map(line);
+	line = set_all_direction(fd, args);
+	is_next_line_is_map(fd, &line);
 	is_no_texture(args);
 	is_not_set_ceiling_or_floor_color(args);
 	args -> map.map = ft_char_two_pointer_malloc(20);
 	args -> map.size = 20;
-	while (only_whitespace(line))
-		line = get_next_line(fd);
 	set_map(fd, args, line);
 	make_map_rectangular(args);
 	is_correct_user_position(args);

@@ -22,11 +22,17 @@ int	play(t_data *data)
 	return (0);
 }
 
+void	leaks(void)
+{
+	system("leaks cub3d");
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	int		i;
 
+	atexit(leaks);
 	i = 0;
 	data.mlx = mlx_init();
 	parse_argv(&(data.args), argc, argv);

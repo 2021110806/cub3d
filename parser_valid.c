@@ -31,10 +31,15 @@ void	check_cub_file(char **argv)
 
 void	set_map(int fd, t_args *args, char *line)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	args -> x_max = 0;
+	while (only_whitespace(line))
+	{
+		free (line);
+		line = get_next_line(fd);
+	}
 	while (line)
 	{
 		if (args -> x_max < (int) ft_strlen(line))
