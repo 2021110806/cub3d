@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 17:55:58 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 22:42:28 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:05:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ int	is_start_with_correct_charactor(char *line)
 int	is_correct_map_component(char comp)
 {
 	if (comp == '1' || comp == '0' || comp == 'N' || \
-		comp == 'W' || comp == 'E' || comp == 'S' || comp == ' ')
+		comp == 'W' || comp == 'E' || comp == 'S' || comp == ' ' || \
+		comp == '2' || comp == '3' || comp == '4' || comp == '5')
 		return (TRUE);
 	return (FALSE);
 }
@@ -60,31 +61,31 @@ int	is_space_in_contact_with_wall(t_args *args)
 
 	i = 0;
 	j = 0;
-	while (i < args -> y_max + 1)
+	while (i < args -> y_max)
 	{
 		j = 0;
-		while (j < args -> x_max + 1)
+		while (j < args -> x_max)
 		{
 			if (args -> map.map[i][j] == MINIMAP_NULL)
 			{
 				if (i - 1 > -1)
 				{
-					if (args -> map.map[i - 1][j] != MINIMAP_WALL)
+					if (!(args -> map.map[i - 1][j] == MINIMAP_WALL || args -> map.map[i - 1][j] == MINIMAP_NULL ))
 						return (FALSE);
 				}
 				if (i + 1 < args -> y_max)
 				{
-					if (args -> map.map[i + 1][j] != MINIMAP_WALL)
+					if (!(args -> map.map[i + 1][j] == MINIMAP_WALL || args -> map.map[i + 1][j] == MINIMAP_NULL))
 						return (FALSE);
 				}
 				if (j - 1 > -1)
 				{
-					if (args -> map.map[i][j - 1] != MINIMAP_WALL)
+					if (!(args -> map.map[i][j - 1] == MINIMAP_WALL || args -> map.map[i][j - 1] == MINIMAP_NULL))
 						return (FALSE);
 				}
 				if (j + 1 < args -> x_max)
 				{
-					if (args -> map.map[i][j + 1] != MINIMAP_WALL)
+					if (!(args -> map.map[i][j + 1] == MINIMAP_WALL || args -> map.map[i][j + 1] == MINIMAP_NULL || args -> map.map[i][j + 1] == 10))
 						return (FALSE);
 				}
 			}

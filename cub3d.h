@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 22:07:15 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 17:43:26 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define TRUE 1
 # define MAP_ONE_SPACE_SIZE 10
 # define MINIMAP_WALL 49
-# define MINIMAP_NULL 5
+# define MINIMAP_NULL 53
 # define MINIMAP_EMPTY 48
 # define MINIMAP_PLAYER 2
 # define MINIMAP_CLOSE_DOOR 50
@@ -48,7 +48,14 @@
 # define MOUSE_RIGHT_CLICK 2
 # define CLOSE_DOOR_IMAGE_PATH "./texture/close_door.xpm"
 # define OPENED_DOOR_IMAGE_PATH "./texture/opened_door.xpm"
-
+# define ARGUMENT_ERROR "ERROR : invalid argument\n"
+# define FILE_ERROR "ERROR : invalid file format\n"
+# define COLOR_FORMAT_ERROR "ERROR : invalid color setting\n"
+# define TEXTURE_ERROR "ERROR : texture not setting\n"
+# define COLOR_ERROR "ERROR : color not settting\n"
+# define SETTING_FORMAT_ERROR "ERROR : inavalid setting format\n"
+# define USER_POSITION_ERROR "ERROR : invalid user position\n"
+# define MAP_ERROR "ERROR : inavalid map\n"
 # include "./mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
@@ -212,4 +219,8 @@ int		double_range_check(double value, double center, double range);
 int		is_correct_user_position(t_args *args);
 int		is_next_line_is_map(char *line);
 int		check_direction(char *path);
+int		make_color(char **line);
+void	pass_white_space(char **line);
+void	copy_path(int direction, char *line, t_args *args, int i);
+void	set_direction(char *line, t_args *args);
 #endif

@@ -6,8 +6,8 @@
       "type": "lldb",
       "request": "launch",
       "args": [],
-      "cwd": "/Users/minjeon2/cub3d_git",
-      "program": "/Users/minjeon2/cub3d_git/build/Debug/outDebug"
+      "cwd": "/Users/minjeon2/last",
+      "program": "/Users/minjeon2/last/build/Debug/outDebug"
     }
   ]
 }

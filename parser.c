@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/30 22:53:32 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:05:50 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	check_direction(char *path)
 {	
 	if (ft_strlen(path) < 2)
+	{
+		printf("%s", SETTING_FORMAT_ERROR);
 		exit (1);
+	}
 	else
 	{
 		if (path[0] == 'E' && path[1] == 'A' && is_whitespace(path[2]))
@@ -90,7 +93,10 @@ int	make_color(char **line)
 			i++;
 		}
 		else
+		{
+			printf("%s", COLOR_FORMAT_ERROR);
 			exit(1);
+		}
 		(*line)++;
 	}
 	return ((int)(color * pow(10, i - 1)));
@@ -187,10 +193,16 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	int		fd;
 
 	if (ft_strlen(argv[1]) < 4)
+	{
+		printf("%s", FILE_ERROR);
 		exit(1);
+	}
 	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && argv[1][ft_strlen(argv[1]) - 2] == 'u' \
 	&& argv[1][ft_strlen(argv[1]) - 3] == 'c' && argv[1][ft_strlen(argv[1]) - 4] == '.'))
+	{
+		printf("%s", FILE_ERROR);
 		exit(1);
+	}
 	args -> east_path = NULL;
 	args -> west_path = NULL;
 	args -> north_path = NULL;
@@ -202,13 +214,19 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	args -> floor_color.g = -1;
 	args -> floor_color.b = -1;
 	if (argc > 2)
+	{
+		printf("%s", ARGUMENT_ERROR);
 		exit(1);
+	}
 	else
 	{
 		fd = open(argv[1], O_RDONLY);
 		line = get_next_line(fd);
 		if (fd == -1)
+		{
+			printf("%s", FILE_ERROR);
 			exit(1);
+		}
 		while (line && *line && only_whitespace(line))
 			line = get_next_line(fd);
 		set_direction(line, args);
@@ -236,12 +254,20 @@ void	parse_argv(t_args *args, int argc, char **argv)
 		while (only_whitespace(line))
 			line = get_next_line(fd);
 		if (!is_next_line_is_map(line))
+		{
+			printf("%s", SETTING_FORMAT_ERROR);
 			exit(1);
+		}
 	}
 	if (is_no_texture(args))
+	{	printf("%s", TEXTURE_ERROR);
 		exit(1);
+	}
 	if (is_not_set_ceiling_or_floor_color(args))
+	{
+		printf("%s", COLOR_ERROR);
 		exit(1);
+	}
 	args -> map.map= ft_char_two_pointer_malloc(20);
 	args -> map.size = 20;
 	while (only_whitespace(line))
@@ -249,8 +275,14 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	set_map(fd, args, line); 
 	make_map_rectangular(args);
 	if (!is_correct_user_position(args))
+	{
+		printf("%s", USER_POSITION_ERROR);
 		exit(1);
+	}
 	make_space_to_integer(args);
 	if (!is_wrapped_by_wall(args))
+	{
+		printf("%s", MAP_ERROR);
 		exit(1);
+	}
 }
