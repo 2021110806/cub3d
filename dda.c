@@ -44,7 +44,9 @@ t_int_coordinate *map, t_data *data, t_int_coordinate step)
 			map -> y += step.y;
 			last_hit_pos = Y;
 		}
-		if (data -> args.map.map[map -> y][map -> x] != '0')
+		if (data -> args.map.map[map -> y][map -> x] == '1' || \
+		data -> args.map.map[map -> y][map -> x] == '2' || \
+		data -> args.map.map[map -> y][map -> x] == '3')
 			hit = 1;
 		data -> last_hit_pos = last_hit_pos;
 	}
