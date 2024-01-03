@@ -68,7 +68,7 @@ int	make_color(char **line)
 			i++;
 		}
 		else
-			progrem_error_end(COLOR_FORMAT_ERROR);
+			program_error_end(COLOR_FORMAT_ERROR);
 		(*line)++;
 	}
 	return ((int)(color * pow(10, i - 1)));
@@ -98,7 +98,7 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	check_parameter(argc);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
-		progrem_error_end(FILE_ERROR);
+		program_error_end(FILE_ERROR);
 	line = set_all_direction(fd, args);
 	is_next_line_is_map(fd, &line);
 	is_no_texture(args);
@@ -110,4 +110,5 @@ void	parse_argv(t_args *args, int argc, char **argv)
 	is_correct_user_position(args);
 	make_space_to_integer(args);
 	is_wrapped_by_wall(args);
+	setting_sprite_information(args);
 }

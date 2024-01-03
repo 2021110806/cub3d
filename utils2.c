@@ -42,7 +42,7 @@ int	is_in_range(char *color)
 	return (TRUE);
 }
 
-void	progrem_error_end(char *error_message)
+void	program_error_end(char *error_message)
 {
 	write(STDERR_FILENO, error_message, ft_strlen(error_message));
 	exit(1);

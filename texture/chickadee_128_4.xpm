@@ -1,0 +1,34 @@
+/* XPM */
+static char *chickadee_128_31704279777[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 12 1 ",
+"  c None",
+". c black",
+"X c #231C18",
+"o c #4C4641",
+"O c #6A6765",
+"+ c gray",
+"@ c #C6BA91",
+"# c #D6CAA1",
+"$ c #E2D5AA",
+"% c #D5D5D5",
+"& c gray95",
+"* c #FDFDFD",
+/* pixels */
+"                ",
+"                ",
+"                ",
+"                ",
+"  XXX           ",
+" XXXXX          ",
+".*.*&X OOooXXX  ",
+" X***&OO++++%   ",
+"  XX&$#++%%     ",
+"  &**$$####@    ",
+"   &**$$$$$#O   ",
+"    &&**$$$#@O  ",
+"      &&##   @O ",
+"       ..      O",
+"                ",
+"                "
+};
