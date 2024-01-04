@@ -1,16 +1,92 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_setting.c                                   :+:      :+:    :+:   */
+/*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/04 17:16:42 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/04 17:16:43 by minkyole         ###   ########.fr       */
+/*   Created: 2024/01/03 12:54:25 by minkyole          #+#    #+#             */
+/*   Updated: 2024/01/04 17:32:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	check_sprite_relative_distance(t_data *data)
+{
+	int	index;
+
+	index = 0;
+	while (index < data->args.sprite_count)
+	{
+		data->args.sprite_information[index].relative_distance = \
+		(pow(data->player_position_x - \
+		data->args.sprite_information[index].x, 2) + \
+		pow(data->player_position_y \
+		- data->args.sprite_information[index].y, 2));
+		index++;
+	}
+}
+
+void	setting_transform_coordinate(t_data *data, int index, \
+t_sprite_drawing_factors *drawing_factor)
+{
+	double	relative_x;
+	double	relative_y;
+	double	inverse_determinant;
+
+	relative_x = data->args.sprite_information[index].x - \
+	data->player_position_x;
+	relative_y = data->args.sprite_information[index].y - \
+	data->player_position_y;
+	inverse_determinant = 1.0 / \
+	(data->camera_plane_x * data->player_view_direction_y - \
+	data->player_view_direction_x * data->camera_plane_y);
+	drawing_factor->transform_x = -(inverse_determinant * \
+	(data->player_view_direction_y * \
+	relative_x - data->player_view_direction_x * relative_y));
+	drawing_factor->transform_y = inverse_determinant * \
+	(-data->camera_plane_y * relative_x + data->camera_plane_x * relative_y);
+	drawing_factor->sprite_screen_x = (int)((WIN_WIDTH / 2) * \
+	(1 + drawing_factor->transform_x / drawing_factor->transform_y));
+}
+
+void	setting_sprite_draw_height(t_sprite_drawing_factors \
+*sprite_drawing_factor, t_data *data)
+{
+	int	sprite_y_position;
+
+	sprite_y_position = (int)((SPRITE_Z - (data->time - 10)) / \
+	sprite_drawing_factor -> transform_y);
+	sprite_drawing_factor->sprite_height = \
+	abs((int)((WIN_HEIGHT / sprite_drawing_factor->transform_y) / SPRITE_Y));
+	sprite_drawing_factor->draw_start_y = \
+	-sprite_drawing_factor->sprite_height / 2 + \
+	WIN_HEIGHT / 2 + sprite_y_position;
+	if (sprite_drawing_factor->draw_start_y < 0)
+		sprite_drawing_factor->draw_start_y = 0;
+	sprite_drawing_factor->draw_end_y = \
+	sprite_drawing_factor->sprite_height / 2 + WIN_HEIGHT / 2 + \
+	sprite_y_position;
+	if (sprite_drawing_factor->draw_end_y >= WIN_HEIGHT)
+		sprite_drawing_factor->draw_end_y = WIN_HEIGHT - 1;
+}
+
+void	setting_sprite_draw_width(t_sprite_drawing_factors \
+*sprite_drawing_factor)
+{
+	sprite_drawing_factor->sprite_width = \
+	abs((int)((WIN_HEIGHT / sprite_drawing_factor->transform_y) / SPRITE_X));
+	sprite_drawing_factor->draw_start_x = \
+	-sprite_drawing_factor->sprite_width / 2 \
+	+ sprite_drawing_factor->sprite_screen_x;
+	if (sprite_drawing_factor->draw_start_x < 0)
+		sprite_drawing_factor->draw_start_x = 0;
+	sprite_drawing_factor->draw_end_x = sprite_drawing_factor->sprite_width / 2 \
+	+ sprite_drawing_factor->sprite_screen_x;
+	if (sprite_drawing_factor->draw_end_x >= WIN_WIDTH)
+		sprite_drawing_factor->draw_end_x = WIN_WIDTH - 1;
+}
 
 void	setting_sprite_animation(t_data *data, int index)
 {
@@ -24,71 +100,4 @@ void	setting_sprite_animation(t_data *data, int index)
 		data->args.sprite_information[index].image_number = CHICKADEE_4;
 	else if ((int)(data -> time / 5 == 4))
 		data->time = 0;
-}
-
-int	calculate_texture_x(int stripe, \
-t_sprite_drawing_factors sprite_drawing_factor)
-{
-	return ((int)((256 * (stripe - (-sprite_drawing_factor.sprite_width / 2 + \
-	sprite_drawing_factor.sprite_screen_x)) * \
-	SPRITE_TEXTURE_WIDTH / sprite_drawing_factor.sprite_width) / 256));
-}
-
-int	calculate_texture_y(int y, int sprite_z_position, \
-t_sprite_drawing_factors sprite_drawing_factor)
-{
-	int	d;
-
-	d = (y - sprite_z_position) * 256 - WIN_HEIGHT * 128 + \
-	sprite_drawing_factor.sprite_height * 128;
-	return (((d * SPRITE_TEXTURE_HEIGHT) / \
-	sprite_drawing_factor.sprite_height) / 256);
-}
-
-int	is_not_transparent_color(t_data *data, int index, int texture_y, \
-int texture_x)
-{
-	if ((data->texture[data->args.sprite_information[index].image_number] \
-	[SPRITE_TEXTURE_WIDTH * texture_y + texture_x] & 0x00FFFFFF) != 0)
-		return (TRUE);
-	return (FALSE);
-}
-
-int	is_printable_sprite(t_data *data, \
-t_sprite_drawing_factors sprite_drawing_factor, int stripe)
-{
-	return (sprite_drawing_factor.transform_y > 0 && stripe > 0 && \
-	stripe < WIN_WIDTH && \
-	sprite_drawing_factor.transform_y < data->sprite_buffer[stripe]);
-}
-
-void	draw_sprite_for_buffer(t_data *data, \
-t_sprite_drawing_factors sprite_drawing_factor, \
-int sprite_z_position, int index)
-{
-	int	stripe;
-	int	y;
-	int	texture_x;
-	int	texture_y;
-
-	stripe = sprite_drawing_factor.draw_start_x;
-	while (stripe < sprite_drawing_factor.draw_end_x)
-	{
-		y = sprite_drawing_factor.draw_start_y;
-		texture_x = calculate_texture_x(stripe, sprite_drawing_factor);
-		if (is_printable_sprite(data, sprite_drawing_factor, stripe))
-		{
-			while (y < sprite_drawing_factor.draw_end_y)
-			{
-				texture_y = calculate_texture_y(y, sprite_z_position, \
-				sprite_drawing_factor);
-				if (is_not_transparent_color(data, index, texture_y, texture_x))
-					data->buf[y][stripe] = data->texture[data->args.\
-					sprite_information[index].image_number] \
-					[SPRITE_TEXTURE_WIDTH * texture_y + texture_x];
-				y++;
-			}
-		}
-		stripe++;
-	}
 }
