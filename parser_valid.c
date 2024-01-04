@@ -14,7 +14,7 @@
 
 void	check_parameter(int argc)
 {
-	if (argc > 2)
+	if (argc != 2)
 		program_error_end(ARGUMENT_ERROR);
 }
 
