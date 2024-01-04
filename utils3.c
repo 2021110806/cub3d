@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:10:45 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/03 12:10:46 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:21:34 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_sprite    *ft_sprite_malloc(int size)
+t_sprite	*ft_sprite_malloc(int size)
 {
 	t_sprite	*return_value;
 

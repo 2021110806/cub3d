@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:07:08 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:23:59 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,4 +311,6 @@ void    setting_sprite_draw_height(t_sprite_drawing_factors *sprite_drawing_fact
 void    setting_sprite_draw_width(t_sprite_drawing_factors *sprite_drawing_factor);
 void	check_sprite_relative_distance(t_data *data);
 void    sort_sprite_information(t_data *data);
+void	sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
+void	sort_sprite_information(t_data *data);
 #endif
