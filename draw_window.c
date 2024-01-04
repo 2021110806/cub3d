@@ -75,8 +75,9 @@ void	draw_minimap(t_data *data)
 		{
 			current_location = check_minimap_current_location(\
 			minimap_coordinate.y, minimap_coordinate.x, data);
-			draw_minimapa_space(current_location, \
-			minimap_coordinate, data, minimap_color);
+			draw_map_one_space(minimap_coordinate.y * MAP_ONE_SPACE_SIZE, \
+			WIN_WIDTH - minimap_coordinate.x * MAP_ONE_SPACE_SIZE, \
+			data, check_color(current_location, minimap_color));
 			minimap_coordinate.x++;
 		}
 		minimap_coordinate.y++;
@@ -107,7 +108,6 @@ void	draw_sprite(t_data *data)
 	int							index;
 	t_sprite_drawing_factors	sprite_drawing_factor;
 	int							sprite_z_position;
-	int							stripe;
 
 	index = 0;
 	check_sprite_relative_distance(data);
@@ -115,39 +115,13 @@ void	draw_sprite(t_data *data)
 	while (index < data->args.sprite_count)
 	{
 		setting_transform_coordinate(data, index, &sprite_drawing_factor);
-		sprite_z_position = (int)((SPRITE_Z - (data->time - 10)) / sprite_drawing_factor.transform_y);
+		sprite_z_position = (int)((SPRITE_Z - (data->time - 10)) / \
+		sprite_drawing_factor.transform_y);
 		setting_sprite_draw_height(&sprite_drawing_factor, data);
 		setting_sprite_draw_width(&sprite_drawing_factor);
-		stripe = sprite_drawing_factor.draw_start_x;
-		if ((int) (data -> time / 5 == 0)) // 0 ~ 4
-			data->args.sprite_information[index].image_number = CHICKADEE_1;
-		else if ((int) (data -> time / 5 == 1)) // 5 ~ 9
-			data->args.sprite_information[index].image_number = CHICKADEE_2;
-		else if ((int) (data -> time / 5 == 2)) // 10 ~ 14
-			data->args.sprite_information[index].image_number = CHICKADEE_3;
-		else if ((int) (data -> time / 5 == 3)) // 15 ~ 19
-			data->args.sprite_information[index].image_number = CHICKADEE_4;
-		else if ((int) (data -> time / 5 == 4)) // 20
-			data->time = 0;
-		while (stripe < sprite_drawing_factor.draw_end_x)
-		{
-			int	y = sprite_drawing_factor.draw_start_y;
-
-			int	texX = (int)((256 * (stripe - (-sprite_drawing_factor.sprite_width / 2 + sprite_drawing_factor.sprite_screen_x)) * SPRITE_TEXTURE_WIDTH / sprite_drawing_factor.sprite_width) / 256);
-			if (sprite_drawing_factor.transform_y > 0 && stripe > 0 && stripe < WIN_WIDTH && sprite_drawing_factor.transform_y < data->sprite_buffer[stripe])
-			{
-				while(y < sprite_drawing_factor.draw_end_y)
-				{
-					int d = (y -  sprite_z_position) * 256 - WIN_HEIGHT * 128 + sprite_drawing_factor.sprite_height * 128;
-					int texY = ((d * SPRITE_TEXTURE_HEIGHT) / sprite_drawing_factor.sprite_height) / 256;
-					if((data->texture[data->args.sprite_information[index].image_number][SPRITE_TEXTURE_WIDTH * texY + texX] & 0x00FFFFFF) != 0)
-						data->buf[y][stripe] = data->texture[data->args.sprite_information[index].image_number][SPRITE_TEXTURE_WIDTH * texY + texX];
-					y++;
-				}
-			}
-			stripe++;
-		}
-
+		setting_sprite_animation(data, index);
+		draw_sprite_for_buffer(data, sprite_drawing_factor, \
+		sprite_z_position, index);
 		index++;
 	}
 }

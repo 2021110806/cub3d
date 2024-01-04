@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite.c                                           :+:      :+:    :+:   */
+/*   sprite_setting.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
+/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/03 12:54:25 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/04 17:32:57 by minjeon2         ###   ########.fr       */
+/*   Created: 2024/01/04 18:27:34 by minkyole          #+#    #+#             */
+/*   Updated: 2024/01/04 18:27:36 by minkyole         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,4 +86,18 @@ void	setting_sprite_draw_width(t_sprite_drawing_factors \
 	+ sprite_drawing_factor->sprite_screen_x;
 	if (sprite_drawing_factor->draw_end_x >= WIN_WIDTH)
 		sprite_drawing_factor->draw_end_x = WIN_WIDTH - 1;
+}
+
+void	setting_sprite_animation(t_data *data, int index)
+{
+	if ((int)(data -> time / 5 == 0))
+		data->args.sprite_information[index].image_number = CHICKADEE_1;
+	else if ((int)(data -> time / 5 == 1))
+		data->args.sprite_information[index].image_number = CHICKADEE_2;
+	else if ((int)(data -> time / 5 == 2))
+		data->args.sprite_information[index].image_number = CHICKADEE_3;
+	else if ((int)(data -> time / 5 == 3))
+		data->args.sprite_information[index].image_number = CHICKADEE_4;
+	else if ((int)(data -> time / 5 == 4))
+		data->time = 0;
 }

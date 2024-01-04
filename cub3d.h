@@ -121,6 +121,7 @@ typedef struct s_minimap_color
 	t_rgb_color	null_color;
 	t_rgb_color	door_close_color;
 	t_rgb_color	door_open_color;
+	t_rgb_color	chickadee_color;
 }	t_minimap_color;
 
 typedef struct s_vectors
@@ -211,106 +212,111 @@ typedef struct s_data
 	int					speed_time;
 }	t_data;
 
-void	init_data(t_data *data);
-int		init_buf(t_data *data);
-int		*ft_int_malloc(int size);
-int		**ft_int_pointer_malloc(int size);
-void	init_texture(t_data *data);
-void	draw_image(t_drawing_factors *drawing_factors, \
+void		init_data(t_data *data);
+int			init_buf(t_data *data);
+int			*ft_int_malloc(int size);
+int			**ft_int_pointer_malloc(int size);
+void		init_texture(t_data *data);
+void		draw_image(t_drawing_factors *drawing_factors, \
 t_data	*data, t_vectors *vectors);
-double	calculate_distance_from_camera_to_wall(t_int_coordinate map, \
+double		calculate_distance_from_camera_to_wall(t_int_coordinate map, \
 t_data *data, t_vectors vectors, t_int_coordinate step);
-double	calculate_wall_crash_spot(t_data *data, \
+double		calculate_wall_crash_spot(t_data *data, \
 double vertical_distance, t_vectors *vectors);
-int		calculate_texture_spot(t_data *data, \
+int			calculate_texture_spot(t_data *data, \
 t_vectors *vectors, double wall_crash_spot);
-void	draw_buf(t_data *data);
-void	draw_floor_and_ceiling(t_data *data);
-int		calculate_draw_start(int line_height);
-int		calculate_draw_end(int line_height);
-int		key_press(int key, t_data *data);
-int		play(t_data *data);
-double	calculate_distance_from_camera_to_wall(t_int_coordinate map, \
+void		draw_buf(t_data *data);
+void		draw_floor_and_ceiling(t_data *data);
+int			calculate_draw_start(int line_height);
+int			calculate_draw_end(int line_height);
+int			key_press(int key, t_data *data);
+int			play(t_data *data);
+double		calculate_distance_from_camera_to_wall(t_int_coordinate map, \
 t_data *data, t_vectors vectors, t_int_coordinate step);
-void	move_ray(t_vectors *vectors, \
+void		move_ray(t_vectors *vectors, \
 t_int_coordinate *map, t_data *data, t_int_coordinate step);
-void	set_x_vector(t_int_coordinate *map, t_data \
+void		set_x_vector(t_int_coordinate *map, t_data \
 *data, t_int_coordinate *step, t_vectors *vectors);
-void	set_y_vector(t_int_coordinate *map, t_data \
+void		set_y_vector(t_int_coordinate *map, t_data \
 *data, t_int_coordinate *step, t_vectors *vectors);
-void	set_curr_measurement_vector(t_int_coordinate *map, t_data \
+void		set_curr_measurement_vector(t_int_coordinate *map, t_data \
 *data, t_int_coordinate *step, t_vectors *vectors);
-void	set_vector(t_data *data, t_vectors *vectors, t_int_coordinate *map);
-void	set_texture(t_data *data, char *direction, int index);
-void	set_player(t_data *data);
-void	set_textures(t_data *data);
-int		draw_wall(t_data *data);
-void	move_up(t_data *data);
-void	move_down(t_data *data);
-void	move_left(t_data *data, double rotate_speed);
-void	move_right(t_data *data, double rotate_speed);
-int		program_end(void);
-void	set_player_direction(t_data *data, char direction);
-void	draw_minimap(t_data *data);
-int		rgb_convert_int(t_rgb_color color);
-void	set_rgb_color(t_rgb_color *color, int r, int g, int b);
-char	check_minimap_current_location(int y, int x, t_data *data);
-void	parse_argv(t_args *args, int argc, char **argv);
-int		is_correct_map_line(char *line);
-char	**ft_realloc(t_args *args);
-char	**ft_char_two_pointer_malloc(int size);
-int		count_line(int fd, char *file_name);
-int		only_whitespace(char *line);
-int		is_whitespace(char charactor);
-void	check_mouse_rotate(t_data *data);
-void	is_not_set_ceiling_or_floor_color(t_args *args);
-void	is_no_texture(t_args *args);
-void	is_wrapped_by_wall(t_args *args);
-int		mouse_press(int buttom, int x, int y, t_data *data);
-int		double_range_check(double value, double center, double range);
-void	is_correct_user_position(t_args *args);
-void	is_next_line_is_map(int fd, char **line);
-int		check_direction(char *path);
-int		make_color(char **line);
-void	pass_white_space(char **line);
-void	copy_path(int direction, char *line, t_args *args, int i);
-void	set_direction(char *line, t_args *args);
-void	pass_white_space(char **line);
-void	copy_path(int direction, char *line, t_args *args, int i);
-int		make_color(char **line);
-void	set_direction(char *line, t_args *args);
-void	init_minimap_color(t_minimap_color *minimap_color);
-void	draw_minimapa_space(int current_location, \
-t_int_coordinate minimap_coordinate, t_data *data, \
-t_minimap_color minimap_color);
-void	draw_map_one_space(int draw_start_y, int draw_start_x, \
+void		set_vector(t_data *data, t_vectors *vectors, t_int_coordinate *map);
+void		set_texture(t_data *data, char *direction, int index);
+void		set_player(t_data *data);
+void		set_textures(t_data *data);
+int			draw_wall(t_data *data);
+void		move_up(t_data *data);
+void		move_down(t_data *data);
+void		move_left(t_data *data, double rotate_speed);
+void		move_right(t_data *data, double rotate_speed);
+int			program_end(void);
+void		set_player_direction(t_data *data, char direction);
+void		draw_minimap(t_data *data);
+int			rgb_convert_int(t_rgb_color color);
+void		set_rgb_color(t_rgb_color *color, int r, int g, int b);
+char		check_minimap_current_location(int y, int x, t_data *data);
+void		parse_argv(t_args *args, int argc, char **argv);
+int			is_correct_map_line(char *line);
+char		**ft_realloc(t_args *args);
+char		**ft_char_two_pointer_malloc(int size);
+int			count_line(int fd, char *file_name);
+int			only_whitespace(char *line);
+int			is_whitespace(char charactor);
+void		check_mouse_rotate(t_data *data);
+void		is_not_set_ceiling_or_floor_color(t_args *args);
+void		is_no_texture(t_args *args);
+void		is_wrapped_by_wall(t_args *args);
+int			mouse_press(int buttom, int x, int y, t_data *data);
+int			double_range_check(double value, double center, double range);
+void		is_correct_user_position(t_args *args);
+void		is_next_line_is_map(int fd, char **line);
+int			check_direction(char *path);
+int			make_color(char **line);
+void		pass_white_space(char **line);
+void		copy_path(int direction, char *line, t_args *args, int i);
+void		set_direction(char *line, t_args *args);
+void		pass_white_space(char **line);
+void		copy_path(int direction, char *line, t_args *args, int i);
+int			make_color(char **line);
+void		set_direction(char *line, t_args *args);
+void		init_minimap_color(t_minimap_color *minimap_color);
+t_rgb_color	check_color(int current_location, t_minimap_color minimap_color);
+void		draw_map_one_space(int draw_start_y, int draw_start_x, \
 t_data *data, t_rgb_color color);
-void	set_direction_east_path(char *line, t_args *args);
-void	set_direction_west_path(char *line, t_args *args);
-void	set_direction_south_path(char *line, t_args *args);
-void	set_direction_north_path(char *line, t_args *args);
-int		is_space_in_contact_with_wall(t_args *args);
-int		arr_size_len(char **arr);
-int		is_all_digit(char *color);
-int		is_in_range(char *color);
-void	program_error_end(char *error_message);
-char	*set_all_direction(int fd, t_args *args);
-void	check_parameter(int argc);
-void	check_cub_file(char **argv);
-void	set_map(int fd, t_args *args, char *line);
-int		check_direction(char *path);
-char	*ft_char_malloc(int size);
-void	make_map_rectangular(t_args *args);
-void	make_space_to_integer(t_args *args);
-int		is_map_edge_check(t_args *args);
+void		set_direction_east_path(char *line, t_args *args);
+void		set_direction_west_path(char *line, t_args *args);
+void		set_direction_south_path(char *line, t_args *args);
+void		set_direction_north_path(char *line, t_args *args);
+int			is_space_in_contact_with_wall(t_args *args);
+int			arr_size_len(char **arr);
+int			is_all_digit(char *color);
+int			is_in_range(char *color);
+void		program_error_end(char *error_message);
+char		*set_all_direction(int fd, t_args *args);
+void		check_parameter(int argc);
+void		check_cub_file(char **argv);
+void		set_map(int fd, t_args *args, char *line);
+int			check_direction(char *path);
+char		*ft_char_malloc(int size);
+void		make_map_rectangular(t_args *args);
+void		make_space_to_integer(t_args *args);
+int			is_map_edge_check(t_args *args);
 t_sprite	*ft_sprite_malloc(int size);
-void	draw_sprite(t_data *data);
-void	setting_sprite_information(t_args *args);
-void    setting_transform_coordinate(t_data *data, int index, t_sprite_drawing_factors *drawing_factor);
-void    setting_sprite_draw_height(t_sprite_drawing_factors *sprite_drawing_factor, t_data *data);
-void    setting_sprite_draw_width(t_sprite_drawing_factors *sprite_drawing_factor);
-void	check_sprite_relative_distance(t_data *data);
-void    sort_sprite_information(t_data *data);
-void	sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
-void	sort_sprite_information(t_data *data);
+void		draw_sprite(t_data *data);
+void		setting_sprite_information(t_args *args);
+void		setting_transform_coordinate(t_data *data, \
+int index, t_sprite_drawing_factors *drawing_factor);
+void		setting_sprite_draw_height(\
+t_sprite_drawing_factors *sprite_drawing_factor, t_data *data);
+void		setting_sprite_draw_width(\
+t_sprite_drawing_factors *sprite_drawing_factor);
+void		check_sprite_relative_distance(t_data *data);
+void		sort_sprite_information(t_data *data);
+void		draw_sprite_for_buffer(t_data *data, \
+t_sprite_drawing_factors sprite_drawing_factor, \
+int sprite_z_position, int index);
+void		setting_sprite_animation(t_data *data, int index);
+void		sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
+void		sort_sprite_information(t_data *data);
 #endif
