@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:07:08 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:23:59 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,4 +315,6 @@ void	draw_sprite_for_buffer(t_data *data, \
 t_sprite_drawing_factors sprite_drawing_factor, \
 int sprite_z_position, int index);
 void	setting_sprite_animation(t_data *data, int index);
+void	sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
+void	sort_sprite_information(t_data *data);
 #endif

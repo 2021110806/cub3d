@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_sprite.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 12:03:27 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/03 12:03:28 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/04 17:37:39 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,10 @@ void	setting_sprite_information(t_args *args)
 {
 	int	y;
 	int	x;
-	int	sprite_count;
 
 	args->sprite_information = ft_sprite_malloc(check_sprite_count(args));
 	y = 0;
-	sprite_count = 0;
+	args -> sprite_count = 0;
 	while (y + 1 < args->y_max)
 	{
 		x = 0;
@@ -50,14 +49,14 @@ void	setting_sprite_information(t_args *args)
 		{
 			if (args->map.map[y][x] == '4')
 			{
-				args->sprite_information[sprite_count].image_number = CHICKADEE_1;
-				args->sprite_information[sprite_count].x = x + 0.5;
-				args->sprite_information[sprite_count].y = y + 0.5;
-				sprite_count++;
+				args->sprite_information[args->sprite_count] \
+				.image_number = CHICKADEE_1;
+				args->sprite_information[args->sprite_count].x = x + 0.5;
+				args->sprite_information[args->sprite_count].y = y + 0.5;
+				args -> sprite_count++;
 			}
 			x++;
 		}
 		y++;
 	}
-	args->sprite_count = sprite_count;
 }

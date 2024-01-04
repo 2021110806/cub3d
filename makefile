@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2023/12/30 22:53:43 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/04 17:30:27 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
 NAME = cub3d
-SRCS = set_texture_path.c exception.c parser.c parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c mouse.c minimap_utils.c set_texture_path_bearing.c map_line_validator.c map_structure_validator.c utils2.c parser_valid.c parser_map.c parser_sprite.c sprite.c utils3.c sprite_setting.c
+SRCS = set_texture_path.c exception.c parser.c parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c draw_window_setting.c set_direction.c draw_window_setting.c color.c mouse.c minimap_utils.c set_texture_path_bearing.c map_line_validator.c map_structure_validator.c utils2.c parser_valid.c parser_map.c parser_sprite.c sprite.c utils3.c sprite_setting.c sprite_sort.c 
+
 OBJS = $(SRCS:.c=.o)
 
 $(NAME): $(OBJS) $(LIBFT)
