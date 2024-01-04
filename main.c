@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:25:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/04 17:18:53 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/04 21:13:45 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 	check_parameter(argc);
 	i = 0;
 	data.mlx = mlx_init();
-	parse_argv(&(data.args), argc, argv);
+	parse_argv(&(data.args), argv);
 	set_player(&data);
 	data.texture = ft_int_pointer_malloc(10);
 	while (i < 10)

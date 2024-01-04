@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:11:05 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/04 21:12:52 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	init_path_and_color(t_args *args)
 	args -> floor_color.b = -1;
 }
 
-void	parse_argv(t_args *args, int argc, char **argv)
+void	parse_argv(t_args *args, char **argv)
 {
 	int		fd;
 	char	*line;
