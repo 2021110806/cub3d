@@ -31,17 +31,17 @@ void	check_mouse_rotate(t_data *data)
 int	check_user_direction(t_data *data, int *check_door_location_x, \
 int *check_door_location_y)
 {
-	if (double_range_check(data->player_view_direction_x, -1, 0.2) && \
-	double_range_check(data->player_view_direction_y, 0, 0.2))
+	if (double_range_check(data->player_view_direction_x, -1, 0.4) && \
+	double_range_check(data->player_view_direction_y, 0, 0.4))
 		*check_door_location_x -= 1;
-	else if (double_range_check(data->player_view_direction_x, 1, 0.2) && \
-	double_range_check(data->player_view_direction_y, 0, 0.2))
+	else if (double_range_check(data->player_view_direction_x, 1, 0.4) && \
+	double_range_check(data->player_view_direction_y, 0, 0.4))
 		*check_door_location_x += 1;
-	else if (double_range_check(data->player_view_direction_x, 0, 0.2) && \
-	double_range_check(data->player_view_direction_y, -1, 0.2))
+	else if (double_range_check(data->player_view_direction_x, 0, 0.4) && \
+	double_range_check(data->player_view_direction_y, -1, 0.4))
 		*check_door_location_y -= 1;
-	else if (double_range_check(data->player_view_direction_x, 0, 0.2) && \
-	double_range_check(data->player_view_direction_y, 1, 0.2))
+	else if (double_range_check(data->player_view_direction_x, 0, 0.4) && \
+	double_range_check(data->player_view_direction_y, 1, 0.4))
 		*check_door_location_y += 1;
 	else
 		return (-1);

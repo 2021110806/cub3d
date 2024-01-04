@@ -95,7 +95,6 @@ void	parse_argv(t_args *args, int argc, char **argv)
 
 	check_cub_file(argv);
 	init_path_and_color(args);
-	check_parameter(argc);
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		program_error_end(FILE_ERROR);

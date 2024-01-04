@@ -21,3 +21,19 @@ t_sprite	*ft_sprite_malloc(int size)
 		exit(-1);
 	return (return_value);
 }
+
+void	change_move_and_rotate_speed(t_data *data)
+{
+	if (data->args.map.map[(int)data -> \
+	player_position_y][(int)data -> player_position_x] == '4')
+	{
+		data -> speed_time = 200;
+		data -> move_speed = 0.4;
+		data -> rotate_speed = 0.2;
+	}
+	if (data -> speed_time == 0)
+	{
+		data -> rotate_speed = 0.1;
+		data -> move_speed = 0.15;
+	}
+}

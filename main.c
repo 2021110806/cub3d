@@ -14,14 +14,7 @@
 
 int	play(t_data *data)
 {
-	if (data->args.map.map[(int)data -> \
-	player_position_y][(int)data -> player_position_x] == '4')
-	{
-		data -> speed_time = 200;
-		data -> move_speed = 0.5;
-	}
-	if (data -> speed_time == 0)
-		data -> move_speed = 0.15;
+	change_move_and_rotate_speed(data);
 	check_mouse_rotate(data);
 	draw_floor_and_ceiling(data);
 	draw_wall(data);
@@ -41,8 +34,7 @@ int	main(int argc, char **argv)
 
 	data.time = 0;
 	data.speed_time = 0;
-	if (argc != 2)
-		program_error_end(ARGUMENT_ERROR);
+	check_parameter(argc);
 	i = 0;
 	data.mlx = mlx_init();
 	parse_argv(&(data.args), argc, argv);

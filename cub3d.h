@@ -319,4 +319,5 @@ int sprite_z_position, int index);
 void		setting_sprite_animation(t_data *data, int index);
 void		sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
 void		sort_sprite_information(t_data *data);
+void		change_move_and_rotate_speed(t_data *data);
 #endif
