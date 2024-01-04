@@ -311,4 +311,8 @@ void    setting_sprite_draw_height(t_sprite_drawing_factors *sprite_drawing_fact
 void    setting_sprite_draw_width(t_sprite_drawing_factors *sprite_drawing_factor);
 void	check_sprite_relative_distance(t_data *data);
 void    sort_sprite_information(t_data *data);
+void	draw_sprite_for_buffer(t_data *data, \
+t_sprite_drawing_factors sprite_drawing_factor, \
+int sprite_z_position, int index);
+void	setting_sprite_animation(t_data *data, int index);
 #endif
