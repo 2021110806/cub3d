@@ -75,8 +75,9 @@ void	draw_minimap(t_data *data)
 		{
 			current_location = check_minimap_current_location(\
 			minimap_coordinate.y, minimap_coordinate.x, data);
-			draw_minimapa_space(current_location, \
-			minimap_coordinate, data, minimap_color);
+			draw_map_one_space(minimap_coordinate.y * MAP_ONE_SPACE_SIZE, \
+			WIN_WIDTH - minimap_coordinate.x * MAP_ONE_SPACE_SIZE, \
+			data, check_color(current_location, minimap_color));
 			minimap_coordinate.x++;
 		}
 		minimap_coordinate.y++;
