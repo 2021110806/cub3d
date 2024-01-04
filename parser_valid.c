@@ -15,18 +15,18 @@
 void	check_parameter(int argc)
 {
 	if (argc > 2)
-		progrem_error_end(ARGUMENT_ERROR);
+		program_error_end(ARGUMENT_ERROR);
 }
 
 void	check_cub_file(char **argv)
 {
 	if (ft_strlen(argv[1]) < 4)
-		progrem_error_end(FILE_ERROR);
+		program_error_end(FILE_ERROR);
 	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && \
 	argv[1][ft_strlen(argv[1]) - 2] == 'u' \
 	&& argv[1][ft_strlen(argv[1]) - 3] == 'c' && \
 	argv[1][ft_strlen(argv[1]) - 4] == '.'))
-		progrem_error_end(FILE_ERROR);
+		program_error_end(FILE_ERROR);
 }
 
 void	set_map(int fd, t_args *args, char *line)
@@ -50,7 +50,7 @@ void	set_map(int fd, t_args *args, char *line)
 		i++;
 		line = get_next_line(fd);
 		if (!is_correct_map_line(line))
-			progrem_error_end(MAP_ERROR);
+			program_error_end(MAP_ERROR);
 	}
 	args->map.map[i] = NULL;
 	args -> y_max = i;
@@ -59,7 +59,7 @@ void	set_map(int fd, t_args *args, char *line)
 int	check_direction(char *path)
 {	
 	if (ft_strlen(path) < 2)
-		progrem_error_end(SETTING_FORMAT_ERROR);
+		program_error_end(SETTING_FORMAT_ERROR);
 	else
 	{
 		if (path[0] == 'E' && path[1] == 'A' && is_whitespace(path[2]))

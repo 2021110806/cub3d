@@ -17,6 +17,8 @@
 # define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEGIHT 128
+# define SPRITE_TEXTURE_WIDTH 128
+# define SPRITE_TEXTURE_HEIGHT 128
 # define GAME_NAME "cub3d"
 # define EAST 0
 # define WEST 1
@@ -24,8 +26,12 @@
 # define NORTH 3
 # define CLOSE_DOOR 4
 # define OPENED_DOOR 5
-# define CEILING 6
-# define FLOOR 7
+# define CHICKADEE_1 6
+# define CHICKADEE_2 7
+# define CHICKADEE_3 8
+# define CHICKADEE_4 9
+# define CEILING 10
+# define FLOOR 11
 # define X 0
 # define Y 1
 # define KEY_PRESS_EVENT 2
@@ -49,6 +55,10 @@
 # define MOUSE_RIGHT_CLICK 2
 # define CLOSE_DOOR_IMAGE_PATH "./texture/close_door.xpm"
 # define OPENED_DOOR_IMAGE_PATH "./texture/opened_door.xpm"
+# define CHICKADEE_SPRITE_PATH_1 "./texture/chickadee_128.xpm"
+# define CHICKADEE_SPRITE_PATH_2 "./texture/chickadee_128_2.xpm"
+# define CHICKADEE_SPRITE_PATH_3 "./texture/chickadee_128_3.xpm"
+# define CHICKADEE_SPRITE_PATH_4 "./texture/chickade_128_4.xpm"
 # define ARGUMENT_ERROR "ERROR : invalid argument\n"
 # define FILE_ERROR "ERROR : invalid file format\n"
 # define COLOR_FORMAT_ERROR "ERROR : invalid color setting\n"
@@ -57,6 +67,9 @@
 # define SETTING_FORMAT_ERROR "ERROR : inavalid setting format\n"
 # define USER_POSITION_ERROR "ERROR : invalid user position\n"
 # define MAP_ERROR "ERROR : inavalid map\n"
+# define SPRITE_Z -25.0
+# define SPRITE_X 5
+# define SPRITE_Y 5
 # include "./mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
@@ -131,11 +144,33 @@ typedef struct s_drawing_factors
 	int		x;
 }	t_drawing_factors;
 
+typedef struct s_sprite_drawing_factors
+{
+	int		draw_start_y;
+	int		draw_end_y;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		line_height;
+	double	transform_x;
+	double	transform_y;
+	int		sprite_screen_x;
+	int		sprite_height;
+	int		sprite_width;
+}	t_sprite_drawing_factors;
+
 typedef struct s_map
 {
 	char	**map;
 	int		size;
 }	t_map;
+
+typedef struct s_sprite
+{
+	double	x;
+	double	y;
+	double	relative_distance;
+	int		image_number;
+}	t_sprite;
 
 typedef struct s_args
 {
@@ -148,6 +183,8 @@ typedef struct s_args
 	t_rgb_color		floor_color;
 	t_rgb_color		ceiling_color;
 	t_map			map;
+	t_sprite		*sprite_information;
+	int				sprite_count;
 }	t_args;
 
 typedef struct s_data
@@ -162,6 +199,7 @@ typedef struct s_data
 	void				*win;
 	t_image_info		img;
 	int					buf[WIN_HEIGHT][WIN_WIDTH];
+	double				sprite_buffer[WIN_WIDTH + 1];
 	int					**texture;
 	int					last_hit_pos;
 	double				move_speed;
@@ -169,6 +207,8 @@ typedef struct s_data
 	double				curr_ratio;
 	int					is_mouse_move_active;
 	t_args				args;
+	int					time;
+	int					speed_time;
 }	t_data;
 
 void	init_data(t_data *data);
@@ -209,7 +249,7 @@ void	move_up(t_data *data);
 void	move_down(t_data *data);
 void	move_left(t_data *data, double rotate_speed);
 void	move_right(t_data *data, double rotate_speed);
-int		progrem_end(void);
+int		program_end(void);
 void	set_player_direction(t_data *data, char direction);
 void	draw_minimap(t_data *data);
 int		rgb_convert_int(t_rgb_color color);
@@ -253,7 +293,7 @@ int		is_space_in_contact_with_wall(t_args *args);
 int		arr_size_len(char **arr);
 int		is_all_digit(char *color);
 int		is_in_range(char *color);
-void	progrem_error_end(char *error_message);
+void	program_error_end(char *error_message);
 char	*set_all_direction(int fd, t_args *args);
 void	check_parameter(int argc);
 void	check_cub_file(char **argv);
@@ -263,4 +303,12 @@ char	*ft_char_malloc(int size);
 void	make_map_rectangular(t_args *args);
 void	make_space_to_integer(t_args *args);
 int		is_map_edge_check(t_args *args);
+t_sprite	*ft_sprite_malloc(int size);
+void	draw_sprite(t_data *data);
+void	setting_sprite_information(t_args *args);
+void    setting_transform_coordinate(t_data *data, int index, t_sprite_drawing_factors *drawing_factor);
+void    setting_sprite_draw_height(t_sprite_drawing_factors *sprite_drawing_factor, t_data *data);
+void    setting_sprite_draw_width(t_sprite_drawing_factors *sprite_drawing_factor);
+void	check_sprite_relative_distance(t_data *data);
+void    sort_sprite_information(t_data *data);
 #endif

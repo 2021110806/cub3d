@@ -1,0 +1,35 @@
+/* XPM */
+static char *chickade_128_41704279778[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 13 1 ",
+"  c None",
+". c black",
+"X c #231C18",
+"o c #4C4641",
+"O c #6A6765",
+"+ c gray",
+"@ c #C6BA91",
+"# c #D6CAA1",
+"$ c #E2D5AA",
+"% c #D5D5D5",
+"& c #F2E9CD",
+"* c gray95",
+"= c #FDFDFD",
+/* pixels */
+"                ",
+"                ",
+"                ",
+"          oooX  ",
+"  XXX   Oo%%%%  ",
+" XXXXX OO%++++  ",
+".=.=*XOO++%%%%  ",
+" X===*O#&%+++   ",
+"  XX*$$$##%%    ",
+"  *==$$$$##@    ",
+"   *==$$$$$#O   ",
+"    **==$$$#@O  ",
+"      **##   @O ",
+"       ..      O",
+"                ",
+"                "
+};

@@ -52,7 +52,7 @@ void	is_correct_user_position(t_args *args)
 			args -> map.map[i][j] == 'W' || args -> map.map[i][j] == 'E')
 			{
 				if (user_position)
-					progrem_error_end(USER_POSITION_ERROR);
+					program_error_end(USER_POSITION_ERROR);
 				user_position = TRUE;
 			}
 			j++;
@@ -60,5 +60,5 @@ void	is_correct_user_position(t_args *args)
 		i++;
 	}
 	if (!user_position)
-		progrem_error_end(USER_POSITION_ERROR);
+		program_error_end(USER_POSITION_ERROR);
 }

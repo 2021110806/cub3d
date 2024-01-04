@@ -34,21 +34,21 @@ int	is_start_with_correct_charactor(char *line)
 void	is_wrapped_by_wall(t_args *args)
 {
 	if (!is_space_in_contact_with_wall(args))
-		progrem_error_end(MAP_ERROR);
+		program_error_end(MAP_ERROR);
 	if (is_map_edge_check(args))
-		progrem_error_end(MAP_ERROR);
+		program_error_end(MAP_ERROR);
 }
 
 void	is_no_texture(t_args *args)
 {
 	if (args -> north_path == NULL)
-		progrem_error_end(TEXTURE_ERROR);
+		program_error_end(TEXTURE_ERROR);
 	if (args -> south_path == NULL)
-		progrem_error_end(TEXTURE_ERROR);
+		program_error_end(TEXTURE_ERROR);
 	if (args -> west_path == NULL)
-		progrem_error_end(TEXTURE_ERROR);
+		program_error_end(TEXTURE_ERROR);
 	if (args -> east_path == NULL)
-		progrem_error_end(TEXTURE_ERROR);
+		program_error_end(TEXTURE_ERROR);
 }
 
 void	is_not_set_ceiling_or_floor_color(t_args *args)
@@ -56,11 +56,11 @@ void	is_not_set_ceiling_or_floor_color(t_args *args)
 	if (args -> ceiling_color.r == -1 || \
 	args -> ceiling_color.g == -1 || \
 	args -> ceiling_color.b == -1)
-		progrem_error_end(COLOR_ERROR);
+		program_error_end(COLOR_ERROR);
 	if (args -> floor_color.r == -1 || \
 	args -> floor_color.g == -1 || \
 	args -> floor_color.b == -1)
-		progrem_error_end(COLOR_ERROR);
+		program_error_end(COLOR_ERROR);
 }
 
 void	is_next_line_is_map(int fd, char **line)
@@ -77,5 +77,5 @@ void	is_next_line_is_map(int fd, char **line)
 	if (curr_direction == CEILING || curr_direction == FLOOR || \
 	curr_direction == NORTH || curr_direction == SOUTH || \
 	curr_direction == WEST || curr_direction == EAST)
-		progrem_error_end(SETTING_FORMAT_ERROR);
+		program_error_end(SETTING_FORMAT_ERROR);
 }
