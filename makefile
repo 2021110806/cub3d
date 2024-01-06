@@ -6,13 +6,14 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2024/01/04 17:30:27 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/06 17:51:05 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 MLX_DIR = mlx
+MLX = ./mlx/libmlx.a
 FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ./libft/libft.a
 LIBFT_DIR = libft
@@ -21,7 +22,7 @@ SRCS = set_texture_path.c exception.c parser.c parser_utils.c main.c init_data.c
 
 OBJS = $(SRCS:.c=.o)
 
-$(NAME): $(OBJS) $(LIBFT)
+$(NAME): $(OBJS) $(LIBFT) $(MLX)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -l$(MLX_DIR) -L$(MLX_DIR) $(FRAMEWORK) $^ -o $@
 
 $(LIBFT):
@@ -30,6 +31,7 @@ $(LIBFT):
 clean:
 	rm -f $(OBJS)
 	make -C $(LIBFT_DIR) fclean
+	make -C $(MLX_DIR) clean
 
 fclean:
 	$(MAKE) clean
@@ -41,5 +43,8 @@ re:
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I$(MLX_DIR) -c $^ -o $@
+	
+$(MLX):
+	make -C $(MLX_DIR)
 
 all: $(NAME)
