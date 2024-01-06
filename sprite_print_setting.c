@@ -15,20 +15,20 @@
 int	calculate_texture_x(int stripe, \
 t_sprite_drawing_factors sprite_drawing_factor)
 {
-	return ((int)((256 * (stripe - (-sprite_drawing_factor.sprite_width / 2 + \
+	return ((int)(((stripe - (-sprite_drawing_factor.sprite_width / 2 + \
 	sprite_drawing_factor.sprite_screen_x)) * \
-	SPRITE_TEXTURE_WIDTH / sprite_drawing_factor.sprite_width) / 256));
+	SPRITE_TEXTURE_WIDTH / sprite_drawing_factor.sprite_width)));
 }
 
 int	calculate_texture_y(int y, int sprite_z_position, \
 t_sprite_drawing_factors sprite_drawing_factor)
 {
-	int	d;
+	int	vertical_offset;
 
-	d = (y - sprite_z_position) * 256 - WIN_HEIGHT * 128 + \
-	sprite_drawing_factor.sprite_height * 128;
-	return (((d * SPRITE_TEXTURE_HEIGHT) / \
-	sprite_drawing_factor.sprite_height) / 256);
+	vertical_offset = (y - sprite_z_position) - WIN_HEIGHT / 2 + \
+	sprite_drawing_factor.sprite_height / 2;
+	return (((vertical_offset * SPRITE_TEXTURE_HEIGHT) / \
+	sprite_drawing_factor.sprite_height));
 }
 
 int	is_not_transparent_color(t_data *data, int index, int texture_y, \
