@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 15:22:34 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:33:53 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -322,4 +322,5 @@ void		sort_sprite_information(t_data *data);
 void		change_move_and_rotate_speed(t_data *data);
 int			is_correct_rgb_color(char *line);
 int			ft_strlen_nl_map_set(char *line);
+int			ft_strlen_nl(char *line);
 #endif
