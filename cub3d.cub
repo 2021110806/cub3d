@@ -2,8 +2,7 @@ C 61,183,204
 NO ./texture/green_bird.xpm
 WE ./texture/dot_bird.xpm
 SO ./texture/skyblue_bird.xpm
-F 102,75,0
-
+F 102,75,256
 
 EA ./texture/orange_bird.xpm
 

@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:52:59 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 14:34:45 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:40:23 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	set_direction_floor_path(char *line, t_args *args)
 	line++;
 	while (is_whitespace(*line))
 		line++;
+	if (!is_correct_rgb_color(line))
+		program_error_end(COLOR_FORMAT_ERROR);
 	set_rgb_color(&(args ->floor_color), make_color(&line), \
 	make_color(&line), make_color(&line));
 }

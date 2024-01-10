@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/04 21:13:24 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:41:28 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,4 +320,5 @@ void		setting_sprite_animation(t_data *data, int index);
 void		sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
 void		sort_sprite_information(t_data *data);
 void		change_move_and_rotate_speed(t_data *data);
+int			is_correct_rgb_color(char *line);
 #endif
