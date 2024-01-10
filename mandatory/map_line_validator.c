@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:20:51 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:23:21 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:40:23 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 int	is_correct_map_component(char comp)
 {
 	if (comp == '1' || comp == '0' || comp == 'N' || \
-		comp == 'W' || comp == 'E' || comp == 'S' || comp == ' ' || \
-		comp == '2' || comp == '3' || comp == '4' || comp == '5')
+		comp == 'W' || comp == 'E' || comp == 'S' || comp == ' ')
 		return (TRUE);
 	return (FALSE);
 }
