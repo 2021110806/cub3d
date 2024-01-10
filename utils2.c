@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 21:24:48 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/02 21:24:49 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:31:47 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int ft_strlen_nl(char *line)
+{
+	int	return_value;
+
+	return_value = 0;
+	while (*line && *line != '\n')
+	{
+		return_value++;
+		line++;
+	}
+	return (return_value);
+}
 
 int	arr_size_len(char **arr)
 {
@@ -24,7 +37,7 @@ int	arr_size_len(char **arr)
 
 int	is_all_digit(char *color)
 {
-	while (*color)
+	while (*color && (*color) != '\n')
 	{
 		if (!ft_isdigit(*color))
 			return (FALSE);
@@ -35,12 +48,13 @@ int	is_all_digit(char *color)
 
 int	is_in_range(char *color)
 {
-	if (ft_strlen(color) > 3)
+	if (ft_strlen_nl(color) > 3)
 		return (FALSE);
 	if (!(0 <= ft_atoi(color) && ft_atoi(color) <= 255))
 		return (FALSE);
 	return (TRUE);
 }
+
 
 void	program_error_end(char *error_message)
 {

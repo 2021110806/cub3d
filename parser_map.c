@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:42:28 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/03 00:42:29 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:24:50 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_strlen_nl(char *line)
+int	ft_strlen_nl_map_set(char *line)
 {
 	int	i;
 	int	nl_flag;
@@ -44,7 +44,7 @@ void	make_map_rectangular(t_args *args)
 		{
 			j = -1;
 			new_map_line = ft_char_malloc(args -> x_max + 1);
-			while (++j < ft_strlen_nl(args -> map.map[i]) - 1)
+			while (++j < ft_strlen_nl_map_set(args -> map.map[i]) - 1)
 				new_map_line[j] = args -> map.map[i][j];
 			while (j < args -> x_max - 1)
 				new_map_line[j++] = MINIMAP_NULL;
