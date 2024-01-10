@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:12:01 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/04 17:07:41 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 14:32:58 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	set_direction_west_path(char *line, t_args *args)
 
 void	set_direction_south_path(char *line, t_args *args)
 {
-	if (args -> west_path != NULL)
+	if (args -> south_path != NULL)
 		program_error_end(SETTING_FORMAT_ERROR);
 	pass_white_space(&line);
 	args->south_path = malloc (ft_strlen(line) + 1);
@@ -41,7 +41,7 @@ void	set_direction_south_path(char *line, t_args *args)
 
 void	set_direction_north_path(char *line, t_args *args)
 {
-	if (args -> west_path != NULL)
+	if (args -> north_path != NULL)
 		program_error_end(SETTING_FORMAT_ERROR);
 	pass_white_space(&line);
 	args->north_path = malloc (ft_strlen(line) + 1);

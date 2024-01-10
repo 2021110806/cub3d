@@ -1,14 +1,13 @@
+C 61,183,204
 NO ./texture/green_bird.xpm
-SO ./texture/skyblue_bird.xpm
 WE ./texture/dot_bird.xpm
-
+SO ./texture/skyblue_bird.xpm
+F 102,75,0
 
 
 EA ./texture/orange_bird.xpm
 
 
-C 61,183,204
-F 102,75,0
 
         1111111111111111111111111
         1000000000110000000000001
