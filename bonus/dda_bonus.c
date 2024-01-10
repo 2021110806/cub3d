@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda.c                                              :+:      :+:    :+:   */
+/*   dda_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:30:18 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:26:27 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:16:08 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 double	calculate_distance_from_camera_to_wall(t_int_coordinate map, \
 t_data *data, t_vectors vectors, t_int_coordinate step)

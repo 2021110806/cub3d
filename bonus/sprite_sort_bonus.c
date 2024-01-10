@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b)
 {

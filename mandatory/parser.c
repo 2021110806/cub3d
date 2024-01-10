@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 14:51:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 14:32:54 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:46:37 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,4 @@ void	parse_argv(t_args *args, char **argv)
 	is_correct_user_position(args);
 	make_space_to_integer(args);
 	is_wrapped_by_wall(args);
-	setting_sprite_information(args);
 }

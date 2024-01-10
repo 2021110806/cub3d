@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:05:13 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:51:10 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:05:41 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,6 @@ void	check_player_direction(t_data *data)
 void	set_player(t_data *data)
 {
 	check_player_direction(data);
-	data -> is_mouse_move_active = 1;
-	mlx_mouse_hide();
 	data -> move_speed = 0.15;
 	data -> rotate_speed = 0.10;
 }

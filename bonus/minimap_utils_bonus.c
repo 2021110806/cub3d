@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minimap_utils.c                                    :+:      :+:    :+:   */
+/*   minimap_utils_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 16:54:00 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/02 16:54:00 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:16:49 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 char	check_minimap_current_location(int y, int x, t_data *data)
 {

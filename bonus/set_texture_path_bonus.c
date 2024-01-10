@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_texture_path.c                                 :+:      :+:    :+:   */
+/*   set_texture_path_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/30 22:52:59 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 15:30:36 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:21:05 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	set_direction_ceiling_path(char *line, t_args *args)
 {

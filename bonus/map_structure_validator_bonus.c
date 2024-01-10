@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_structure_validator.c                          :+:      :+:    :+:   */
+/*   map_structure_validator_bonus.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 18:23:50 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/02 18:28:08 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:16:46 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	is_side_wall_or_null(t_args *args, int y, int x)
 {

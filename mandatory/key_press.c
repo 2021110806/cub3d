@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:24:56 by minkyole          #+#    #+#             */
-/*   Updated: 2023/12/29 20:31:00 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:52:53 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,12 @@ void	move_up(t_data *data)
 {
 	if (data->args.map.map[(int)(data->player_position_y + \
 	data->player_view_direction_y * data->move_speed)] \
-	[(int)(data->player_position_x)] != MINIMAP_WALL && \
-	data->args.map.map[(int)(data->player_position_y + \
-	data->player_view_direction_y * data->move_speed)] \
-	[(int)(data->player_position_x)] != MINIMAP_CLOSE_DOOR)
+	[(int)(data->player_position_x)] != MINIMAP_WALL)
 			data->player_position_y += \
 			data->player_view_direction_y * data->move_speed;
 	if (data->args.map.map[(int)(data->player_position_y)] \
 	[(int)(data->player_position_x + data->player_view_direction_x * \
-	data->move_speed)] != MINIMAP_WALL && \
-	data->args.map.map[(int)(data->player_position_y)] \
-	[(int)(data->player_position_x + data->player_view_direction_x * \
-	data->move_speed)] != MINIMAP_CLOSE_DOOR)
+	data->move_speed)] != MINIMAP_WALL)
 			data->player_position_x += data->player_view_direction_x * \
 			data->move_speed;
 }
@@ -53,18 +47,12 @@ void	move_down(t_data *data)
 {
 	if (data->args.map.map[(int)(data->player_position_y - \
 	data->player_view_direction_y * data->move_speed)] \
-	[(int)(data->player_position_x)] != MINIMAP_WALL && \
-	data->args.map.map[(int)(data->player_position_y - \
-	data->player_view_direction_y * data->move_speed)] \
-	[(int)(data->player_position_x)] != MINIMAP_CLOSE_DOOR)
+	[(int)(data->player_position_x)] != MINIMAP_WALL)
 			data->player_position_y -= \
 			data->player_view_direction_y * data->move_speed;
 	if (data->args.map.map[(int)(data->player_position_y)] \
 	[(int)(data->player_position_x - data->player_view_direction_x * \
-	data->move_speed)] != MINIMAP_WALL && \
-	data->args.map.map[(int)(data->player_position_y)] \
-	[(int)(data->player_position_x - data->player_view_direction_x * \
-	data->move_speed)] != MINIMAP_CLOSE_DOOR)
+	data->move_speed)] != MINIMAP_WALL)
 			data->player_position_x -= \
 			data->player_view_direction_x * data->move_speed;
 }

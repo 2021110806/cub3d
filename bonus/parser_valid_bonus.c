@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_valid.c                                     :+:      :+:    :+:   */
+/*   parser_valid_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:26:38 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/10 15:04:34 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:20:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	check_parameter(int argc)
 {
@@ -62,21 +62,21 @@ int	check_direction(char *path)
 		program_error_end(SETTING_FORMAT_ERROR);
 	else
 	{
-		if (path[0] == 'E' && (is_whitespace(path[1]) || \
-		(path[1] == 'A' && is_whitespace(path[2]))))
+		if (path[0] == 'E' && (path[1] == ' ' || \
+		(path[1] == 'A' && path[2] == ' ')))
 			return (EAST);
-		if (path[0] == 'W' && (is_whitespace(path[1]) || \
-		(path[1] == 'E' && is_whitespace(path[2]))))
+		if (path[0] == 'W' && (path[1] == ' ' || \
+		(path[1] == 'E' && path[2] == ' ')))
 			return (WEST);
-		if (path[0] == 'N' && (is_whitespace(path[1]) || \
-		(path[1] == 'O' && is_whitespace(path[2]))))
+		if (path[0] == 'N' && (path[1] == ' ' || \
+		(path[1] == 'O' && path[2] == ' ')))
 			return (NORTH);
-		if (path[0] == 'S' && (is_whitespace(path[1]) || \
-		(path[1] == 'O' && is_whitespace(path[2]))))
+		if (path[0] == 'S' && (path[1] == ' ' || \
+		(path[1] == 'O' && path[2] == ' ')))
 			return (SOUTH);
-		if (path[0] == 'F' && is_whitespace(path[1]))
+		if (path[0] == 'F' && path[1] == ' ')
 			return (FLOOR);
-		if (path[0] == 'C' && is_whitespace(path[1]))
+		if (path[0] == 'C' && path[1] == ' ')
 			return (CEILING);
 	}
 	return (-1);

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_texture_path_bearing.c                         :+:      :+:    :+:   */
+/*   set_texture_path_bearing_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/02 19:12:01 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/10 14:32:58 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:17:12 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	set_direction_east_path(char *line, t_args *args)
 {

@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 15:33:53 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:25:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,13 @@
 # define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 128
 # define TEXTURE_HEGIHT 128
-# define SPRITE_TEXTURE_WIDTH 128
-# define SPRITE_TEXTURE_HEIGHT 128
 # define GAME_NAME "cub3d"
 # define EAST 0
 # define WEST 1
 # define SOUTH 2
 # define NORTH 3
-# define CLOSE_DOOR 4
-# define OPENED_DOOR 5
-# define CHICKADEE_1 6
-# define CHICKADEE_2 7
-# define CHICKADEE_3 8
-# define CHICKADEE_4 9
-# define CEILING 10
-# define FLOOR 11
+# define CEILING 4
+# define FLOOR 5
 # define X 0
 # define Y 1
 # define KEY_PRESS_EVENT 2
@@ -48,34 +40,23 @@
 # define MINIMAP_NULL 53
 # define MINIMAP_EMPTY 48
 # define MINIMAP_PLAYER 2
-# define MINIMAP_CLOSE_DOOR 50
-# define MINIMAP_OPEN_DOOR 51
-# define MINIMAP_CHICKADEE 52
-# define MOUSE_LEFT_CLICK 1
-# define MOUSE_RIGHT_CLICK 2
-# define CLOSE_DOOR_IMAGE_PATH "./texture/close_door.xpm"
-# define OPENED_DOOR_IMAGE_PATH "./texture/opened_door.xpm"
-# define CHICKADEE_SPRITE_PATH_1 "./texture/chickadee_128.xpm"
-# define CHICKADEE_SPRITE_PATH_2 "./texture/chickadee_128_2.xpm"
-# define CHICKADEE_SPRITE_PATH_3 "./texture/chickadee_128_3.xpm"
-# define CHICKADEE_SPRITE_PATH_4 "./texture/chickade_128_4.xpm"
 # define ARGUMENT_ERROR "ERROR : invalid argument\n"
 # define FILE_ERROR "ERROR : invalid file format\n"
 # define COLOR_FORMAT_ERROR "ERROR : invalid color setting\n"
 # define TEXTURE_ERROR "ERROR : texture not setting\n"
 # define COLOR_ERROR "ERROR : color not settting\n"
-# define SETTING_FORMAT_ERROR "ERROR : inavalid setting format\n"
+# define SETTING_FORMAT_ERROR "ERROR : invalid setting format\n"
 # define USER_POSITION_ERROR "ERROR : invalid user position\n"
 # define MAP_ERROR "ERROR : inavalid map\n"
 # define SPRITE_Z -25.0
 # define SPRITE_X 5
 # define SPRITE_Y 5
-# include "./mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
 # include "get_next_line.h"
-# include "./libft/libft.h"
+# include "../libft/libft.h"
 
 typedef struct s_image_info
 {
@@ -113,17 +94,6 @@ typedef struct s_rgb_color
 	int	b;
 }	t_rgb_color;
 
-typedef struct s_minimap_color
-{
-	t_rgb_color	empty_color;
-	t_rgb_color	player_color;
-	t_rgb_color	wall_color;
-	t_rgb_color	null_color;
-	t_rgb_color	door_close_color;
-	t_rgb_color	door_open_color;
-	t_rgb_color	chickadee_color;
-}	t_minimap_color;
-
 typedef struct s_vectors
 {
 	t_double_vector	ray_vector;
@@ -145,33 +115,11 @@ typedef struct s_drawing_factors
 	int		x;
 }	t_drawing_factors;
 
-typedef struct s_sprite_drawing_factors
-{
-	int		draw_start_y;
-	int		draw_end_y;
-	int		draw_start_x;
-	int		draw_end_x;
-	int		line_height;
-	double	transform_x;
-	double	transform_y;
-	int		sprite_screen_x;
-	int		sprite_height;
-	int		sprite_width;
-}	t_sprite_drawing_factors;
-
 typedef struct s_map
 {
 	char	**map;
 	int		size;
 }	t_map;
-
-typedef struct s_sprite
-{
-	double	x;
-	double	y;
-	double	relative_distance;
-	int		image_number;
-}	t_sprite;
 
 typedef struct s_args
 {
@@ -184,8 +132,6 @@ typedef struct s_args
 	t_rgb_color		floor_color;
 	t_rgb_color		ceiling_color;
 	t_map			map;
-	t_sprite		*sprite_information;
-	int				sprite_count;
 }	t_args;
 
 typedef struct s_data
@@ -200,13 +146,11 @@ typedef struct s_data
 	void				*win;
 	t_image_info		img;
 	int					buf[WIN_HEIGHT][WIN_WIDTH];
-	double				sprite_buffer[WIN_WIDTH + 1];
 	int					**texture;
 	int					last_hit_pos;
 	double				move_speed;
 	double				rotate_speed;
 	double				curr_ratio;
-	int					is_mouse_move_active;
 	t_args				args;
 	int					time;
 	int					speed_time;
@@ -280,8 +224,7 @@ void		pass_white_space(char **line);
 void		copy_path(int direction, char *line, t_args *args, int i);
 int			make_color(char **line);
 void		set_direction(char *line, t_args *args);
-void		init_minimap_color(t_minimap_color *minimap_color);
-t_rgb_color	check_color(int current_location, t_minimap_color minimap_color);
+t_rgb_color	check_color(int current_location);
 void		draw_map_one_space(int draw_start_y, int draw_start_x, \
 t_data *data, t_rgb_color color);
 void		set_direction_east_path(char *line, t_args *args);
@@ -302,23 +245,10 @@ char		*ft_char_malloc(int size);
 void		make_map_rectangular(t_args *args);
 void		make_space_to_integer(t_args *args);
 int			is_map_edge_check(t_args *args);
-t_sprite	*ft_sprite_malloc(int size);
 void		draw_sprite(t_data *data);
 void		setting_sprite_information(t_args *args);
-void		setting_transform_coordinate(t_data *data, \
-int index, t_sprite_drawing_factors *drawing_factor);
-void		setting_sprite_draw_height(\
-t_sprite_drawing_factors *sprite_drawing_factor, t_data *data);
-void		setting_sprite_draw_width(\
-t_sprite_drawing_factors *sprite_drawing_factor);
 void		check_sprite_relative_distance(t_data *data);
-void		sort_sprite_information(t_data *data);
-void		draw_sprite_for_buffer(t_data *data, \
-t_sprite_drawing_factors sprite_drawing_factor, \
-int sprite_z_position, int index);
 void		setting_sprite_animation(t_data *data, int index);
-void		sprite_swap(t_sprite *sprite_a, t_sprite *sprite_b);
-void		sort_sprite_information(t_data *data);
 void		change_move_and_rotate_speed(t_data *data);
 int			is_correct_rgb_color(char *line);
 int			ft_strlen_nl_map_set(char *line);

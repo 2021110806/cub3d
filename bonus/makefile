@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2024/01/10 16:28:46 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/10 16:28:23 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,17 @@ FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ../libft/libft.a
 LIBFT_DIR = ../libft
 NAME = cub3d
-SRCS = color_valid_utils.c set_texture_path.c exception.c parser.c \
-parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c \
-key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c \
-draw_window_setting.c set_direction.c draw_window_setting.c color.c\
-set_texture_path_bearing.c map_line_validator.c \
-map_structure_validator.c utils2.c parser_valid.c parser_map.c
+SRCS = color_valid_utils_bonus.c set_texture_path_bonus.c exception_bonus.c \
+parser_bonus.c parser_utils_bonus.c main_bonus.c init_data_bonus.c \
+utils_bonus.c draw_window_bonus.c draw_window_utils_bonus.c \
+key_press_bonus.c dda_bonus.c init_vector_bonus.c get_next_line_bonus.c \
+get_next_line_utils_bonus.c draw_window_setting_bonus.c \
+set_direction_bonus.c draw_window_setting_bonus.c color_bonus.c \
+mouse_bonus.c minimap_utils_bonus.c set_texture_path_bearing_bonus.c \
+map_line_validator_bonus.c map_structure_validator_bonus.c utils2_bonus.c \
+parser_valid_bonus.c parser_map_bonus.c parser_sprite_bonus.c \
+sprite_print_setting_bonus.c utils3_bonus.c sprite_setting_bonus.c \
+sprite_sort_bonus.c 
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 19:24:14 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/28 17:11:31 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:46:18 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@ void	set_textures(t_data *data)
 	set_texture(data, data -> args.west_path, WEST);
 	set_texture(data, data -> args.south_path, SOUTH);
 	set_texture(data, data -> args.north_path, NORTH);
-	set_texture(data, CLOSE_DOOR_IMAGE_PATH, CLOSE_DOOR);
-	set_texture(data, OPENED_DOOR_IMAGE_PATH, OPENED_DOOR);
-	set_texture(data, CHICKADEE_SPRITE_PATH_1, CHICKADEE_1);
-	set_texture(data, CHICKADEE_SPRITE_PATH_2, CHICKADEE_2);
-	set_texture(data, CHICKADEE_SPRITE_PATH_3, CHICKADEE_3);
-	set_texture(data, CHICKADEE_SPRITE_PATH_4, CHICKADEE_4);
 }
 
 double	calculate_wall_crash_spot(t_data *data, \

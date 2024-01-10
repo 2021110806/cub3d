@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_direction.c                                    :+:      :+:    :+:   */
+/*   set_direction_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 20:10:41 by minkyole          #+#    #+#             */
-/*   Updated: 2023/12/23 20:10:42 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:17:09 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	set_player_direction_north(t_data *data)
 {

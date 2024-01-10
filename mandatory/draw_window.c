@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:05:34 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 21:28:28 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 15:56:21 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,30 +60,6 @@ t_data *data, t_rgb_color color)
 	}
 }
 
-void	draw_minimap(t_data *data)
-{
-	t_minimap_color		minimap_color;
-	t_int_coordinate	minimap_coordinate;
-	int					current_location;
-
-	minimap_coordinate.y = 0;
-	init_minimap_color(&minimap_color);
-	while (minimap_coordinate.y < 11)
-	{
-		minimap_coordinate.x = 0;
-		while (minimap_coordinate.x < 11)
-		{
-			current_location = check_minimap_current_location(\
-			minimap_coordinate.y, minimap_coordinate.x, data);
-			draw_map_one_space(minimap_coordinate.y * MAP_ONE_SPACE_SIZE, \
-			WIN_WIDTH - minimap_coordinate.x * MAP_ONE_SPACE_SIZE, \
-			data, check_color(current_location, minimap_color));
-			minimap_coordinate.x++;
-		}
-		minimap_coordinate.y++;
-	}
-}
-
 void	draw_buf(t_data *data)
 {
 	int	x;
@@ -101,27 +77,4 @@ void	draw_buf(t_data *data)
 		y++;
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.image, 0, 0);
-}
-
-void	draw_sprite(t_data *data)
-{
-	int							index;
-	t_sprite_drawing_factors	sprite_drawing_factor;
-	int							sprite_z_position;
-
-	index = 0;
-	check_sprite_relative_distance(data);
-	sort_sprite_information(data);
-	while (index < data->args.sprite_count)
-	{
-		setting_transform_coordinate(data, index, &sprite_drawing_factor);
-		sprite_z_position = (int)((SPRITE_Z - (data->time - 10)) / \
-		sprite_drawing_factor.transform_y);
-		setting_sprite_draw_height(&sprite_drawing_factor, data);
-		setting_sprite_draw_width(&sprite_drawing_factor);
-		setting_sprite_animation(data, index);
-		draw_sprite_for_buffer(data, sprite_drawing_factor, \
-		sprite_z_position, index);
-		index++;
-	}
 }

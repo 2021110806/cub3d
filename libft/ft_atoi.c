@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_valid_utils_bonus.c                          :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/10 15:32:44 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 16:16:04 by minjeon2         ###   ########.fr       */
+/*   Created: 2023/03/15 21:55:07 by minjeon2          #+#    #+#             */
+/*   Updated: 2024/01/10 17:35:20 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "libft.h"
 
-int	arr_size_len(char **arr)
+int	ft_atoi(const char *str)
 {
 	int	i;
+	int	minus;
+	int	return_value;
 
 	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
-
-int	is_all_digit(char *color)
-{
-	while (*color && (*color) != '\n')
+	minus = 1;
+	return_value = 0;
+	while ((9 <= str[i] && str[i] <= 13) || str[i] == 32)
 	{
-		if (!ft_isdigit(*color))
-			return (FALSE);
-		color++;
+		i++;
 	}
-	return (TRUE);
-}
-
-int	is_in_range(char *color)
-{
-	if (ft_strlen_nl(color) > 3)
-		return (FALSE);
-	if (!(0 <= ft_atoi(color) && ft_atoi(color) <= 255))
-		return (FALSE);
-	return (TRUE);
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			minus *= -1;
+		i++;
+	}
+	if (!ft_isdigit(str[i]))
+		return (-1);
+	while ('0' <= str[i] && str[i] <= '9')
+	{
+		return_value = return_value * 10 + minus * (str[i] - 48);
+		i++;
+	}
+	return (return_value);
 }

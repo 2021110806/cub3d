@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_setting.c                                   :+:      :+:    :+:   */
+/*   sprite_setting_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:27:34 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/04 18:27:36 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:17:22 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	check_sprite_relative_distance(t_data *data)
 {

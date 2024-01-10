@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_print_setting.c                             :+:      :+:    :+:   */
+/*   sprite_print_setting_bonus.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: minkyole <minkyole@student.42seoul.>       +#+  +:+       +#+        */
+/*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 18:27:20 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/04 18:27:22 by minkyole         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:17:18 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 int	calculate_texture_x(int stripe, \
 t_sprite_drawing_factors sprite_drawing_factor)

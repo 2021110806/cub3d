@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_window_setting.c                              :+:      :+:    :+:   */
+/*   draw_window_setting_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:27:17 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/04 17:06:57 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:16:13 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	calculate_draw_texture_number(t_drawing_factors *drawing_factors, \
 t_data *data, t_int_coordinate step, t_int_coordinate map)

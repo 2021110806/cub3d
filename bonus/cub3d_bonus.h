@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 15:33:53 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 17:25:01 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
+#ifndef CUB3D_BONUS_H
 
-# define CUB3D_H
+# define CUB3D_BONUS_H
 # define WIN_WIDTH 640
 # define WIN_HEIGHT 480
 # define TEXTURE_WIDTH 128
@@ -64,18 +64,18 @@
 # define COLOR_FORMAT_ERROR "ERROR : invalid color setting\n"
 # define TEXTURE_ERROR "ERROR : texture not setting\n"
 # define COLOR_ERROR "ERROR : color not settting\n"
-# define SETTING_FORMAT_ERROR "ERROR : inavalid setting format\n"
+# define SETTING_FORMAT_ERROR "ERROR : invalid setting format\n"
 # define USER_POSITION_ERROR "ERROR : invalid user position\n"
 # define MAP_ERROR "ERROR : inavalid map\n"
 # define SPRITE_Z -25.0
 # define SPRITE_X 5
 # define SPRITE_Y 5
-# include "./mlx/mlx.h"
+# include "../mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
 # include <stdio.h>
-# include "get_next_line.h"
-# include "./libft/libft.h"
+# include "get_next_line_bonus.h"
+# include "../libft/libft.h"
 
 typedef struct s_image_info
 {

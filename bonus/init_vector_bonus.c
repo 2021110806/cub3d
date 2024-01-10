@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_vector.c                                      :+:      :+:    :+:   */
+/*   init_vector_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:34:56 by minjeon2          #+#    #+#             */
-/*   Updated: 2023/12/29 18:15:24 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/10 16:16:34 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	set_x_vector(t_int_coordinate *map, t_data \
 *data, t_int_coordinate *step, t_vectors *vectors)
