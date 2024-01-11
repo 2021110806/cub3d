@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2024/01/10 16:28:46 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/11 20:48:36 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ MLX = ../mlx/libmlx.a
 FRAMEWORK = -framework Appkit -framework OpenGL
 LIBFT = ../libft/libft.a
 LIBFT_DIR = ../libft
-NAME = cub3d
+NAME = cub3D
 SRCS = color_valid_utils.c set_texture_path.c exception.c parser.c \
 parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c \
 key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c \

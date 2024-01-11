@@ -6,13 +6,13 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/10 16:36:53 by minjeon2          #+#    #+#              #
-#    Updated: 2024/01/10 16:43:21 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/11 20:48:44 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MANDATORY_DIR = mandatory
 BONUS_DIR = bonus
-NAME = cub3d
+NAME = cub3D
 
 .PHONY : clean fclean re all bonus
 
