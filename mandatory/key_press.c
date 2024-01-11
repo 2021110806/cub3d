@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:24:56 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/10 15:52:53 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:36:15 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,24 @@ int	key_press(int key, t_data *data)
 {
 	if (key == KEYCODE_UP)
 		move_up(data);
-	if (key == KEYCODE_DOWN)
+	else if (key == KEYCODE_DOWN)
 		move_down(data);
-	if (key == KEYCODE_RIGHT)
-		move_right(data, data->rotate_speed);
-	if (key == KEYCODE_LEFT)
-		move_left(data, data->rotate_speed);
-	if (key == KEYCODE_ESC)
+	else if (key == KEYCODE_RIGHT)
+		move_right(data);
+	else if (key == KEYCODE_LEFT)
+		move_left(data);
+	else if (key == KEYCODE_ARROW_RIGHT)
+		move_arrow_right(data, data->rotate_speed);
+	else if (key == KEYCODE_ARROW_LEFT)
+		move_arrow_left(data, data->rotate_speed);
+	else if (key == KEYCODE_ESC)
 		exit(0);
 	mlx_clear_window(data->mlx, data->win);
 	play(data);
 	return (0);
 }
 
-void	move_up(t_data *data)
-{
-	if (data->args.map.map[(int)(data->player_position_y + \
-	data->player_view_direction_y * data->move_speed)] \
-	[(int)(data->player_position_x)] != MINIMAP_WALL)
-			data->player_position_y += \
-			data->player_view_direction_y * data->move_speed;
-	if (data->args.map.map[(int)(data->player_position_y)] \
-	[(int)(data->player_position_x + data->player_view_direction_x * \
-	data->move_speed)] != MINIMAP_WALL)
-			data->player_position_x += data->player_view_direction_x * \
-			data->move_speed;
-}
-
-void	move_down(t_data *data)
-{
-	if (data->args.map.map[(int)(data->player_position_y - \
-	data->player_view_direction_y * data->move_speed)] \
-	[(int)(data->player_position_x)] != MINIMAP_WALL)
-			data->player_position_y -= \
-			data->player_view_direction_y * data->move_speed;
-	if (data->args.map.map[(int)(data->player_position_y)] \
-	[(int)(data->player_position_x - data->player_view_direction_x * \
-	data->move_speed)] != MINIMAP_WALL)
-			data->player_position_x -= \
-			data->player_view_direction_x * data->move_speed;
-}
-
-void	move_left(t_data *data, double rotate_speed)
+void	move_arrow_left(t_data *data, double rotate_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;
@@ -78,7 +54,7 @@ void	move_left(t_data *data, double rotate_speed)
 	* cos(-rotate_speed);
 }
 
-void	move_right(t_data *data, double rotate_speed)
+void	move_arrow_right(t_data *data, double rotate_speed)
 {
 	double	old_dir_x;
 	double	old_plane_x;

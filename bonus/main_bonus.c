@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 14:25:10 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 16:16:42 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:53:57 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ int	play(t_data *data)
 		data -> speed_time--;
 	return (0);
 }
+
+// int	key_release(int key, t_data *data)
+// {
+// 	(void) data;
+// 	printf("ㅋㅋ 밈정바보야 근데 예뻐서 괜찮아 %d\n", key);
+// 	return (0);
+// }
 
 int	main(int argc, char **argv)
 {
@@ -50,6 +57,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, play, &data);
 	mlx_mouse_hook(data.win, mouse_press, &data);
 	mlx_hook(data.win, KEY_PRESS_EVENT, 0, &key_press, &data);
+	mlx_hook(data.win, 3, 0, &key_release, &data);
 	mlx_hook(data.win, RED_BUTTON, 0, &program_end, 0);
 	mlx_loop(data.mlx);
 }

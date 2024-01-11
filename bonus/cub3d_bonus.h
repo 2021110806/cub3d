@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/16 13:58:33 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 17:25:01 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:40:55 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define KEYCODE_DOWN 1
 # define KEYCODE_LEFT 0
 # define KEYCODE_RIGHT 2
+# define KEYCODE_ARROW_LEFT 123
+# define KEYCODE_ARROW_RIGHT 124
 # define KEYCODE_ESC 53
 # define FALSE 0
 # define TRUE 1
@@ -248,8 +250,10 @@ void		set_textures(t_data *data);
 int			draw_wall(t_data *data);
 void		move_up(t_data *data);
 void		move_down(t_data *data);
-void		move_left(t_data *data, double rotate_speed);
-void		move_right(t_data *data, double rotate_speed);
+void		move_left(t_data *data);
+void		move_right(t_data *data);
+void		move_arrow_left(t_data *data, double rotate_speed);
+void		move_arrow_right(t_data *data, double rotate_speed);
 int			program_end(void);
 void		set_player_direction(t_data *data, char direction);
 void		draw_minimap(t_data *data);

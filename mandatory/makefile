@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2024/01/11 20:48:36 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/11 21:36:34 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c \
 key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c \
 draw_window_setting.c set_direction.c draw_window_setting.c color.c\
 set_texture_path_bearing.c map_line_validator.c \
-map_structure_validator.c utils2.c parser_valid.c parser_map.c
+map_structure_validator.c utils2.c parser_valid.c parser_map.c move_command.c
 
 OBJS = $(SRCS:.c=.o)
 

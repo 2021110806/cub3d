@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 21:42:25 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/10 16:16:51 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/11 21:52:44 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	check_mouse_rotate(t_data *data)
 	{
 		mlx_mouse_get_pos(data->win, &current_mouse_x, &current_mouse_y);
 		if (current_mouse_x > WIN_WIDTH / 2)
-			move_right(data, data->rotate_speed / 2.5);
+			move_arrow_right(data, data->rotate_speed / 2.5);
 		else if (current_mouse_x < WIN_WIDTH / 2)
-			move_left(data, data->rotate_speed / 2.5);
+			move_arrow_left(data, data->rotate_speed / 2.5);
 		mlx_mouse_move(data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	}
 }

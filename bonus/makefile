@@ -6,7 +6,7 @@
 #    By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/19 16:31:47 by minkyole          #+#    #+#              #
-#    Updated: 2024/01/11 20:48:41 by minjeon2         ###   ########.fr        #
+#    Updated: 2024/01/11 21:40:05 by minjeon2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ mouse_bonus.c minimap_utils_bonus.c set_texture_path_bearing_bonus.c \
 map_line_validator_bonus.c map_structure_validator_bonus.c utils2_bonus.c \
 parser_valid_bonus.c parser_map_bonus.c parser_sprite_bonus.c \
 sprite_print_setting_bonus.c utils3_bonus.c sprite_setting_bonus.c \
-sprite_sort_bonus.c 
+sprite_sort_bonus.c move_command_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 
