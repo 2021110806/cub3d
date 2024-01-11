@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 00:26:38 by minkyole          #+#    #+#             */
-/*   Updated: 2024/01/10 17:18:21 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:45:00 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,13 @@ int	check_direction(char *path)
 		program_error_end(SETTING_FORMAT_ERROR);
 	else
 	{
-		if (path[0] == 'E' && (path[1] == ' ' || \
-		(path[1] == 'A' && path[2] == ' ')))
+		if (path[0] == 'E' && path[1] == 'A' && path[2] == ' ')
 			return (EAST);
-		if (path[0] == 'W' && (path[1] == ' ' || \
-		(path[1] == 'E' && path[2] == ' ')))
+		if (path[0] == 'W' && path[1] == 'E' && path[2] == ' ')
 			return (WEST);
-		if (path[0] == 'N' && (path[1] == ' ' || \
-		(path[1] == 'O' && path[2] == ' ')))
+		if (path[0] == 'N' && path[1] == 'O' && path[2] == ' ')
 			return (NORTH);
-		if (path[0] == 'S' && (path[1] == ' ' || \
-		(path[1] == 'O' && path[2] == ' ')))
+		if (path[0] == 'S' && path[1] == 'O' && path[2] == ' ')
 			return (SOUTH);
 		if (path[0] == 'F' && path[1] == ' ')
 			return (FLOOR);
