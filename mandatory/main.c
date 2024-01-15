@@ -14,6 +14,7 @@
 
 int	play(t_data *data)
 {
+	check_key_input(data);
 	draw_floor_and_ceiling(data);
 	draw_wall(data);
 	draw_buf(data);
@@ -42,6 +43,7 @@ int	main(int argc, char **argv)
 	(data.img.image, &data.img.bit_per_pixel, &data.img.size, &data.img.endian);
 	mlx_loop_hook(data.mlx, play, &data);
 	mlx_hook(data.win, KEY_PRESS_EVENT, 0, &key_press, &data);
+	mlx_hook(data.win, KEY_RELEASE_EVENT, 0, &key_release, &data);
 	mlx_hook(data.win, RED_BUTTON, 0, &program_end, 0);
 	mlx_loop(data.mlx);
 }

@@ -21,9 +21,9 @@ void	check_mouse_rotate(t_data *data)
 	{
 		mlx_mouse_get_pos(data->win, &current_mouse_x, &current_mouse_y);
 		if (current_mouse_x > WIN_WIDTH / 2)
-			move_arrow_right(data, data->rotate_speed / 2.5);
+			move_arrow_right(data, data->rotate_speed);
 		else if (current_mouse_x < WIN_WIDTH / 2)
-			move_arrow_left(data, data->rotate_speed / 2.5);
+			move_arrow_left(data, data->rotate_speed);
 		mlx_mouse_move(data->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	}
 }

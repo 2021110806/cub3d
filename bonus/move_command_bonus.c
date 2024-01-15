@@ -46,7 +46,7 @@ void	move_left(t_data *data)
 	data->camera_plane_y * data->move_speed)] \
 	[(int)(data->player_position_x)] != MINIMAP_WALL)
 			data->player_position_y += \
-			data->camera_plane_y* data->move_speed;
+			data->camera_plane_y * data->move_speed;
 	if (data->args.map.map[(int)(data->player_position_y)] \
 	[(int)(data->player_position_x + data->camera_plane_x * \
 	data->move_speed)] != MINIMAP_WALL)

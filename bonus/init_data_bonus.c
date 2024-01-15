@@ -93,6 +93,7 @@ void	set_player(t_data *data)
 	check_player_direction(data);
 	data -> is_mouse_move_active = 1;
 	mlx_mouse_hide();
-	data -> move_speed = 0.15;
-	data -> rotate_speed = 0.10;
+	data -> move_speed = 0.05;
+	data -> rotate_speed = 0.03;
+	data -> current_input_key = KEYCODE_NOT_INPUT;
 }

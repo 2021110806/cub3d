@@ -28,12 +28,12 @@ void	change_move_and_rotate_speed(t_data *data)
 	player_position_y][(int)data -> player_position_x] == '4')
 	{
 		data -> speed_time = 200;
-		data -> move_speed = 0.4;
-		data -> rotate_speed = 0.2;
+		data -> move_speed = 0.1;
+		data -> rotate_speed = 0.06;
 	}
 	if (data -> speed_time == 0)
 	{
-		data -> rotate_speed = 0.1;
-		data -> move_speed = 0.15;
+		data -> rotate_speed = 0.03;
+		data -> move_speed = 0.05;
 	}
 }

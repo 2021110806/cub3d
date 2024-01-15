@@ -27,6 +27,7 @@
 # define X 0
 # define Y 1
 # define KEY_PRESS_EVENT 2
+# define KEY_RELEASE_EVENT 3
 # define RED_BUTTON 17
 # define KEYCODE_UP 13
 # define KEYCODE_DOWN 1
@@ -34,6 +35,7 @@
 # define KEYCODE_RIGHT 2
 # define KEYCODE_ARROW_LEFT 123
 # define KEYCODE_ARROW_RIGHT 124
+# define KEYCODE_NOT_INPUT -1
 # define KEYCODE_ESC 53
 # define FALSE 0
 # define TRUE 1
@@ -156,6 +158,7 @@ typedef struct s_data
 	t_args				args;
 	int					time;
 	int					speed_time;
+	int					current_input_key;
 }	t_data;
 
 void		init_data(t_data *data);
@@ -257,4 +260,6 @@ void		change_move_and_rotate_speed(t_data *data);
 int			is_correct_rgb_color(char *line);
 int			ft_strlen_nl_map_set(char *line);
 int			ft_strlen_nl(char *line);
+int			key_release(int key, t_data *data);
+void		check_key_input(t_data *data);
 #endif
