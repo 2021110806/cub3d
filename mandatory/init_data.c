@@ -6,7 +6,7 @@
 /*   By: minjeon2 <qwer10897@naver.com>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/21 20:05:13 by minjeon2          #+#    #+#             */
-/*   Updated: 2024/01/10 16:05:41 by minjeon2         ###   ########.fr       */
+/*   Updated: 2024/01/15 18:22:11 by minjeon2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	set_texture(t_data *data, char *direction, int index)
 	i = 0;
 	img.image = mlx_xpm_file_to_image(data -> mlx, \
 	direction, &img.width, &img.height);
+	if (img.image == NULL)
+		program_error_end(TEXTURE_ERROR);
 	img.texture = (int *) mlx_get_data_addr(img.image, \
 	&img.bit_per_pixel, &img.size, &img.endian);
 	while (i < img.height)

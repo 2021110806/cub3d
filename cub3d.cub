@@ -5,7 +5,7 @@ C 61,183,05
 F 100,2,1
 
 NO ./texture/green_bird.xpm
-EA ./texture/orange_bird.xpm
+EA ./texture/orange_bird.xp
 
 WE ./texture/dot_bird.xpm
 
