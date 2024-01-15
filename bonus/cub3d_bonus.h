@@ -74,6 +74,7 @@
 # define SPRITE_Z -25.0
 # define SPRITE_X 5
 # define SPRITE_Y 5
+# define USER_SIZE 0.2
 # include "../mlx/mlx.h"
 # include <stdlib.h>
 # include <math.h>
