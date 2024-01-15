@@ -14,6 +14,7 @@
 
 int	play(t_data *data)
 {
+	check_key_input(data);
 	change_move_and_rotate_speed(data);
 	check_mouse_rotate(data);
 	draw_floor_and_ceiling(data);
@@ -26,13 +27,6 @@ int	play(t_data *data)
 		data -> speed_time--;
 	return (0);
 }
-
-// int	key_release(int key, t_data *data)
-// {
-// 	(void) data;
-// 	printf("ㅋㅋ 밈정바보야 근데 예뻐서 괜찮아 %d\n", key);
-// 	return (0);
-// }
 
 int	main(int argc, char **argv)
 {
@@ -57,7 +51,7 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(data.mlx, play, &data);
 	mlx_mouse_hook(data.win, mouse_press, &data);
 	mlx_hook(data.win, KEY_PRESS_EVENT, 0, &key_press, &data);
-	mlx_hook(data.win, 3, 0, &key_release, &data);
+	mlx_hook(data.win, KEY_RELEASE_EVENT, 0, &key_release, &data);
 	mlx_hook(data.win, RED_BUTTON, 0, &program_end, 0);
 	mlx_loop(data.mlx);
 }

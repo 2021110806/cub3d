@@ -89,6 +89,7 @@ void	check_player_direction(t_data *data)
 void	set_player(t_data *data)
 {
 	check_player_direction(data);
-	data -> move_speed = 0.15;
-	data -> rotate_speed = 0.10;
+	data -> move_speed = 0.05;
+	data -> rotate_speed = 0.03;
+	data -> current_input_key = KEYCODE_NOT_INPUT;
 }

@@ -22,7 +22,7 @@ SRCS = color_valid_utils.c set_texture_path.c exception.c parser.c \
 parser_utils.c main.c init_data.c utils.c draw_window.c draw_window_utils.c \
 key_press.c dda.c init_vector.c get_next_line.c get_next_line_utils.c \
 draw_window_setting.c set_direction.c draw_window_setting.c color.c\
-set_texture_path_bearing.c map_line_validator.c \
+set_texture_path_bearing.c map_line_validator.c key_release.c\
 map_structure_validator.c utils2.c parser_valid.c parser_map.c move_command.c
 
 OBJS = $(SRCS:.c=.o)

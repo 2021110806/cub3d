@@ -28,7 +28,7 @@ mouse_bonus.c minimap_utils_bonus.c set_texture_path_bearing_bonus.c \
 map_line_validator_bonus.c map_structure_validator_bonus.c utils2_bonus.c \
 parser_valid_bonus.c parser_map_bonus.c parser_sprite_bonus.c \
 sprite_print_setting_bonus.c utils3_bonus.c sprite_setting_bonus.c \
-sprite_sort_bonus.c move_command_bonus.c
+sprite_sort_bonus.c move_command_bonus.c key_release_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 

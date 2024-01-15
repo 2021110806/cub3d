@@ -12,24 +12,27 @@
 
 #include "cub3d.h"
 
+void	check_key_input(t_data *data)
+{
+	if (data->current_input_key == KEYCODE_UP)
+		move_up(data);
+	else if (data->current_input_key == KEYCODE_DOWN)
+		move_down(data);
+	else if (data->current_input_key == KEYCODE_RIGHT)
+		move_right(data);
+	else if (data->current_input_key == KEYCODE_LEFT)
+		move_left(data);
+	else if (data->current_input_key == KEYCODE_ARROW_RIGHT)
+		move_arrow_right(data, data->rotate_speed);
+	else if (data->current_input_key == KEYCODE_ARROW_LEFT)
+		move_arrow_left(data, data->rotate_speed);
+}
+
 int	key_press(int key, t_data *data)
 {
-	if (key == KEYCODE_UP)
-		move_up(data);
-	else if (key == KEYCODE_DOWN)
-		move_down(data);
-	else if (key == KEYCODE_RIGHT)
-		move_right(data);
-	else if (key == KEYCODE_LEFT)
-		move_left(data);
-	else if (key == KEYCODE_ARROW_RIGHT)
-		move_arrow_right(data, data->rotate_speed);
-	else if (key == KEYCODE_ARROW_LEFT)
-		move_arrow_left(data, data->rotate_speed);
-	else if (key == KEYCODE_ESC)
+	data->current_input_key = key;
+	if (key == KEYCODE_ESC)
 		exit(0);
-	mlx_clear_window(data->mlx, data->win);
-	play(data);
 	return (0);
 }
 
