@@ -43,8 +43,10 @@ void	move_up(t_data *data)
 	double	move_x;
 	double	move_y;
 
-	move_x = data->player_position_x + data->player_view_direction_x * data->move_speed;
-	move_y = data->player_position_y + data->player_view_direction_y * data->move_speed;
+	move_x = data->player_position_x + data->player_view_direction_x * \
+	data->move_speed;
+	move_y = data->player_position_y + data->player_view_direction_y * \
+	data->move_speed;
 	if (check_movable(data, move_x, move_y))
 	{
 		data->player_position_x = move_x;
@@ -57,8 +59,10 @@ void	move_down(t_data *data)
 	double	move_x;
 	double	move_y;
 
-	move_x = data->player_position_x - data->player_view_direction_x * data->move_speed;
-	move_y = data->player_position_y - data->player_view_direction_y * data->move_speed;
+	move_x = data->player_position_x - data->player_view_direction_x * \
+	data->move_speed;
+	move_y = data->player_position_y - data->player_view_direction_y * \
+	data->move_speed;
 	if (check_movable(data, move_x, move_y))
 	{
 		data->player_position_x = move_x;
