@@ -20,7 +20,7 @@ void	check_parameter(int argc)
 
 void	check_cub_file(char **argv)
 {
-	if (ft_strlen(argv[1]) < 4)
+	if (ft_strlen(argv[1]) < 5)
 		program_error_end(FILE_ERROR);
 	if (!(argv[1][ft_strlen(argv[1]) - 1] == 'b' && \
 	argv[1][ft_strlen(argv[1]) - 2] == 'u' \
