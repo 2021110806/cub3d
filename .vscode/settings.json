@@ -69,7 +69,8 @@
     "string_view": "c",
     "vector": "c",
     "__locale": "c",
-    "__node_handle": "c"
+    "__node_handle": "c",
+    "chrono": "c"
   },
   "C_Cpp_Runner.msvcSecureNoWarnings": false
 }

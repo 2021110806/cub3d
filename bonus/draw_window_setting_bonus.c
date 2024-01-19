@@ -88,13 +88,10 @@ t_data *data, t_vectors *vectors)
 	y = drawing_factors -> draw_start;
 	while (y < drawing_factors -> draw_end)
 	{
-		texture_y = \
-		(int) drawing_factors -> curr_drawing_spot & (TEXTURE_HEGIHT - 1);
+		texture_y = (int) drawing_factors -> curr_drawing_spot;
 		drawing_factors -> curr_drawing_spot += drawing_factors -> delta;
 		color = data -> texture[drawing_factors->texture_number] \
 		[TEXTURE_HEGIHT * texture_y + texture_x];
-		if (data->last_hit_pos == Y)
-			color = (color >> 1) & 8355711;
 		data -> buf[y][drawing_factors -> x] = color;
 		y++;
 	}
