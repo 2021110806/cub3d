@@ -30,6 +30,19 @@ void	set_rgb_color(t_rgb_color *color, int r, int g, int b)
 	color->b = b;
 }
 
+void	color_free(char **color)
+{
+	int	index;
+
+	index = 0;
+	while (color[index])
+	{
+		free(color[index]);
+		index++;
+	}
+	free(color);
+}
+
 int	is_correct_rgb_color(char *line)
 {
 	int		i;
@@ -38,14 +51,19 @@ int	is_correct_rgb_color(char *line)
 	i = 0;
 	color = ft_split(line, ',');
 	if (arr_size_len(color) != 3)
+	{
+		color_free(color);
 		return (FALSE);
+	}
 	while (i < 3)
 	{
-		if (!is_all_digit(color[i]))
+		if (!is_all_digit(color[i]) || !is_in_range(color[i]))
+		{
+			color_free(color);
 			return (FALSE);
-		if (!is_in_range(color[i]))
-			return (FALSE);
+		}
 		i++;
 	}
+	color_free(color);
 	return (TRUE);
 }

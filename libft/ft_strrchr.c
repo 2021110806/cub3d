@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 char	*ft_strrchr(const char *s, int c)
 {
 	char	*return_value;
@@ -30,4 +29,3 @@ char	*ft_strrchr(const char *s, int c)
 		return (&return_value[i]);
 	return ((void *)0);
 }
-
